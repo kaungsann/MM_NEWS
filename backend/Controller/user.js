@@ -7,6 +7,7 @@ const getAll = async (req, res, next) => {
 
 const registerUser = async (req, res, next) => {
   const name = await userDB.findOne({ name: req.body.name });
+
   const findEmail = await userDB.findOne({ email: req.body.email });
   const findPhone = await userDB.findOne({ phone: req.body.phone });
   if (name) {

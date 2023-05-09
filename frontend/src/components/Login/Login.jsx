@@ -1,7 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Icons from "../img/icons.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+import { addUser, removeUser } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 function Login() {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const usersData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
+
+  const loginApi = async (userData) => {
+    let response = await fetch("http://127.0.0.1:5000/user/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    let resData = await response.json();
+
+    if (resData.con) {
+      setLoading(false);
+      dispatch(addUser(resData.results));
+      navigate("/");
+    }
+  };
+  const loginUser = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    let user = {
+      email,
+      password,
+    };
+
+    loginApi(user);
+    setemail("");
+    setpassword("");
+  };
   return (
     <div>
       <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -13,16 +51,17 @@ function Login() {
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" action="#" method="POST" onSubmit={loginUser}>
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 class="block text-sm font-medium leading-6 text-gray-900"
               >
                 Email address
               </label>
               <div class="mt-2">
                 <input
+                  onChange={(e) => setemail(e.target.value)}
                   id="email"
                   name="email"
                   type="email"
@@ -36,7 +75,7 @@ function Login() {
             <div>
               <div class="flex items-center justify-between">
                 <label
-                  for="password"
+                  htmlFor="password"
                   class="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Password
@@ -54,6 +93,7 @@ function Login() {
               </div>
               <div class="mt-2">
                 <input
+                  onChange={(e) => setpassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"
@@ -69,6 +109,16 @@ function Login() {
                 type="submit"
                 class="flex w-full justify-center rounded-md bg-cyan-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
               >
+                {loading && (
+                  <ClipLoader
+                    color={"#9ca3af"}
+                    loading={loading}
+                    size={20}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    className="mx-4"
+                  />
+                )}
                 Sign in
               </button>
             </div>
@@ -79,9 +129,7 @@ function Login() {
             <a
               href="#"
               class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              hello buddy
-            </a>
+            ></a>
           </p>
         </div>
       </div>

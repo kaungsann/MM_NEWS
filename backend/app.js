@@ -3,12 +3,14 @@ require("dotenv").config();
 const express = require("express");
 
 const app = express();
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
 
 const userRouter = require("./Router/userRouer");
 app.use(express.json());
+app.use(cors());
 app.use("/user", userRouter);
 
 app.get("*", (req, res, next) => {
