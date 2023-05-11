@@ -17,5 +17,9 @@ module.exports = {
       .regex(/^[a-fA-F0-9]{24}$/)
       .required(),
   }),
-
+  categorySchema: joi.object({
+    name: joi.string(),
+    image: joi.string().required(),
+    text: joi.string(),
+  }),
 };

@@ -4,10 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { addUser, removeUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const usersData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
@@ -26,6 +29,9 @@ function Login() {
       setLoading(false);
       dispatch(addUser(resData.results));
       navigate("/");
+    } else {
+      toast(resData.message);
+      setLoading(false);
     }
   };
   const loginUser = (e) => {
@@ -37,11 +43,11 @@ function Login() {
     };
 
     loginApi(user);
-    setemail("");
-    setpassword("");
   };
   return (
     <div>
+      <ToastContainer />
+
       <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img class="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
@@ -70,6 +76,10 @@ function Login() {
                   class="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
                 />
               </div>
+              <label
+                htmlFor="email"
+                class="block text-sm font-medium leading-6 text-gray-900"
+              ></label>
             </div>
 
             <div>

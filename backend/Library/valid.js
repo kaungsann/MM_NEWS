@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 module.exports = {
   validBody: (schema) => {
     return (req, res, next) => {

@@ -1,0 +1,25 @@
+.containerImg {
+  background-image: url("../img/biden.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+.cotainer {
+  position: relative;
+}
+.imageBiden,
+.unbox {
+  position: relative;
+}
+.text-overlay,
+.unText {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+.bidenText {
+  font-size: 23px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
