@@ -1,8 +1,3 @@
-.containerImg {
-  background-image: url("../img/biden.jpg");
-  background-size: cover;
-  height: 100vh;
-}
 .cotainer {
   position: relative;
 }
@@ -13,7 +8,7 @@
 .text-overlay,
 .unText {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   z-index: 1;
 }
 .bidenText {
@@ -21,5 +16,19 @@
   font-weight: bold;
   color: white;
   text-align: center;
-  margin-bottom: 10px;
+  padding: 10px;
+}
+.card {
+  position: relative;
+  width: 230px;
+  height: 280px;
+  margin: 5px;
+}
+.labelContainer {
+  margin-top: 0;
+  padding: 20px;
+  background-color: blueviolet;
+}
+.container {
+  position: relative;
 }
