@@ -18,7 +18,7 @@ const addCategory = async (req, res, next) => {
     next(new Error("Name is alreaduy in use"));
   } else {
     const results = await new categoryDB(req.body).save();
-    helper(res, "all category ", results);
+    helper(res, "category saved ", results);
   }
 };
 const pathCategory = async (req, res, next) => {

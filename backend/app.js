@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-
+const path = require("path");
 const app = express();
 const cors = require("cors");
 const fileupload = require("express-fileupload");
@@ -14,6 +14,7 @@ const categoryRouter = require("./Router/category");
 app.use(express.json());
 app.use(cors());
 app.use(fileupload());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
 
