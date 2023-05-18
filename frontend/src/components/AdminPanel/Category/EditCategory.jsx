@@ -15,33 +15,72 @@ function EditCategory() {
   const fileChange = (e) => {
     setFile(e.target.files[0]);
   };
-  const catApi = async () => {
-    const response = await fetch("http://127.0.0.1:5000/category/");
-    let resData = await response.json();
-    console.log(resData);
-    setCategory(resData.results);
-  };
+  // const catApi = async () => {
+  //   const response = await fetch("http://127.0.0.1:5000/category/");
+  //   let resData = await response.json();
+  //   console.log(resData);
+  // };
+  // const editCategoyApi = async () => {
+  //   const response = await fetch(`http://127.0.0.1:5000/category/${id}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify({ file: file, name: name, text: text }),
+  //     headers: {
+  //       "content-type": "application/json",
+  //       authorization: `Bearer  ${userData.token}`,
+  //     },
+  //   });
+
+  //   const resData = await response.json();
+  //   catApi();
+  //   if (resData.con) {
+  //     navigate("/admin/category/all");
+  //   } else {
+  //     console.log(resData);
+  //     toast(resData.message);
+  //   }
+  // };
+  // useEffect(() => {
+  //   catApi();
+  // }, []);
+
   const editCategoyApi = async () => {
+    console.log(file);
+
+    // const editCat = {
+    //   name,
+    //   text,
+    //   file,
+    // };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("text", text);
+    formData.append("file", file);
+
     const response = await fetch(`http://127.0.0.1:5000/category/${id}`, {
       method: "PATCH",
-      body: JSON.stringify({ file: file, name: name, text: text }),
+      body: formData,
+      // body: JSON.stringify(editCat),
       headers: {
-        "content-type": "application/json",
-        authorization: `Bearer  ${userData.token}`,
+        //"content-type": "application/json",
+        authorization: `Bearer ${userData.token}`,
       },
     });
-
     const resData = await response.json();
-    catApi();
+
     if (resData.con) {
       navigate("/admin/category/all");
     } else {
-      console.log(resData);
       toast(resData.message);
     }
   };
+  const singleCategory = async () => {
+    let response = await fetch(`http://127.0.0.1:5000/category/${id}`);
+    let resData = await response.json();
+    setName(resData.results.name);
+    setText(resData.results.text);
+  };
   useEffect(() => {
-    catApi();
+    singleCategory();
   }, []);
 
   const submitCategory = (e) => {
@@ -96,7 +135,7 @@ function EditCategory() {
                 type="text"
                 name="name"
                 className="w-full px-2 block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={""}
+                defaultValue={name}
                 minLength={5}
                 placeholder="Enter Category Name"
                 onChange={(e) => setName(e.target.value)}
@@ -117,7 +156,7 @@ function EditCategory() {
                 name="about"
                 rows={3}
                 className="block px-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={""}
+                defaultValue={text}
                 placeholder="Enter Text"
                 onChange={(e) => setText(e.target.value)}
               />
