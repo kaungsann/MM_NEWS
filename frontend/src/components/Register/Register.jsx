@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Icons from "../img/icons.png";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function () {
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
@@ -22,6 +24,9 @@ export default function () {
     if (resData.con) {
       setloading(false);
       navigate("/login");
+    } else {
+      toast(resData.message);
+      setLoading(false);
     }
   };
   const registerUser = (e) => {

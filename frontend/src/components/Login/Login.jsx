@@ -28,7 +28,7 @@ function Login() {
     if (resData.con) {
       setLoading(false);
       dispatch(addUser(resData.results));
-      navigate("/");
+      navigate("/home");
     } else {
       toast(resData.message);
       setLoading(false);
@@ -135,11 +135,15 @@ function Login() {
           </form>
 
           <p class="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a
-              href="#"
+            {/* Not a member? */}
+
+            <Link
+              to="/"
               class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            ></a>
+            >
+              {" "}
+              Go to main page
+            </Link>
           </p>
         </div>
       </div>

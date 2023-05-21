@@ -12,6 +12,8 @@ import Admin from "./components/AdminPanel/Admin";
 import AllCategory from "./components/AdminPanel/Category/AllCategory";
 import EditCategory from "./components/AdminPanel/Category/EditCategory";
 import CreateCategory from "./components/AdminPanel/Category/CreateCategory";
+import UserALL from "./components/AdminPanel/User/UserALL";
+import MainPage from "./components/Mainpage/MainPage";
 
 function App() {
   return (
@@ -19,10 +21,11 @@ function App() {
       <Router>
         <Nav />
         <Routes>
+          <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <GuardRouter>
                 <Home />
@@ -41,6 +44,9 @@ function App() {
               <Route path="all" element={<AllCategory />} />
               <Route path="create" element={<CreateCategory />} />
               <Route path="edit/:id" element={<EditCategory />} />
+            </Route>
+            <Route path="user">
+              <Route path="all" element={<UserALL />} />
             </Route>
           </Route>
           <Route path="*" element={<FallBack />} />

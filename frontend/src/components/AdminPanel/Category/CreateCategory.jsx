@@ -41,7 +41,7 @@ function CreateCategory() {
 
   return (
     <>
-      <h2>Add Category</h2>
+      <h2 className="mx-3 text-xl font-serif">Add Category</h2>
       <ToastContainer />
       <div className="w-3/5 mx-auto p-4">
         <form onSubmit={submitCategory}>

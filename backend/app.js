@@ -11,12 +11,19 @@ mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
 
 const userRouter = require("./Router/userRouer");
 const categoryRouter = require("./Router/category");
+const permitRouter = require("./Router/permit");
+const roleRouter = require("./Router/role");
+const tagRouter = require("./Router/tag");
+
 app.use(express.json());
 app.use(cors());
 app.use(fileupload());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
+app.use("/permit", permitRouter);
+app.use("/role", roleRouter);
+app.use("/tag", tagRouter);
 
 app.get("*", (req, res, next) => {
   res.send({

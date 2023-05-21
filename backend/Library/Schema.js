@@ -17,9 +17,22 @@ module.exports = {
       .regex(/^[a-fA-F0-9]{24}$/)
       .required(),
   }),
+  permitSchema: joi.object({
+    name: joi.string().required(),
+  }),
   categorySchema: joi.object({
     name: joi.string(),
     image: joi.string().required(),
     text: joi.string(),
+  }),
+  AddRoleSchema: joi.object({
+    userId: joi
+      .string()
+      .regex(/^{a-fA-F0-9}[24]$/)
+      .required(),
+    roleId: joi
+      .string()
+      .regex(/^{a-fA-F0-9}[24]$/)
+      .required(),
   }),
 };

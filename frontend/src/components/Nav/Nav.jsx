@@ -7,6 +7,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../redux/actions";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Nav() {
   const userData = useSelector((state) => state.userData);
   const [toggle, settoggle] = useState(false);
@@ -19,10 +22,14 @@ function Nav() {
     dispatch(removeUser(null));
     navigator("/login");
   };
+  const warmingAlert = () => {
+    !userData && toast("You need to first register and login");
+  };
 
   return (
     <>
-      <nav className="bg-cyan-800">
+      <ToastContainer />
+      <nav className="bg-cyan-800 sticky top-0 z-10">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -92,25 +99,29 @@ function Nav() {
                 <div className="flex space-x-4">
                   {/*  Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                   <Link
-                    to="/"
+                    to={userData && "/home"}
+                    onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Home
                   </Link>
                   <a
                     href="#"
+                    onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     About
                   </a>
                   <a
                     href="#"
+                    onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Local
                   </a>
                   <a
                     href="#"
+                    onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     International

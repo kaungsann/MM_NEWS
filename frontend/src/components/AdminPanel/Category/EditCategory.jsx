@@ -15,42 +15,10 @@ function EditCategory() {
   const fileChange = (e) => {
     setFile(e.target.files[0]);
   };
-  // const catApi = async () => {
-  //   const response = await fetch("http://127.0.0.1:5000/category/");
-  //   let resData = await response.json();
-  //   console.log(resData);
-  // };
-  // const editCategoyApi = async () => {
-  //   const response = await fetch(`http://127.0.0.1:5000/category/${id}`, {
-  //     method: "PATCH",
-  //     body: JSON.stringify({ file: file, name: name, text: text }),
-  //     headers: {
-  //       "content-type": "application/json",
-  //       authorization: `Bearer  ${userData.token}`,
-  //     },
-  //   });
-
-  //   const resData = await response.json();
-  //   catApi();
-  //   if (resData.con) {
-  //     navigate("/admin/category/all");
-  //   } else {
-  //     console.log(resData);
-  //     toast(resData.message);
-  //   }
-  // };
-  // useEffect(() => {
-  //   catApi();
-  // }, []);
 
   const editCategoyApi = async () => {
     console.log(file);
 
-    // const editCat = {
-    //   name,
-    //   text,
-    //   file,
-    // };
     const formData = new FormData();
     formData.append("name", name);
     formData.append("text", text);
@@ -90,7 +58,7 @@ function EditCategory() {
 
   return (
     <>
-      <h2>Edit Category</h2>
+      <h2 className="mx-3 text-xl font-serif">Edit Category</h2>
       <ToastContainer />
       <div className="w-3/5 mx-auto p-4">
         <form onSubmit={submitCategory}>

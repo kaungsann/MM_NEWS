@@ -37,14 +37,14 @@ function AllCategory() {
   }, []);
   return (
     <div>
-      <h1>ALL CATEGORY</h1>
+      <h1 className="mx-3 text-xl font-serif">ALL CATEGORY</h1>
       <ToastContainer />
-      <Link to="/admin/category/create">
+      {/* <Link to="/admin/category/create">
         <button className="p-1  bg-cyan-700 w-28 text-slate-200 mt-4 mb-3 rounded-md hover:bg-cyan-600">
           Add +
         </button>
-      </Link>
-      <div className="flex w-46 flex-wrap">
+      </Link> */}
+      <div className="flex  flex-wrap  p-4">
         {category.length > 0 &&
           category.map((card) => (
             <CardCategory
