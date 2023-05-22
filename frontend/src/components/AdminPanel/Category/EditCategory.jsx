@@ -36,7 +36,7 @@ function EditCategory() {
     const resData = await response.json();
 
     if (resData.con) {
-      navigate("/admin/category/all");
+      navigate("/admin/categorys/all");
     } else {
       toast(resData.message);
     }

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import CardCategory from "./CardCategory";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BeatLoader from "react-spinners/BeatLoader";
 
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 function AllCategory() {
   const [category, setCategory] = useState([]);
+  const [loading, setloading] = useState(false);
   const userData = useSelector((state) => state.userData);
 
   const catApi = async () => {
@@ -26,9 +28,9 @@ function AllCategory() {
     });
     const resData = await deleteCard.json();
     catApi();
-    console.log(resData);
-    if (resData) {
-      toast(resData);
+    if (resData.con) {
+      setloading(false);
+      //  toast(resData);
     }
   };
 
@@ -36,14 +38,26 @@ function AllCategory() {
     catApi();
   }, []);
   return (
-    <div>
-      <h1 className="mx-3 text-xl font-serif">ALL CATEGORY</h1>
+    <div className="relative">
+      <h1 className="mx-3 text-xl font-serif ">ALL CATEGORY</h1>
       <ToastContainer />
       {/* <Link to="/admin/category/create">
         <button className="p-1  bg-cyan-700 w-28 text-slate-200 mt-4 mb-3 rounded-md hover:bg-cyan-600">
           Add +
         </button>
       </Link> */}
+
+      {loading && (
+        <BeatLoader
+          color={"#14b8a6"}
+          loading={loading}
+          aria-label="Loading Spinner"
+          size={20}
+          data-testid="loader"
+          className="absolute top-0 mx-96 my-60 bottom-0 left-0 "
+        />
+      )}
+
       <div className="flex  flex-wrap  p-4">
         {category.length > 0 &&
           category.map((card) => (

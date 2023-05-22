@@ -17,8 +17,8 @@ function CardCategory({ card, deleteCard }) {
             <span className="lg:text-sm">{card.text}</span>
           </div>
           <div className="flex justify-around bg-slate-300 p-3">
-            <Link to={`/admin/category/edit/${card._id}`}>
-              <FiEdit className="lg:text-2xl text-[#0891b2] " />
+            <Link to={`/admin/categorys/edit/${card._id}`}>
+              <FiEdit className="lg:text-2xl text-[#0891b2] hover:text-cyan-500" />
             </Link>
             <Link>
               <AiOutlineDelete

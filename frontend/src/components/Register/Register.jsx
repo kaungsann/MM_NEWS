@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "../img/icons.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +12,20 @@ export default function () {
 
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
+
+  // handleGoogleSignIn = (response) => {
+  //   console.log(response); // Handle the response from Google Sign-In
+  // };
+
+  // useEffect(() => {
+  //   window.google.accounts.id.initialize({
+  //     client_id: "YOUR_CLIENT_ID",
+  //     callback: handleGoogleSignIn,
+  //     ux_mode: "redirect",
+  //     redirect_uri: "http://localhost:5173/callback", // Replace with your callback URL
+  //   });
+  // });
+
   const registterApi = async (userData) => {
     let response = await fetch("http://127.0.0.1:5000/user/register", {
       method: "POST",
@@ -25,8 +39,8 @@ export default function () {
       setloading(false);
       navigate("/login");
     } else {
+      setloading(false);
       toast(resData.message);
-      setLoading(false);
     }
   };
   const registerUser = (e) => {
@@ -39,13 +53,10 @@ export default function () {
       password,
     };
     registterApi(user);
-    setname("");
-    setemail("");
-    setpassword("");
-    setphone("");
   };
   return (
     <div>
+      <ToastContainer />
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
@@ -143,28 +154,6 @@ export default function () {
               </div>
             </div>
 
-            {/* <div>
-              <div className="flex items-center justify-between">
-                <label
-                  for="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Comfirm Password
-                </label>
-                <div className="text-sm"></div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  required
-                  className=" px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div> */}
-
             <div>
               <button
                 type="submit"
@@ -187,13 +176,22 @@ export default function () {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?
-            <a
-              href="#"
+            <Link
+              to="/"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              hello buddy
-            </a>
+              Go to Mainpage
+            </Link>
           </p>
+          {/* <p className="mt-10 text-center text-sm text-gray-500">
+            Not a member?
+            <Link
+              to="/"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
+              Sign in google
+            </Link>
+          </p> */}
         </div>
       </div>
     </div>

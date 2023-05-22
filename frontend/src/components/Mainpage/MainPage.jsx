@@ -47,13 +47,13 @@ function MainPage() {
           <div className="mt-6">
             <Link
               to="/register"
-              className="bg-cyan-700 text-white p-3 text-sm rounded-sm"
+              className="bg-cyan-700 text-white p-3 text-sm rounded-sm cursor-progress"
             >
-              Register
+              Sign Up
             </Link>
             <Link
               to="/login"
-              className="mx-4 bg-cyan-700 p-3 text-sm text-white rounded-sm"
+              className="mx-4 bg-cyan-700 p-3 text-sm text-white rounded-sm cursor-progress"
             >
               Login
             </Link>

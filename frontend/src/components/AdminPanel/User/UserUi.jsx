@@ -17,22 +17,22 @@ function UserUi({ users, deleteUser }) {
           <span className="lg:text-2xl my-1 text-slate-600 font-bold">
             {users.name}
           </span>
-          <span className="lg:text-xl my-1 text-slate-600">{users.email}</span>
-          <span className="lg:text-xl my-1 text-slate-600">{users.phone}</span>
-          <span className="lg:text-xl  text-slate-600">
+          <span className=" my-1 text-slate-600">{users.email}</span>
+          <span className=" my-1 text-slate-600">{users.phone}</span>
+          <span className="  text-slate-600">
             {users.role[0] ? users.role : "This user no have role"}
           </span>
-          <span className="lg:text-xl  text-slate-600">
+          <span className="  text-slate-600">
             {users.permit[0] ? users.permit : "This user no have permit"}
           </span>
 
-          <span className="lg:text-xl my-1 text-slate-600">
+          <span className=" my-1 text-slate-600">
             {new Date(users.create).toLocaleDateString() +
               " ( " +
               new Date(users.create).toLocaleTimeString() +
               " ) "}
           </span>
-          <div className="my-3 p-3  flex justify-around">
+          <div className=" mt-2  flex justify-around">
             <button className="lg:text-sm bg-[#1f30c9] p-2 text-white rounded-sm shadow-sm   hover:bg-[#4a57c9]">
               Add Ower Role
             </button>

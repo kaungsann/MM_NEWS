@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Login() {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [email, setemail] = useState("kaungsanh53@gmail.com");
+  const [password, setpassword] = useState("kaungsann");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
