@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function PostCreate() {
+  const [category, setCategory] = useState([]);
+  const [tag, setTag] = useState([]);
+  const catApi = async () => {
+    const response = await fetch("http://127.0.0.1:5000/category/");
+    let resData = await response.json();
+    console.log(resData);
+    setCategory(resData.results);
+  };
+  const tagApI = async () => {
+    const response = await fetch("http://127.0.0.1:5000/tag/");
+    let resData = await response.json();
+    if (resData.con) {
+      console.log(resData);
+      setTag(resData.results);
+    } else {
+      console.log(resData);
+    }
+  };
+  useEffect(() => {
+    catApi();
+    tagApI();
+  });
   return (
     <>
       <div>PostCreate</div>
@@ -14,17 +36,19 @@ function PostCreate() {
               >
                 Category Name
               </label>
-              <select className="p-2 bg-white   w-full block px-2  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <option className="mt-2 divide-y divide-slate-700 placeholder:text-gray-400">
-                  United States
-                </option>
-                <option className="mt-2 divide-y divide-slate-700">
-                  United Kingdom
-                </option>
-                <option className="mt-2 divide-y divide-slate-700">
-                  Thailand
-                </option>
-                <option className="mt-2divide-y divide-slate-700">India</option>
+              <select
+                // onClick={(e) => setTag(e.target.value)}
+                className="p-2.5 bg-white   w-full block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                {category.map((cat) => (
+                  <option
+                    className="mt-2 placeholder:text-gray-400"
+                    key={cat._id}
+                    value={cat._id}
+                  >
+                    {cat.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="mx-4 w-2/4">
@@ -34,13 +58,12 @@ function PostCreate() {
               >
                 Tag Name
               </label>
-              <select className="w-full p-2 order-solid bg-white  block px-2  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <option className="mt-2 placeholder:text-gray-400">
-                  United States
-                </option>
-                <option className="mt-2">United Kingdom</option>
-                <option className="mt-2">Thailand</option>
-                <option className="mt-2">India</option>
+              <select className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                {tag.map((tg) => (
+                  <option className="mt-2" key={tg._id} value={tg._id}>
+                    {tg.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
