@@ -35,4 +35,19 @@ module.exports = {
       .regex(/^{a-fA-F0-9}[24]$/)
       .required(),
   }),
+
+  PostSchema: joi.object({
+    image: joi.string().required(),
+    category: joi
+      .string()
+      .regex(/^[a-fA-F0-9]{24}$/)
+      .required(),
+    tag: joi
+      .string()
+      .regex(/^[a-fA-F0-9]{24}$/)
+      .required(),
+    title: joi.string().required(),
+    text: joi.string().required(),
+    user: joi.optional(),
+  }),
 };

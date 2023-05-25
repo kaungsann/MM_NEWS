@@ -1,69 +1,157 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function PostCreate() {
-  const [category, setCategory] = useState([]);
-  const [tag, setTag] = useState([]);
+  const [categorys, setCategorys] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [file, setFile] = useState("");
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [cat, setCat] = useState("");
+  const [tag, setTag] = useState("");
+  const userData = useSelector((state) => state.userData);
+  const navigate = useNavigate();
+
+  const fileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const creatPostAPi = async () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("tag", tag);
+    formData.append("category", cat);
+    formData.append("title", title);
+    formData.append("text", text);
+
+    const response = await fetch("http://127.0.0.1:5000/post/", {
+      method: "POST",
+      body: formData,
+      headers: {
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
+    const resData = await response.json();
+    if (resData.con) {
+      console.log(resData);
+      navigate("/admin/posts/all");
+    } else {
+      console.log(resData);
+      s;
+    }
+
+    // if (resData.con) {
+    //   navigate("/admin/posts/all");
+    // } else {
+    //   console.log(resData);
+    // }
+  };
+
   const catApi = async () => {
     const response = await fetch("http://127.0.0.1:5000/category/");
     let resData = await response.json();
-    console.log(resData);
-    setCategory(resData.results);
+
+    if (resData.con) {
+      // console.log(resData);
+      setCategorys(resData.results);
+    } else {
+      console.log(resData);
+    }
   };
   const tagApI = async () => {
     const response = await fetch("http://127.0.0.1:5000/tag/");
     let resData = await response.json();
     if (resData.con) {
-      console.log(resData);
-      setTag(resData.results);
+      // console.log(resData);
+      setTags(resData.results);
     } else {
       console.log(resData);
     }
   };
+
   useEffect(() => {
     catApi();
     tagApI();
-  });
+  }, []);
+
+  const postSubmit = (e) => {
+    e.preventDefault();
+    creatPostAPi();
+    //  console.log(tag, cat, title, file, text);
+  };
   return (
     <>
       <div>PostCreate</div>
       <div className="w-3/5 mx-auto p-4">
-        <form>
+        <form onSubmit={postSubmit}>
+          <div className="mt-2">
+            <label
+              htmlFor="category-photo"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Post photo
+            </label>
+            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-cyan-700 px-6 py-10">
+              <div className="text-center">
+                <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                  >
+                    <span>Upload a file</span>
+                    <input
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                      className="sr-only"
+                      required
+                      onChange={fileChange}
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="mt-3 flex w-full">
             <div className="w-2/4">
               <label
-                htmlFor="Category Detals"
+                htmlFor="CategoryId"
                 className="block text-sm font-medium leading-6 text-gray-900 mb-2"
               >
                 Category Name
               </label>
               <select
-                // onClick={(e) => setTag(e.target.value)}
+                id="CategoryId"
+                onChange={(e) => setCat(e.target.value)}
                 className="p-2.5 bg-white   w-full block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                {category.map((cat) => (
-                  <option
-                    className="mt-2 placeholder:text-gray-400"
-                    key={cat._id}
-                    value={cat._id}
-                  >
-                    {cat.name}
-                  </option>
-                ))}
+                {categorys.length > 0 &&
+                  categorys.map((cats) => (
+                    <option key={cats._id} value={cats._id}>
+                      {cats.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="mx-4 w-2/4">
               <label
-                htmlFor="Category Detals"
+                htmlFor="tagId"
                 className="block text-sm font-medium leading-6 text-gray-900 mb-2"
               >
                 Tag Name
               </label>
-              <select className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                {tag.map((tg) => (
-                  <option className="mt-2" key={tg._id} value={tg._id}>
-                    {tg.name}
-                  </option>
-                ))}
+              <select
+                id="tagId"
+                onChange={(e) => setTag(e.target.value)}
+                className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
+                {tags.length > 0 &&
+                  tags.map((tags) => (
+                    <option key={tags._id} value={tags._id}>
+                      {tags.name}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -84,7 +172,7 @@ function PostCreate() {
                 required
                 minLength={5}
                 placeholder="Enter Category Name"
-                // onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
           </div>
@@ -105,7 +193,7 @@ function PostCreate() {
                 defaultValue={""}
                 placeholder="Enter Text"
                 required
-                // onChange={(e) => setText(e.target.value)}
+                onChange={(e) => setText(e.target.value)}
               />
             </div>
           </div>

@@ -14,6 +14,8 @@ const categoryRouter = require("./Router/category");
 const permitRouter = require("./Router/permit");
 const roleRouter = require("./Router/role");
 const tagRouter = require("./Router/tag");
+const postRouter = require("./Router/post");
+const commentRouter = require("./Router/comment");
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +26,8 @@ app.use("/category", categoryRouter);
 app.use("/permit", permitRouter);
 app.use("/role", roleRouter);
 app.use("/tag", tagRouter);
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 app.get("*", (req, res, next) => {
   res.send({
