@@ -1,192 +1,141 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import biden from "../img/biden.jpg";
-import un from "../img/un.jpeg";
-import bomb from "../img/bomb.jpeg";
-import china from "../img/strike.jpeg";
-
-import "./Home.css";
+import space from "../img/spacex.jpg";
+import robot from "../img/robot.jpeg";
+import meta from "../img/meta.jpeg";
+import drone from "../img/drone.jpeg";
+import tesla from "../img/tesla.jpeg";
+import hel from "../img/hei.jpg";
+import ai from "../img/ai.jpeg";
+import Footer from "../footer/Footer";
 function Home() {
-  const siteData = useSelector((state) => state.textData);
   return (
     <>
-      <h2 className=" lg:text-2xl text-center mt-4 font-serif p-6 ">
-        Welcome to M_NEWS
-      </h2>
-      <div className=" lg:mt-8 lg:w-9/12 lg:mx-auto cotainer flex justify-betweem ">
-        <div className=" lg:w-3/4 ">
-          <div className="grid grid-cols-3 gap-3  w-full">
-            <div className="  imageBiden col-span-2 ">
-              <img src={biden} className="w-full h-full" />
-              <div className="text-overlay">
-                <span className="bidenText">
-                  we will continue to impose further costs on the military and
-                  its supporters.
-                </span>
-              </div>
-            </div>
-            <div className=" grid grid-rows-2 col-span-1 bg-red-400 ">
-              <div className=" unbox row-span-1 ">
-                <img src={un} className="w-full h-full" />
-                <div className="unText">
-                  <span className="lg:text-lg text-white font-bold">
-                    Myanmar:UN condemns deadly military airstrike on crowd of
-                    civilians
-                  </span>
-                </div>
-              </div>
-              <div className=" unbox row-span-1  ">
-                <img src={bomb} className="w-full h-full" />
-                <div className="unText">
-                  <span className="lg:text-lg text-white font-bold">
-                    Israeli strikes on Gaza kill top militants and 10 civilians
-                  </span>
-                </div>
-              </div>
-              {/* <div className=" unbox w-full  h-auto">
-                <img src={china} className="lg:w-full lg:h-auto" />
-                <div className="unText">
-                  <span className="lg:text-lg text-white font-bold">
-                    China Military Exercises around Taiwan civilians
-                  </span>
-                </div>
-              </div> */}
+      <div className="w-10/12 mx-auto">
+        <h1>Welcome to MMNews</h1>
+
+        <div class="flex mb-4 p-3">
+          <div class="w-3/5  relative">
+            <img src={space} />
+            <div className=" lg:w-72 p-4 absolute top-0 bg-[#F5F5F5]">
+              <div className="text-slate-500 font-sans">0ct . 4 . 2023</div>
+              <span className="lg:text-2xl font-serif font-bold">
+                Space X to take worlds first space tourist on trips on the moon
+              </span>
             </div>
           </div>
-          <div className=" mt-4 w-full grid gap-4 grid-cols-4">
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
+          <div class="w-2/5 flex flex-wrap  justify-between ">
+            <div className="mx-6 flex bg-white p-4">
+              <img src={robot} className="lg:h-32 lg:w-36" />
+              <div className="mx-6">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-bold text-slate-600">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
+                  consectetur adipisicing elit. Qui consectetur adipisicing
+                  elit. Qui
+                </p>
+                <span className="text-slate-500 text-sm">MORE</span>
               </div>
             </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
+            <div className="mx-6 flex bg-white p-4 my-1">
+              <img src={tesla} className="lg:h-32 lg:w-36" />
+              <div className="mx-6">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-bold text-slate-600">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
+                  consectetur adipisicing elit. Qui
+                </p>
+                <span className="text-slate-500 text-sm ">MORE</span>
               </div>
             </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
-              </div>
-            </div>
-            <div className="lg:mx-1 card mx-2  ">
-              <img src={un} className="w-full h-full" />
-              <div className="unText">
-                <span className="lg:text-sm text-white font-bold">
-                  Myanmar:UN condemns deadly military airstrike on crowd of
-                  civilians
-                </span>
+            <div className="mx-6 flex bg-white p-4">
+              <img src={meta} className="lg:h-32 lg:w-36" />
+              <div className="mx-6">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-bold text-slate-600">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
+                  consectetur adipisicing elit. Qui
+                </p>
+                <span className="text-slate-500 text-sm">MORE</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* <div>
-          <h4>Top Stories</h4>
-          <div className="flex flex-col text-2xl">
-            <span>Whiscosin got what it deserve in loss to illnois</span>
-            <span>For the top videos, a series of videos</span>
-            <span>achieve your goal. Huffpost is another</span>
-            <span>Huffpost utilizes web banners to post an</span>
-            <span>What’s more? It also uses a sticky header to improve </span>
-            <span> web banners to post an ad as part of its monetization</span>
-            <span> Always opt for the best to help you</span>
+        <div className="flex bg-white p-3">
+          <div className="w-2/5 px-3">
+            {/* Most Popular */}
+            <div className="text-slate-400 text-lg font-serif font-bold">
+              MOST POPULAR
+            </div>
+            {/* popular news loop*/}
+            <div className="flex flex-wrap justify-between p-3 ">
+              <div className="p-4 bg-slate-50 my-3">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-medium  text-slate-600">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Facere ad, assumenda eum voluptas cum corrupti incidunt
+                  dolorum totam deleniti. Dolore.
+                </p>
+              </div>
+              <div className="p-4 bg-slate-50 my-3">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-medium  text-slate-600">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Facere ad, assumenda eum voluptas cum corrupti incidunt
+                  dolorum totam deleniti. Dolore.
+                </p>
+              </div>
+              <div className="p-4 bg-slate-50 my-3">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-medium  text-slate-600">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Facere ad, assumenda eum voluptas cum corrupti incidunt
+                  dolorum totam deleniti. Dolore.
+                </p>
+              </div>
+              <div className="p-4 bg-slate-50 my-3">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-medium  text-slate-600">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Facere ad, assumenda eum voluptas cum corrupti incidunt
+                  dolorum totam deleniti. Dolore.
+                </p>
+              </div>
+              {/* <div className="p-3 bg-slate-50 my-3">
+                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
+                <p className="text-sm font-sans font-medium  text-slate-600">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Facere ad, assumenda eum voluptas cum corrupti incidunt
+                  dolorum totam deleniti. Dolore.
+                </p>
+              </div> */}
+            </div>
           </div>
-        </div> */}
+          <div className="w-3/5  flex flex-wrap px-3">
+            <div className="flex w-full h-60   mb-3">
+              <div className="w-3/5 relative">
+                <img src={ai} className="w-full h-full" />
+                <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </span>
+              </div>
+              <div className="w-2/5 mx-4 relative">
+                <img src={hel} className="h-full" />
+                <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </span>
+              </div>
+            </div>
+            <div className="h-80 w-full relative   ">
+              <img src={drone} className="w-full h-full" />
+              <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
+      <Footer />
     </>
   );
 }

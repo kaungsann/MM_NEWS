@@ -38,7 +38,6 @@ function PostCreate() {
       navigate("/admin/posts/all");
     } else {
       console.log(resData);
-      s;
     }
 
     // if (resData.con) {

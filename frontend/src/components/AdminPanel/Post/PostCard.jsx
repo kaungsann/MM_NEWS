@@ -40,7 +40,7 @@ function PostCard(props) {
             " ) "}
         </span>
         <div className="flex justify-around bg-slate-300 p-3">
-          <Link>
+          <Link to={`/admin/posts/edit/${postCard._id}`}>
             <FiEdit className="lg:text-2xl text-[#0891b2] hover:text-cyan-500" />
           </Link>
           <Link>
