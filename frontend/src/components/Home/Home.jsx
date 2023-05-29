@@ -22,6 +22,9 @@ function Home() {
                 Space X to take worlds first space tourist on trips on the moon
               </span>
             </div>
+            <span className="p-2 text-sm bg-[#e40d0d] text-white font-serif font-bold absolute right-0 top-0 rounded-sm shadow-lg">
+              Breaking News
+            </span>
           </div>
           <div class="w-2/5 flex flex-wrap  justify-between ">
             <div className="mx-6 flex bg-white p-4">

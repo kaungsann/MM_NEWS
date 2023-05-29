@@ -6,6 +6,7 @@ const { PostSchema } = require("../Library/Schema");
 const postController = require("../Controller/post");
 
 postRouter.get("/", postController.Allpost);
+postRouter.get("/bytag/:id", postController.byTag);
 postRouter.post(
   "/",
   validToken,
@@ -17,6 +18,6 @@ postRouter.post(
 postRouter
   .route("/:id")
   .get(postController.getOnePost)
-  .patch(postController.editPost)
+  .patch(saveFile, postController.editPost)
   .delete(postController.deletPost);
 module.exports = postRouter;

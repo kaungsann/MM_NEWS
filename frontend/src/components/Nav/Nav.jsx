@@ -105,27 +105,28 @@ function Nav() {
                   >
                     Home
                   </Link>
-                  <a
-                    href="#"
-                    onClick={warmingAlert}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#"
+
+                  <Link
+                    to={userData && "/local"}
                     onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Local
-                  </a>
-                  <a
-                    href="#"
+                  </Link>
+                  <Link
+                    to={userData && "/international"}
                     onClick={warmingAlert}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     International
-                  </a>
+                  </Link>
+                  <Link
+                    to={userData && "/about"}
+                    onClick={warmingAlert}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >
+                    About
+                  </Link>
                   {userData && (
                     <Link
                       to="/admin"

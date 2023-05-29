@@ -39,34 +39,17 @@ function PostCreate() {
     } else {
       console.log(resData);
     }
-
-    // if (resData.con) {
-    //   navigate("/admin/posts/all");
-    // } else {
-    //   console.log(resData);
-    // }
   };
 
   const catApi = async () => {
     const response = await fetch("http://127.0.0.1:5000/category/");
     let resData = await response.json();
-
-    if (resData.con) {
-      // console.log(resData);
-      setCategorys(resData.results);
-    } else {
-      console.log(resData);
-    }
+    setCategorys(resData.results);
   };
   const tagApI = async () => {
     const response = await fetch("http://127.0.0.1:5000/tag/");
     let resData = await response.json();
-    if (resData.con) {
-      // console.log(resData);
-      setTags(resData.results);
-    } else {
-      console.log(resData);
-    }
+    setTags(resData.results);
   };
 
   useEffect(() => {
@@ -77,7 +60,6 @@ function PostCreate() {
   const postSubmit = (e) => {
     e.preventDefault();
     creatPostAPi();
-    //  console.log(tag, cat, title, file, text);
   };
   return (
     <>
@@ -125,12 +107,14 @@ function PostCreate() {
                 onChange={(e) => setCat(e.target.value)}
                 className="p-2.5 bg-white   w-full block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                {categorys.length > 0 &&
-                  categorys.map((cats) => (
-                    <option key={cats._id} value={cats._id}>
-                      {cats.name}
-                    </option>
-                  ))}
+                <option disabled selected value>
+                  Select an option
+                </option>
+                {categorys.map((cats) => (
+                  <option key={cats._id} value={cats._id}>
+                    {cats.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="mx-4 w-2/4">
@@ -145,12 +129,14 @@ function PostCreate() {
                 onChange={(e) => setTag(e.target.value)}
                 className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                {tags.length > 0 &&
-                  tags.map((tags) => (
-                    <option key={tags._id} value={tags._id}>
-                      {tags.name}
-                    </option>
-                  ))}
+                <option disabled selected value>
+                  Select an option
+                </option>
+                {tags.map((tags) => (
+                  <option key={tags._id} value={tags._id}>
+                    {tags.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

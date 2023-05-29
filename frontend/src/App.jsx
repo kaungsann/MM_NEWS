@@ -21,6 +21,9 @@ import PostEdit from "./components/AdminPanel/Post/PostEdit";
 import PostAll from "./components/AdminPanel/Post/PostAll";
 import PostCard from "./components/AdminPanel/Post/PostCard";
 import PostCreate from "./components/AdminPanel/Post/PostCreate";
+import Local from "./components/Local/Local";
+import Internation from "./components/international/Internation";
+import About from "./components/about/About";
 
 function App() {
   return (
@@ -39,6 +42,31 @@ function App() {
               </GuardRouter>
             }
           />
+          <Route
+            path="/local"
+            element={
+              <GuardRouter>
+                <Local />
+              </GuardRouter>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <GuardRouter>
+                <About />
+              </GuardRouter>
+            }
+          />
+          <Route
+            path="/international"
+            element={
+              <GuardRouter>
+                <Internation />
+              </GuardRouter>
+            }
+          />
+
           <Route
             path="/admin"
             element={

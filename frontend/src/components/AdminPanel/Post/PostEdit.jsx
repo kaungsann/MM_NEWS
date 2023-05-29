@@ -68,12 +68,12 @@ function PostEdit() {
   const getOnePost = async () => {
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
-    const catPost = resData.results;
-    console.log(catPost);
-    setcat(catPost.category);
-    settag(catPost.tag);
-    setTitle(catPost.title);
-    setText(catPost.text);
+    //const catPost = resData.results;
+    console.log("post one is ", resData.results);
+    settag(resData.results.tag);
+    setcat(resData.results.category);
+    setTitle(resData.results.title);
+    setText(resData.results.text);
   };
 
   useEffect(() => {
@@ -133,6 +133,9 @@ function PostEdit() {
                 onChange={(e) => setcat(e.target.value)}
                 className="p-2.5 bg-white   w-full block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
+                <option disabled selected value>
+                  Select an option
+                </option>
                 {categorys.length > 0 &&
                   categorys.map((cats) => (
                     <option
@@ -155,9 +158,11 @@ function PostEdit() {
               <select
                 id="tagId"
                 onChange={(e) => settag(e.target.value)}
-                s
                 className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
+                <option disabled selected value>
+                  Select an option
+                </option>
                 {tags.length > 0 &&
                   tags.map((tags) => (
                     <option

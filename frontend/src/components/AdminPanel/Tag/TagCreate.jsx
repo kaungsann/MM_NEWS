@@ -27,6 +27,9 @@ function TagCreate() {
     e.preventDefault();
     addApiTag();
   };
+  // const resteText = () => {
+  //   setName("");
+  // };
 
   return (
     <>
@@ -67,6 +70,7 @@ function TagCreate() {
             <div className="mt-2 flex items-center mx-3">
               <button
                 type="reset"
+                onClick={() => setName("")}
                 className="bg-red-700 text-slate-200  rounded-md  px-2.5 py-1.5 text-sm font-semibold  shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-red-600"
               >
                 Cancel

@@ -33,7 +33,7 @@ const editPost = async (req, res, next) => {
   let postId = await postDb.findById(req.params.id);
   if (postId) {
     await postDb.findByIdAndUpdate(postId._id, req.body);
-    let results = await postDb.findById(postDb._id);
+    let results = await postDb.findById(postId._id);
     helper(res, "edit post", results);
   } else {
     next(new Error("you don't have with that id"));
@@ -51,10 +51,29 @@ const deletPost = async (req, res, next) => {
   }
 };
 
+const byTag = async (req, res, next) => {
+  let findId = await postDb.find({ tag: req.params.id });
+  if (findId) {
+    helper(res, "all tag post", findId);
+  } else {
+    next(new Error("you don't have with that id"));
+  }
+};
+const bycategory = async (req, res, next) => {
+  let findByCat = await postDb.find({ category: req.params.id });
+  if (findByCat) {
+    helper(res, "all category", findByCat);
+  } else {
+    next(new Error("you don't have with that id"));
+  }
+};
+
 module.exports = {
   Allpost,
   sendPost,
   getOnePost,
   editPost,
   deletPost,
+  byTag,
+  bycategory,
 };
