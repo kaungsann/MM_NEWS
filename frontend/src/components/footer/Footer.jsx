@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
@@ -7,16 +8,19 @@ function Footer() {
         <span className="text-3xl font-sans font-bold lg:ml-36">Lets Talk</span>
         <div className="flex justify-evenly">
           <div className="lg:w-1/3 mt-4">
-            <p className="text-slate-500">
+            <p className="text-slate-500 my-3">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error,
               quaerat assumenda perferendis molestiae provident non sunt
               sapiente odit enim modi cupiditate, sequi dolorem architecto quae.
               Beatae dicta laudantium commodi. Consectetur quas atque ut
               aspernatur consequuntur ipsam rerum amet, laboriosam voluptas.
             </p>
-            <button className="p-3 hover:bg-cyan-500 bg-cyan-600 text-white rounded-md shadow-sm my-3">
+            <Link
+              to="/about"
+              className="p-3 my-6 hover:bg-cyan-500 bg-cyan-600 text-white rounded-md shadow-sm my-3"
+            >
               Go To About Page
-            </button>
+            </Link>
           </div>
           <div className="lg:w-4/12 mt-4">
             <div>

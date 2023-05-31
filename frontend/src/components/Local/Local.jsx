@@ -10,7 +10,7 @@ function Local() {
       "http://127.0.0.1:5000/post/bytag/6474a42c5203d3b8df88f18a"
     );
     const resData = await response.json();
-    setHotNews(resData.results.splice(0, 4));
+    setHotNews(resData.results.splice(0, 5));
     setMianCard(resData.results[0]);
     console.log("main card is ", main);
   };

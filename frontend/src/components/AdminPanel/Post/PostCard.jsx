@@ -5,19 +5,21 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 function PostCard(props) {
   const { postCard, deletePost } = props;
-  const category = postCard.category || {};
-  const user = postCard.user || {};
-  // console.log(postCard);
-  // const { user, category } = postCard;
-  // console.log(user);
+  // const category = postCard.category || {};
+  // const user = postCard.user || {};
+  //
+  const { user, category } = postCard;
+  console.log("post card is ", postCard);
+  // console.log("user name is ", user);
   // console.log(category);
 
   return (
     <>
-      <div className="  w-72 ml-8 first-line p-3 h-auto bg-white shadow-lg rounded-lg">
+      <div className="  w-72 h-96 my-4 ml-8 first-line p-3 h-auto bg-white shadow-lg rounded-lg">
         <div className="flex justify-between mb-2">
           <span className="text-slate-400 mb-2">
-            Post By : {user.name || "N/A"}
+            {/* Post By : {user.name || "N/A"} */}
+            Post By : {user.name}
           </span>
         </div>
         <img
@@ -27,7 +29,7 @@ function PostCard(props) {
 
         <span className="text-slate-700 ">{postCard.title}</span>
         <p className="text-sm  overflow-y-hidden overflow-ellipsis  mt-2 ">
-          {postCard.text}
+          {postCard.text.substring(0, 30)}
         </p>
         <div>
           <button className=" text-slate-400 mb-2">See more </button>
