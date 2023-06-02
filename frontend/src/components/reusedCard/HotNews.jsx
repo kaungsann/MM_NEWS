@@ -1,5 +1,8 @@
 import React from "react";
-import img from "../img/drone.jpeg";
+import { useSelector } from "react-redux";
+
+import { Link } from "react-router-dom";
+
 export default function HotNews({ hotCard }) {
   return (
     <>
@@ -22,7 +25,12 @@ export default function HotNews({ hotCard }) {
           <p className="text-sm text-slate-600 ">
             {hotCard.text.substring(0, 30)}
           </p>
-          <button className="text-sm text-slate-400">see more</button>
+          <Link
+            to={`/postdetail/${hotCard._id}`}
+            className="text-sm text-slate-400"
+          >
+            see more
+          </Link>
         </div>
       </div>
     </>

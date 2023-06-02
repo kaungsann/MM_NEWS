@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import robot from "../img/robot.jpeg";
 import HotNews from "../reusedCard/HotNews";
+import Details from "../Details/Details";
+import { Link } from "react-router-dom";
 function Local() {
   const [hotnews, setHotNews] = useState([]);
   const [main, setMianCard] = useState([]);
@@ -40,7 +42,9 @@ function Local() {
             <div className="w-8/12">
               <h3 className="text-3xl my-3 font-serif ">{main.title}</h3>
               <p className="text-slate-600 my-2">{main.text}</p>
-              <div className="text-slate-400">See More</div>
+              <Link to={`/postdetail/${main._id}`} className="text-slate-400">
+                See More
+              </Link>
             </div>
           </div>
         </div>

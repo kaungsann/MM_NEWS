@@ -6,7 +6,8 @@ const { helper } = require("../Library/helper");
 const Allpost = async (req, res, next) => {
   const results = await postDb
     .find()
-    .populate("user tag category", "-password");
+    .populate("user tag category", "-password ");
+  // .populate("user tag category", "-password");
   helper(res, "all post ", results);
 };
 const sendPost = async (req, res, next) => {
@@ -68,6 +69,19 @@ const bycategory = async (req, res, next) => {
   }
 };
 
+const paginate = async (req, res, next) => {
+  let pages = req.params.pages;
+  pages === 1 ? 0 : pages - 1;
+  let limit = Number(process.env.POST_LIMIT);
+  let postCount = limit * pages;
+  let results = await postDb
+    .find()
+    .limit(limit)
+    .skip(postCount)
+    .populate("user tag category");
+  helper(res, "paginate post", results);
+};
+
 module.exports = {
   Allpost,
   sendPost,
@@ -76,4 +90,5 @@ module.exports = {
   deletPost,
   byTag,
   bycategory,
+  paginate,
 };

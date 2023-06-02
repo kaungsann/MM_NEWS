@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import space from "../img/spacex.jpg";
 import robot from "../img/robot.jpeg";
 import meta from "../img/meta.jpeg";
@@ -7,60 +7,58 @@ import tesla from "../img/tesla.jpeg";
 import hel from "../img/hei.jpg";
 import ai from "../img/ai.jpeg";
 import Footer from "../footer/Footer";
+import SlideCard from "../reusedCard/SlideCard";
+import RightSide from "../reusedCard/RightSide";
+import { Link } from "react-router-dom";
 function Home() {
+  const [technology, setTechnology] = useState([]);
+  const [main, setMain] = useState([]);
+  const [side, setSide] = useState([]);
+  const [show, setShow] = useState([]);
+  const [show1, setShow1] = useState([]);
+  const [show2, setShow2] = useState([]);
+  const techApi = async () => {
+    let response = await fetch(
+      "http://127.0.0.1:5000/post/bytag/6479d7cce8a3b6f7db7fbf62"
+    );
+    let resData = await response.json();
+    console.log("res data ", resData.results);
+    setShow(resData.results[4]);
+    setShow1(resData.results[5]);
+    setShow2(resData.results[6]);
+    setMain(resData.results[0]);
+
+    setSide(resData.results.slice(1, 4));
+    setTechnology(resData.results.splice(0, 5));
+  };
+
+  useEffect(() => {
+    techApi();
+  }, []);
   return (
     <>
       <div className="w-10/12 mx-auto">
         <h1>Welcome to MMNews</h1>
 
         <div class="flex mb-4 p-3">
-          <div class="w-3/5  relative">
-            <img src={space} />
+          <Link to={`/postdetail/${main._id}`} className="w-3/5  relative">
+            <img src={`http://127.0.0.1:5000/uploads/${main.image}`} />
             <div className=" lg:w-72 p-4 absolute top-0 bg-[#F5F5F5]">
-              <div className="text-slate-500 font-sans">0ct . 4 . 2023</div>
+              <div className="text-slate-500 font-sans">
+                {" "}
+                {new Date(main.create).toLocaleDateString()}
+              </div>
               <span className="lg:text-2xl font-serif font-bold">
-                Space X to take worlds first space tourist on trips on the moon
+                {main.title}
               </span>
             </div>
             <span className="p-2 text-sm bg-[#e40d0d] text-white font-serif font-bold absolute right-0 top-0 rounded-sm shadow-lg">
               Breaking News
             </span>
-          </div>
+          </Link>
           <div class="w-2/5 flex flex-wrap  justify-between ">
-            <div className="mx-6 flex bg-white p-4">
-              <img src={robot} className="lg:h-32 lg:w-36" />
-              <div className="mx-6">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-bold text-slate-600">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
-                  consectetur adipisicing elit. Qui consectetur adipisicing
-                  elit. Qui
-                </p>
-                <span className="text-slate-500 text-sm">MORE</span>
-              </div>
-            </div>
-            <div className="mx-6 flex bg-white p-4 my-1">
-              <img src={tesla} className="lg:h-32 lg:w-36" />
-              <div className="mx-6">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-bold text-slate-600">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
-                  consectetur adipisicing elit. Qui
-                </p>
-                <span className="text-slate-500 text-sm ">MORE</span>
-              </div>
-            </div>
-            <div className="mx-6 flex bg-white p-4">
-              <img src={meta} className="lg:h-32 lg:w-36" />
-              <div className="mx-6">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-bold text-slate-600">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui
-                  consectetur adipisicing elit. Qui
-                </p>
-                <span className="text-slate-500 text-sm">MORE</span>
-              </div>
-            </div>
+            {side.length > 0 &&
+              side.map((sd) => <RightSide key={sd._id} card={sd} />)}
           </div>
         </div>
 
@@ -72,38 +70,8 @@ function Home() {
             </div>
             {/* popular news loop*/}
             <div className="flex flex-wrap justify-between p-3 ">
-              <div className="p-4 bg-slate-50 my-3">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-medium  text-slate-600">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Facere ad, assumenda eum voluptas cum corrupti incidunt
-                  dolorum totam deleniti. Dolore.
-                </p>
-              </div>
-              <div className="p-4 bg-slate-50 my-3">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-medium  text-slate-600">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Facere ad, assumenda eum voluptas cum corrupti incidunt
-                  dolorum totam deleniti. Dolore.
-                </p>
-              </div>
-              <div className="p-4 bg-slate-50 my-3">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-medium  text-slate-600">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Facere ad, assumenda eum voluptas cum corrupti incidunt
-                  dolorum totam deleniti. Dolore.
-                </p>
-              </div>
-              <div className="p-4 bg-slate-50 my-3">
-                <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
-                <p className="text-sm font-sans font-medium  text-slate-600">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Facere ad, assumenda eum voluptas cum corrupti incidunt
-                  dolorum totam deleniti. Dolore.
-                </p>
-              </div>
+              {technology.length > 0 &&
+                technology.map((th) => <SlideCard key={th._id} card={th} />)}
               {/* <div className="p-3 bg-slate-50 my-3">
                 <span className="text-slate-500 font-sans">0ct . 4 . 2023</span>
                 <p className="text-sm font-sans font-medium  text-slate-600">
@@ -116,25 +84,40 @@ function Home() {
           </div>
           <div className="w-3/5  flex flex-wrap px-3">
             <div className="flex w-full h-60   mb-3">
-              <div className="w-3/5 relative">
-                <img src={ai} className="w-full h-full" />
+              <Link to={`/postdetail/${show._id}`} className="w-3/5 relative">
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${show.image}`}
+                  className="w-full h-full"
+                />
                 <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  {show.title}
                 </span>
-              </div>
-              <div className="w-2/5 mx-4 relative">
-                <img src={hel} className="h-full" />
+              </Link>
+              <Link
+                to={`/postdetail/${show1._id}`}
+                className="w-2/5 mx-4 relative"
+              >
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${show1.image}`}
+                  className="h-full"
+                />
                 <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  {show1.title}
                 </span>
-              </div>
+              </Link>
             </div>
-            <div className="h-80 w-full relative   ">
-              <img src={drone} className="w-full h-full" />
+            <Link
+              className="h-80 w-full relative   "
+              to={`/postdetail/${show2._id}`}
+            >
+              <img
+                src={`http://127.0.0.1:5000/uploads/${show2.image}`}
+                className="w-full h-full"
+              />
               <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                {show2.title}
               </span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

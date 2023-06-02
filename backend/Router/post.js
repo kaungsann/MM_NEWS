@@ -7,6 +7,9 @@ const postController = require("../Controller/post");
 
 postRouter.get("/", postController.Allpost);
 postRouter.get("/bytag/:id", postController.byTag);
+
+postRouter.get("/paginate/:pages", postController.paginate);
+
 postRouter.post(
   "/",
   validToken,

@@ -7,6 +7,7 @@ import hel from "../img/hei.jpg";
 import ai from "../img/ai.jpeg";
 import LatestCard from "../reusedCard/LatestCard";
 import SportsCard from "../reusedCard/SportsCard";
+import { Link } from "react-router-dom";
 function Internation() {
   const [latest, setLatest] = useState([]);
   const [sports, setSports] = useState([]);
@@ -49,7 +50,7 @@ function Internation() {
       <div className="w-11/12  mx-auto">
         <div className="flex ">
           <div className="w-1/4 p-3 relative flex flex-wrap justify-between">
-            <div className="relative my-2">
+            <Link to={`/postdetail/${card1._id}`} className="relative my-2">
               <img
                 src={`http://127.0.0.1:5000/uploads/${card1.image}`}
                 className="w-full h-auto"
@@ -60,8 +61,8 @@ function Internation() {
                 </span>
                 {/* <p className="text-slate-100">{card1.text.substring(0, 0)}</p> */}
               </div>
-            </div>
-            <div className="relative">
+            </Link>
+            <Link to={`/postdetail/${card2._id}`} className="relative">
               <img
                 src={`http://127.0.0.1:5000/uploads/${card2.image}`}
                 className="w-full"
@@ -72,10 +73,10 @@ function Internation() {
                 </span>
                 {/* <p className="text-slate-100">{card2.text.}</p> */}
               </div>
-            </div>
+            </Link>
           </div>
           <div className="w-2/4  p-3 flex justify-center">
-            <div className="relative my-2">
+            <Link to={`/postdetail/${card3._id}`} className="relative my-2">
               <img
                 src={`http://127.0.0.1:5000/uploads/${card3.image}`}
                 className="w-full h-full"
@@ -89,10 +90,13 @@ function Internation() {
                   Inventore, earum?
                 </p> */}
               </div>
-            </div>
+            </Link>
           </div>
           <div className="w-1/4 p-3 flex flex-wrap justify-between">
-            <div className="relative my-2 h-1/2">
+            <Link
+              to={`/postdetail/${card4._id}`}
+              className="relative my-2 h-1/2"
+            >
               <img
                 src={`http://127.0.0.1:5000/uploads/${card4.image}`}
                 className="w-full h-full"
@@ -106,8 +110,8 @@ function Internation() {
                   Inventore, earum?
                 </p> */}
               </div>
-            </div>
-            <div className="relative h-1/2">
+            </Link>
+            <Link to={`/postdetail/${card5._id}`} className="relative h-1/2">
               <img
                 src={`http://127.0.0.1:5000/uploads/${card5.image}`}
                 className="w-full h-auto"
@@ -117,7 +121,7 @@ function Internation() {
                   {card5.title}
                 </span>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
         <h3 className="text-2xl mb-3">Sports News</h3>

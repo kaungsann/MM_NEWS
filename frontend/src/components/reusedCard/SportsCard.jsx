@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function SportsCard({ sport }) {
   return (
@@ -9,7 +10,12 @@ function SportsCard({ sport }) {
       />
       <div className="mx-4 ">
         <span className="text-sm text-slate-600">{sport.title}</span>
-        <p className="text-sm text-slate-400">see more ...</p>
+        <Link
+          to={`/postdetail/${sport._id}`}
+          className="text-sm text-slate-400 mx-3"
+        >
+          see more ...
+        </Link>
       </div>
     </div>
   );

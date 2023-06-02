@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function LatestCard({ card }) {
   return (
@@ -18,7 +19,9 @@ export default function LatestCard({ card }) {
         <p className="text-sm font-serif text-slate-600 overflow-hidden">
           {card.text.substring(0, 45)}
         </p>
-        <button>see more</button>
+        <Link to={`/postdetail/${card._id}`} className="text-slate-400">
+          see more
+        </Link>
       </div>
     </div>
   );

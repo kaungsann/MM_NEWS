@@ -25,6 +25,8 @@ import Local from "./components/Local/Local";
 import Internation from "./components/international/Internation";
 import About from "./components/about/About";
 
+import Details from "./components/Details/Details";
+
 function App() {
   return (
     <>
@@ -34,6 +36,16 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/postdetail/:id" element={<Details />} />
+
+          {/* <Route
+            path="/detail"
+            element={
+              <GuardRouter>
+                <Details />
+              </GuardRouter>
+            }
+          /> */}
           <Route
             path="/home"
             element={
@@ -42,6 +54,7 @@ function App() {
               </GuardRouter>
             }
           />
+
           <Route
             path="/local"
             element={

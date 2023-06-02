@@ -21,19 +21,18 @@ function MainPage() {
   }, []);
   return (
     <div>
-      <div className="video-container   w-full">
+      <div className="video-container   w-full h-full">
         <video
           src={short}
           type="video/mp4"
           loop
           autoplay
           ref={videoRef}
-          className="w-full fixed"
+          className="w-full fixed "
         >
           Your browser does not support the video tag.
         </video>
       </div>
-      t
       <div className="main-conten  p-4 absolute ml-32 mt-20">
         <div className="opacity-background  font-serif "></div>
         <div className="w-96 flex flex-wrap cursor-pointer">
@@ -47,13 +46,13 @@ function MainPage() {
           <div className="mt-6">
             <Link
               to="/register"
-              className="bg-cyan-700 text-white p-3 text-sm rounded-sm cursor-progress"
+              className="hover:bg-blue-600 bg-blue-700 text-white p-3 text-sm rounded-sm cursor-progress"
             >
               Sign Up
             </Link>
             <Link
               to="/login"
-              className="mx-4 bg-cyan-700 p-3 text-sm text-white rounded-sm cursor-progress"
+              className="hover:bg-blue-600 mx-4 bg-blue-700 p-3 text-sm text-white rounded-sm cursor-progress"
             >
               Login
             </Link>
