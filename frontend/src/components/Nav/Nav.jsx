@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Nav() {
+  const localDb = "MMNews";
   const userData = useSelector((state) => state.userData);
   const [toggle, settoggle] = useState(false);
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Nav() {
     settoggle(!toggle);
   };
   const logout = () => {
+    localStorage.removeItem(localDb);
     dispatch(removeUser(null));
     navigator("/login");
   };

@@ -1,12 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import short from "../img/office.mp4";
 import "./MainPage.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { addUser, removeUser } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 function MainPage() {
+  const localDb = "MMNews";
   const videoRef = useRef(null);
-
+  const usersData = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
+  const [isCheck, setIsCheck] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     const videoElement = videoRef.current;
+    let localData = JSON.parse(localStorage.getItem(localDb));
+
+    if (localData) {
+      setIsCheck(true);
+      console.log("local data is ", localData);
+      dispatch(addUser(localData));
+      navigate("/home");
+    }
+
     if (videoElement) {
       videoElement.loop = true;
       videoElement.play();

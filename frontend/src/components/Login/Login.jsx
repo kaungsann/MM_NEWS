@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icons from "../img/icons.png";
 import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -6,15 +6,18 @@ import { addUser, removeUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Checkbox from "@mui/material/Checkbox";
+
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [isCheck, setIsCheck] = useState(false);
+  const localDb = "MMNews";
   const navigate = useNavigate();
   const usersData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
-
+  // const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const loginApi = async (userData) => {
     let response = await fetch("http://127.0.0.1:5000/user/login", {
       method: "POST",
@@ -24,10 +27,16 @@ function Login() {
       },
     });
     let resData = await response.json();
+    console.log("userToken is ", resData.results);
 
     if (resData.con) {
       setLoading(false);
       dispatch(addUser(resData.results));
+      if (isCheck) {
+        localStorage.setItem(localDb, JSON.stringify(resData.results));
+      } else {
+        localStorage.removeItem(localDb);
+      }
       navigate("/home");
     } else {
       toast(resData.message);
@@ -36,6 +45,7 @@ function Login() {
   };
   const loginUser = (e) => {
     e.preventDefault();
+    console.log("is check ", isCheck);
     setLoading(true);
     let user = {
       email,
@@ -44,11 +54,23 @@ function Login() {
 
     loginApi(user);
   };
+
+  useEffect(() => {
+    let localData = JSON.parse(localStorage.getItem(localDb));
+
+    if (localData) {
+      setIsCheck(true);
+      console.log("local data is ", localData);
+      dispatch(addUser(localData));
+      navigate("/home");
+    }
+  }, []);
+
   return (
     <div>
       <ToastContainer />
 
-      <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img class="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
           <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -112,6 +134,19 @@ function Login() {
                   class="  px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+              <div className="my-3 flex items-center ">
+                <input
+                  type="checkbox"
+                  id="rememberChecked"
+                  checked={isCheck}
+                  onChange={() => setIsCheck(!isCheck)}
+                />
+                <span className="mx-2 text-sm">Remember Me</span>
+              </div>
+              {/* <div>
+                <Checkbox {...label} onChange={checkBox} checked={isCheck} />
+                <span>Remember Me</span>
+              </div> */}
             </div>
 
             <div>
@@ -141,7 +176,6 @@ function Login() {
               to="/"
               class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              {" "}
               Go to main page
             </Link>
           </p>
