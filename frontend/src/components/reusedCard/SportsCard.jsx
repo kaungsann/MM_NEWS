@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { AiTwotoneLike } from "react-icons/ai";
 function SportsCard({ sport }) {
   return (
     <div className="flex w-80 h-40 bg-slate-100 p-4">
@@ -16,6 +16,12 @@ function SportsCard({ sport }) {
         >
           see more ...
         </Link>
+        <div className="">
+          <div className="flex  cursor-pointer  items-center">
+            <AiTwotoneLike className="hover:rotate-2	 text-xl text-cyan-500 hover:text-cyan-700 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-125 duration-300" />
+            <span className="mx-1">{sport.like}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

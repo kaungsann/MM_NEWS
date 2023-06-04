@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import robot from "../img/robot.jpeg";
-import meta from "../img/meta.jpeg";
-import drone from "../img/drone.jpeg";
-import tesla from "../img/tesla.jpeg";
-import hel from "../img/hei.jpg";
-import ai from "../img/ai.jpeg";
+
 import LatestCard from "../reusedCard/LatestCard";
 import SportsCard from "../reusedCard/SportsCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 function Internation() {
   const [latest, setLatest] = useState([]);
   const [sports, setSports] = useState([]);
@@ -16,6 +13,8 @@ function Internation() {
   const [card3, setCard3] = useState([]);
   const [card4, setCard4] = useState([]);
   const [card5, setCard5] = useState([]);
+  const userData = useSelector((state) => state.userData);
+  //const { id } = useParams();
   const latestNewsApi = async () => {
     // latest News & international category
     let response = await fetch(
@@ -38,6 +37,19 @@ function Internation() {
     console.log("sports ", resData.results);
     setSports(resData.results);
   };
+  const toggleLikeApi = async (id, page) => {
+    if (page < 0) {
+      return;
+    } else {
+      const postLike = await fetch(
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
+      );
+      let resData = await postLike.json();
+      console.log("add like is working", resData.results);
+      latestNewsApi();
+    }
+  };
+
   useEffect(() => {
     latestNewsApi();
     sportsApi();
@@ -131,9 +143,11 @@ function Internation() {
         </div>
         <div className=" font-serif text-[#343a40] my-6">
           <h3 className="text-3xl mb-3">Latest News</h3>
-          <div className=" flex flex-wrap justify-between ">
+          <div className=" flex flex-wrap justify-between my-4">
             {latest.length > 0 &&
-              latest.map((lat) => <LatestCard key={lat._id} card={lat} />)}
+              latest.map((lat) => (
+                <LatestCard key={lat._id} card={lat} addLike={toggleLikeApi} />
+              ))}
           </div>
         </div>
       </div>

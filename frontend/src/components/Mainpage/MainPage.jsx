@@ -11,8 +11,17 @@ function MainPage() {
   const dispatch = useDispatch();
   const [isCheck, setIsCheck] = useState(false);
   const navigate = useNavigate();
+  const videoElement = videoRef.current;
+  if (videoElement) {
+    videoElement.loop = true;
+    videoElement.play();
+  }
   useEffect(() => {
     const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.loop = true;
+      videoElement.play();
+    }
     let localData = JSON.parse(localStorage.getItem(localDb));
 
     if (localData) {
@@ -22,17 +31,12 @@ function MainPage() {
       navigate("/home");
     }
 
-    if (videoElement) {
-      videoElement.loop = true;
-      videoElement.play();
-    }
-
-    return () => {
-      if (videoElement) {
-        videoElement.loop = false;
-        videoElement.pause();
-      }
-    };
+    // return () => {
+    //   if (videoElement) {
+    //     videoElement.loop = false;
+    //     videoElement.pause();
+    //   }
+    // };
   }, []);
   return (
     <div>
