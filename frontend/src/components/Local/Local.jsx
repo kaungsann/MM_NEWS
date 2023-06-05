@@ -16,6 +16,18 @@ function Local() {
     setMianCard(resData.results[0]);
     console.log("main card is ", main);
   };
+  const toggleLikeApi = async (id, page) => {
+    if (page < 0) {
+      return;
+    } else {
+      const postLike = await fetch(
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
+      );
+      let resData = await postLike.json();
+      console.log("add like is working", resData.results);
+      HotNewsApi();
+    }
+  };
 
   useEffect(() => {
     HotNewsApi();
@@ -34,10 +46,7 @@ function Local() {
           </div>
           <div className="w-1/2">
             <span className="text-slate-500 font-sans my-1 ">
-              {new Date(main.create).toLocaleDateString() +
-                " ( " +
-                new Date(main.create).toLocaleTimeString() +
-                " ) "}
+              {new Date(main.create).toLocaleDateString()}
             </span>
             <div className="w-8/12">
               <h3 className="text-3xl my-3 font-serif ">{main.title}</h3>
@@ -52,7 +61,9 @@ function Local() {
           <h3 className="text-3xl mb-3">Latest News</h3>
           <div className=" flex flex-wrap justify-between ">
             {hotnews.length > 0 &&
-              hotnews.map((hot) => <HotNews key={hot._id} hotCard={hot} />)}
+              hotnews.map((hot) => (
+                <HotNews key={hot._id} hotCard={hot} addLike={toggleLikeApi} />
+              ))}
           </div>
         </div>
       </div>

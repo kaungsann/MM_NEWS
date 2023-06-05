@@ -6,7 +6,7 @@ const { helper } = require("../Library/helper");
 const Allpost = async (req, res, next) => {
   const results = await postDb
     .find()
-    .populate("user tag category", "-password ");
+    .populate("user tag category comment", "-password ");
   // .populate("user tag category", "-password");
   helper(res, "all post ", results);
 };
@@ -19,7 +19,7 @@ const sendPost = async (req, res, next) => {
 };
 
 const getOnePost = async (req, res, next) => {
-  let post = await postDb.findById(req.params.id);
+  let post = await postDb.findById(req.params.id).populate("comment");
   // let comment = await commentDb.findById({ postId: post._id });
   // post = post.toObject();
   // post.comment = comment;
@@ -53,7 +53,7 @@ const deletPost = async (req, res, next) => {
 };
 
 const byTag = async (req, res, next) => {
-  let findId = await postDb.find({ tag: req.params.id });
+  let findId = await postDb.find({ tag: req.params.id }).populate("comment");
   if (findId) {
     helper(res, "all tag post", findId);
   } else {
@@ -82,6 +82,61 @@ const paginate = async (req, res, next) => {
   helper(res, "paginate post", results);
 };
 
+const postComment = async (req, res, next) => {
+  const postId = await postDb.findById(req.params.id);
+  if (postId) {
+    let commentId = await new commentDb(req.body).save();
+    await postDb.findByIdAndUpdate(postId._id, {
+      $push: { comment: commentId._id },
+    });
+    let results = await postDb.findById(postId._id);
+    helper(res, "post comment", results);
+  } else {
+    next(new Error("you don't have with that id"));
+  }
+};
+
+const commentDelete = async (req, res, next) => {
+  let commentId = await commentDb.findById(req.params.id);
+  if (commentId) {
+    await commentDb.findByIdAndDelete(commentId._id);
+    helper(res, "comment delete");
+  }
+};
+
+const toggleLike = async (req, res, next) => {
+  let findId = await postDb.findById(req.params.id);
+  if (findId) {
+    if (req.params.page == 1) {
+      findId.like = findId.like + 1;
+    } else {
+      findId.unLike = findId.unLike + 1;
+    }
+    if (findId.unLike < 0) {
+      findId.unLike = findId.unLike = 0;
+    }
+
+    await postDb.findByIdAndUpdate(findId._id, findId);
+    let results = await postDb.findById(findId._id);
+    helper(res, "toggle like", results);
+  } else {
+    next(new Error("you don't have with that id"));
+  }
+};
+
+const addLike = async (req, res, next) => {
+  console.log("add like");
+  let findId = await postDb.findById(req.params.id);
+  if (findId) {
+    findId.like = findId.like + 1;
+    await postDb.findByIdAndUpdate(findId._id, findId);
+    let results = await postDb.findById(findId._id);
+    helper(res, "toggle like", results);
+  } else {
+    next(new Error("you don't have with that id"));
+  }
+};
+
 module.exports = {
   Allpost,
   sendPost,
@@ -91,4 +146,8 @@ module.exports = {
   byTag,
   bycategory,
   paginate,
+  toggleLike,
+  addLike,
+  postComment,
+  commentDelete,
 };

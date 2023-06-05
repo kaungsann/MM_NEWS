@@ -9,7 +9,7 @@ function Details() {
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
     setDetail(resData.results);
-    console.log(resData.results);
+    console.log("post detailsis", resData.results);
   };
   useEffect(() => {
     singlePost();
@@ -27,8 +27,24 @@ function Details() {
         <p className="my-4 font-serif text-2xl text-slate-700">{detail.text}</p>
         <div className="">
           <div className="flex  cursor-pointer  items-center">
-            <AiTwotoneLike className="text-2xl text-cyan-500 hover:text-cyan-700 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300" />
-            <span className="mx-1">+1</span>
+            <span className="text-blue-600">Like : {detail.like}</span>
+            <span className="text-red-600 mx-6 flex flex-col">
+              UnLike : {detail.unLike}
+            </span>
+          </div>
+          <div className="mt-4">
+            <span className="text-lg text-slate-600 my-6">Comment</span>
+            <div className="mt-4">
+              {/* {detail.comment} */}
+              {/* {detail.comment.length > 0 &&
+                detail.comment.map((cm) => {
+                  <p>{cm.text}</p>;
+                })} */}
+            </div>
+            {/* {detail.comment.length > 0 &&
+              detail.comment.map((cm) => {
+                <div>{cm._id}</div>;
+              })} */}
           </div>
         </div>
       </div>

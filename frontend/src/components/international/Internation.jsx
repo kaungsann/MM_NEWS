@@ -14,7 +14,7 @@ function Internation() {
   const [card4, setCard4] = useState([]);
   const [card5, setCard5] = useState([]);
   const userData = useSelector((state) => state.userData);
-  //const { id } = useParams();
+  const { id } = useParams();
   const latestNewsApi = async () => {
     // latest News & international category
     let response = await fetch(
@@ -48,6 +48,19 @@ function Internation() {
       console.log("add like is working", resData.results);
       latestNewsApi();
     }
+  };
+  const commentApi = async (id, text) => {
+    let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
+      method: "POST",
+      body: JSON.stringify(text),
+      headers: {
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
+    const resData = await comment.json();
+    console.log(resData.results);
+
+    latestNewsApi();
   };
 
   useEffect(() => {
@@ -137,7 +150,7 @@ function Internation() {
           </div>
         </div>
         <h3 className="text-2xl mb-3">Sports News</h3>
-        <div className="flex justify-between ">
+        <div className="flex justify-between mb-14">
           {sports.length > 0 &&
             sports.map((sp) => <SportsCard key={sp._id} sport={sp} />)}
         </div>
@@ -146,7 +159,12 @@ function Internation() {
           <div className=" flex flex-wrap justify-between my-4">
             {latest.length > 0 &&
               latest.map((lat) => (
-                <LatestCard key={lat._id} card={lat} addLike={toggleLikeApi} />
+                <LatestCard
+                  key={lat._id}
+                  card={lat}
+                  addLike={toggleLikeApi}
+                  comment={commentApi}
+                />
               ))}
           </div>
         </div>

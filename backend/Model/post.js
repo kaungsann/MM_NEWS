@@ -11,6 +11,7 @@ const postSchema = new Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
   like: { type: Number, default: 0 },
+  unLike: { type: Number, default: 0 },
   create: { type: Date, default: Date.now },
 });
 
