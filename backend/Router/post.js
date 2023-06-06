@@ -20,6 +20,11 @@ postRouter.post(
 postRouter.get("/like/toggle/:id/:page", postController.toggleLike);
 postRouter.get("/like/add/:id", validToken, postController.addLike);
 postRouter.post("/comment/:id", validToken, postController.postComment);
+postRouter.post(
+  "/comment/delete/:id",
+  validToken,
+  postController.commentDelete
+);
 
 postRouter
   .route("/:id")

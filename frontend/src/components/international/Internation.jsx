@@ -49,11 +49,14 @@ function Internation() {
       latestNewsApi();
     }
   };
+
   const commentApi = async (id, text) => {
     let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
       method: "POST",
-      body: JSON.stringify(text),
+
+      body: JSON.stringify({ text: text }),
       headers: {
+        "content-type": "application/json",
         authorization: `Bearer ${userData.token}`,
       },
     });
@@ -163,7 +166,7 @@ function Internation() {
                   key={lat._id}
                   card={lat}
                   addLike={toggleLikeApi}
-                  comment={commentApi}
+                  comments={commentApi}
                 />
               ))}
           </div>

@@ -19,7 +19,7 @@ const sendPost = async (req, res, next) => {
 };
 
 const getOnePost = async (req, res, next) => {
-  let post = await postDb.findById(req.params.id).populate("comment");
+  let post = await postDb.findById(req.params.id).populate("user comment");
   // let comment = await commentDb.findById({ postId: post._id });
   // post = post.toObject();
   // post.comment = comment;
@@ -97,10 +97,16 @@ const postComment = async (req, res, next) => {
 };
 
 const commentDelete = async (req, res, next) => {
-  let commentId = await commentDb.findById(req.params.id);
-  if (commentId) {
-    await commentDb.findByIdAndDelete(commentId._id);
-    helper(res, "comment delete");
+  const postId = await postDb.findById(req.params.id);
+  const commentId = await commentDb.findById(req.body.commentId);
+  if (postId) {
+    await postDb.findByIdAndUpdate(postId._id, {
+      $pull: { comment: commentId._id },
+    });
+    let results = await postDb.findById(postId._id);
+    helper(res, "post comment", results);
+  } else {
+    next(new Error("you don't have with that id"));
   }
 };
 

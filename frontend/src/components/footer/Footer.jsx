@@ -8,7 +8,7 @@ function Footer() {
         <span className="text-3xl font-sans font-bold lg:ml-36">Lets Talk</span>
         <div className="flex justify-evenly">
           <div className="lg:w-1/3 mt-4">
-            <p className="text-slate-500 my-3">
+            <p className="text-slate-500 my-3 mb-8">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error,
               quaerat assumenda perferendis molestiae provident non sunt
               sapiente odit enim modi cupiditate, sequi dolorem architecto quae.
@@ -17,7 +17,7 @@ function Footer() {
             </p>
             <Link
               to="/about"
-              className="p-3 my-6 hover:bg-cyan-500 bg-cyan-600 text-white rounded-md shadow-sm my-3"
+              className="p-3 my-6 hover:bg-cyan-500 bg-cyan-600 text-white rounded-md shadow-sm "
             >
               Go To About Page
             </Link>
