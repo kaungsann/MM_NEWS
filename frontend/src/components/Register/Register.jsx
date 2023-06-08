@@ -4,6 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
+
+const clientId =
+  "460190909818-d990ukpiqbeuo1hdaf4g01j80bo93oik.apps.googleusercontent.com";
+
+import GoogleLogouts from "../googleLogin/GoogleLogout";
 export default function () {
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
@@ -13,18 +20,17 @@ export default function () {
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
 
-  // handleGoogleSignIn = (response) => {
-  //   console.log(response); // Handle the response from Google Sign-In
-  // };
+  // let accessToken = gapi.auth.getToken().access_token;
 
-  // useEffect(() => {
-  //   window.google.accounts.id.initialize({
-  //     client_id: "YOUR_CLIENT_ID",
-  //     callback: handleGoogleSignIn,
-  //     ux_mode: "redirect",
-  //     redirect_uri: "http://localhost:5173/callback", // Replace with your callback URL
-  //   });
-  // });
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
+  });
 
   const registterApi = async (userData) => {
     let response = await fetch("http://127.0.0.1:5000/user/register", {
@@ -58,15 +64,15 @@ export default function () {
     <div>
       <ToastContainer />
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mb-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
 
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-3 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Register Account
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
             className="space-y-6"
             action="#"
@@ -174,7 +180,7 @@ export default function () {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-4 text-center text-sm text-gray-500">
             Not a member?
             <Link
               to="/"
@@ -183,15 +189,12 @@ export default function () {
               Go to Mainpage
             </Link>
           </p>
-          {/* <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <Link
-              to="/"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Sign in google
-            </Link>
-          </p> */}
+        </div>
+        <div className="items-center flex justify-center mb-10 mt-4">
+          <GoogleLogin />
+          <div className="mx-4">
+            <GoogleLogouts />
+          </div>
         </div>
       </div>
     </div>

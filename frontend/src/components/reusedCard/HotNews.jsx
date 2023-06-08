@@ -5,8 +5,9 @@ import { BiCommentDetail } from "react-icons/bi";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import { BsFillSendFill } from "react-icons/bs";
-export default function HotNews({ hotCard, addLike }) {
+export default function HotNews({ hotCard, addLike, comments }) {
   const [showment, setShowMent] = useState(false);
+  const [text, setText] = useState("");
   return (
     <>
       <div className="w-60 h-96 p-2 my-4">
@@ -91,6 +92,7 @@ export default function HotNews({ hotCard, addLike }) {
                               id="about"
                               name="about"
                               rows="3"
+                              onChange={(e) => setText(e.target.value)}
                               placeholder="Enter Your Comment "
                               class="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             ></textarea>
@@ -100,6 +102,13 @@ export default function HotNews({ hotCard, addLike }) {
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button
+                        onClick={() => {
+                          if (text) {
+                            comments(hotCard._id, text);
+                          }
+
+                          setShowMent(!showment);
+                        }}
                         type="button"
                         class="items-center inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
                       >

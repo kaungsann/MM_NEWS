@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import robot from "../img/robot.jpeg";
 import HotNews from "../reusedCard/HotNews";
 import Details from "../Details/Details";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Local() {
   const [hotnews, setHotNews] = useState([]);
   const [main, setMianCard] = useState([]);
-
+  const userData = useSelector((state) => state.userData);
   const HotNewsApi = async () => {
     const response = await fetch(
       "http://127.0.0.1:5000/post/bytag/6474a42c5203d3b8df88f18a"
@@ -27,6 +28,22 @@ function Local() {
       console.log("add like is working", resData.results);
       HotNewsApi();
     }
+  };
+
+  const commentApi = async (id, text) => {
+    let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
+      method: "POST",
+
+      body: JSON.stringify({ text: text }),
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
+    const resData = await comment.json();
+    console.log(resData.results);
+
+    HotNewsApi();
   };
 
   useEffect(() => {
@@ -62,7 +79,12 @@ function Local() {
           <div className=" flex flex-wrap justify-between ">
             {hotnews.length > 0 &&
               hotnews.map((hot) => (
-                <HotNews key={hot._id} hotCard={hot} addLike={toggleLikeApi} />
+                <HotNews
+                  key={hot._id}
+                  hotCard={hot}
+                  addLike={toggleLikeApi}
+                  comments={commentApi}
+                />
               ))}
           </div>
         </div>

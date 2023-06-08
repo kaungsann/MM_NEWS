@@ -76,6 +76,8 @@ function Admin() {
             <div className="flex flex-col px-3  lg:text-sm text-slate-500 ">
               <Link
                 to="/admin/posts/all"
+                exact
+                index
                 className="p-2 borde-solid hover:bg-slate-100"
               >
                 Post All
