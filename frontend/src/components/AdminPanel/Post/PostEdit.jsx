@@ -90,7 +90,7 @@ function PostEdit() {
   };
   return (
     <>
-      <div>PostEdit</div>
+      <div className="mx-3 text-xl font-serif">PostEdit</div>
       <div className="w-3/5 mx-auto p-4">
         <form onSubmit={postSubmit}>
           <div className="mt-2">

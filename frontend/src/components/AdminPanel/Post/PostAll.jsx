@@ -64,7 +64,7 @@ function PostAll() {
           </div>
           <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
-              <p class="text-sm text-gray-700">ALL POSTS</p>
+              <p className="mx-3 text-xl font-serif">ALL POSTS</p>
             </div>
             <div>
               <nav

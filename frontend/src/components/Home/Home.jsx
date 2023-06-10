@@ -10,6 +10,7 @@ import Footer from "../footer/Footer";
 import SlideCard from "../reusedCard/SlideCard";
 import RightSide from "../reusedCard/RightSide";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search";
 function Home() {
   const [technology, setTechnology] = useState([]);
   const [main, setMain] = useState([]);
@@ -37,7 +38,8 @@ function Home() {
   }, []);
   return (
     <>
-      <div className="w-10/12 mx-auto">
+      <Search />
+      <div className="w-10/12 mx-auto mt-16">
         <h1>Welcome to MMNews</h1>
 
         <div class="flex mb-4 p-3">

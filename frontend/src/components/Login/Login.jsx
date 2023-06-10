@@ -62,7 +62,11 @@ function Login() {
       setIsCheck(true);
       console.log("local data is ", localData);
       dispatch(addUser(localData));
-      navigate("/home");
+      if (usersData) {
+        navigate("/home");
+      } else {
+        navigate("/");
+      }
     }
   }, []);
 

@@ -5,7 +5,7 @@ function Footer() {
   return (
     <>
       <div className="p-6 my-6">
-        <span className="text-3xl font-sans font-bold lg:ml-36">Lets Talk</span>
+        {/* <span className="text-3xl font-sans font-bold lg:ml-36">Lets Talk</span> */}
         <div className="flex justify-evenly">
           <div className="lg:w-1/3 mt-4">
             <p className="text-slate-500 my-3 mb-8">

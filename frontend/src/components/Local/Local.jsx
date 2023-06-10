@@ -4,6 +4,7 @@ import HotNews from "../reusedCard/HotNews";
 import Details from "../Details/Details";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 function Local() {
   const [hotnews, setHotNews] = useState([]);
   const [main, setMianCard] = useState([]);

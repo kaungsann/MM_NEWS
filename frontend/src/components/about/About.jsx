@@ -49,7 +49,9 @@ function About() {
           </p>
         </div>
         <div cclassName="my-4 flex flex-wrap justify-center">
-          <h1 className="text-2xl text-slate-700 mb-3">Our Values</h1>
+          <h1 className="text-2xl text-slate-700 mb-3 text-center">
+            Our Values
+          </h1>
           <p className="text-slate-600">
             Integrity, accuracy, and transparency are the core values that drive
             us. We believe in the power of honest journalism to create positive
