@@ -26,10 +26,11 @@ import Internation from "./components/international/Internation";
 import About from "./components/about/About";
 
 import Details from "./components/Details/Details";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <Router>
         <Nav />
         <Routes>
@@ -110,7 +111,7 @@ function App() {
           <Route path="*" element={<FallBack />} />
         </Routes>
       </Router>
-    </>
+    </ErrorBoundary>
   );
 }
 

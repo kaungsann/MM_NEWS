@@ -5,6 +5,7 @@ import SlideCard from "../reusedCard/SlideCard";
 import RightSide from "../reusedCard/RightSide";
 import { Link, useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
+import { getApi } from "../Api";
 
 function Home() {
   const [technology, setTechnology] = useState([]);
@@ -15,23 +16,21 @@ function Home() {
   const [show2, setShow2] = useState([]);
 
   const techApi = async () => {
-    let response = await fetch(
-      "http://127.0.0.1:5000/post/bytag/6479d7cce8a3b6f7db7fbf62"
-    );
-    let resData = await response.json();
-    console.log("res data ", resData.results);
-    setShow(resData.results[4]);
-    setShow1(resData.results[5]);
-    setShow2(resData.results[6]);
-    setMain(resData.results[0]);
+    let response = await getApi("/post/bytag/6479d7cce8a3b6f7db7fbf62");
 
-    setSide(resData.results.slice(1, 4));
-    setTechnology(resData.results.splice(0, 5));
+    setShow(response.results[4]);
+    setShow1(response.results[5]);
+    setShow2(response.results[6]);
+    setMain(response.results[0]);
+
+    setSide(response.results.slice(1, 4));
+    setTechnology(response.results.splice(0, 5));
   };
 
   useEffect(() => {
     techApi();
   }, []);
+
   return (
     <>
       <Search />
