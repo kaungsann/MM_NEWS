@@ -6,7 +6,6 @@ import { addUser, removeUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Checkbox from "@mui/material/Checkbox";
 
 function Login() {
   const [email, setemail] = useState("");
@@ -17,7 +16,7 @@ function Login() {
   const navigate = useNavigate();
   const usersData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
-  // const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
   const loginApi = async (userData) => {
     let response = await fetch("http://127.0.0.1:5000/user/login", {
       method: "POST",
@@ -27,7 +26,6 @@ function Login() {
       },
     });
     let resData = await response.json();
-    console.log("userToken is ", resData.results);
 
     if (resData.con) {
       setLoading(false);
@@ -45,7 +43,6 @@ function Login() {
   };
   const loginUser = (e) => {
     e.preventDefault();
-    console.log("is check ", isCheck);
     setLoading(true);
     let user = {
       email,

@@ -31,7 +31,7 @@ export default function HotNews({ hotCard, addLike, comments }) {
           </p>
           <Link
             to={`/postdetail/${hotCard._id}`}
-            className="text-lg text-slate-400"
+            className="text-lg text-slate-400  hover:text-cyan-700 hover:font-bold"
           >
             see more
           </Link>

@@ -31,7 +31,10 @@ export default function LatestCard({ card, addLike, comments }) {
         <p className="text-sm font-serif text-slate-600 overflow-hidden">
           {card.text.substring(0, 65)}
         </p>
-        <Link to={`/postdetail/${card._id}`} className="text-slate-400">
+        <Link
+          to={`/postdetail/${card._id}`}
+          className="text-slate-400  hover:text-cyan-700 hover:font-bold "
+        >
           see more
         </Link>
         <div className=" flex  bg-slate-100 flex-col justify-center mt-3">

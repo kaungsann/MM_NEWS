@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import space from "../img/spacex.jpg";
-import robot from "../img/robot.jpeg";
-import meta from "../img/meta.jpeg";
-import drone from "../img/drone.jpeg";
-import tesla from "../img/tesla.jpeg";
-import hel from "../img/hei.jpg";
-import ai from "../img/ai.jpeg";
+
 import Footer from "../footer/Footer";
 import SlideCard from "../reusedCard/SlideCard";
 import RightSide from "../reusedCard/RightSide";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
+
 function Home() {
   const [technology, setTechnology] = useState([]);
   const [main, setMain] = useState([]);
@@ -18,6 +13,7 @@ function Home() {
   const [show, setShow] = useState([]);
   const [show1, setShow1] = useState([]);
   const [show2, setShow2] = useState([]);
+
   const techApi = async () => {
     let response = await fetch(
       "http://127.0.0.1:5000/post/bytag/6479d7cce8a3b6f7db7fbf62"
@@ -43,11 +39,13 @@ function Home() {
         <h1>Welcome to MMNews</h1>
 
         <div class="flex mb-4 p-3">
-          <Link to={`/postdetail/${main._id}`} className="w-3/5  relative">
+          <Link
+            to={`/postdetail/${main._id}`}
+            className="w-3/5  relative  hover:opacity-75  border-solid border-2 "
+          >
             <img src={`http://127.0.0.1:5000/uploads/${main.image}`} />
             <div className=" lg:w-72 p-4 absolute top-0 bg-[#F5F5F5]">
               <div className="text-slate-500 font-sans">
-                {" "}
                 {new Date(main.create).toLocaleDateString()}
               </div>
               <span className="lg:text-2xl font-serif font-bold">
@@ -86,7 +84,10 @@ function Home() {
           </div>
           <div className="w-3/5  flex flex-wrap px-3">
             <div className="flex w-full h-60   mb-3">
-              <Link to={`/postdetail/${show._id}`} className="w-3/5 relative">
+              <Link
+                to={`/postdetail/${show._id}`}
+                className="w-3/5 relative hover:opacity-75  "
+              >
                 <img
                   src={`http://127.0.0.1:5000/uploads/${show.image}`}
                   className="w-full h-full"
@@ -97,7 +98,7 @@ function Home() {
               </Link>
               <Link
                 to={`/postdetail/${show1._id}`}
-                className="w-2/5 mx-4 relative"
+                className="w-2/5 mx-4 relative   hover:opacity-75    "
               >
                 <img
                   src={`http://127.0.0.1:5000/uploads/${show1.image}`}
@@ -109,12 +110,12 @@ function Home() {
               </Link>
             </div>
             <Link
-              className="h-80 w-full relative   "
+              className="h-80 w-full relative   hover:opacity-75   border-solid border-2  "
               to={`/postdetail/${show2._id}`}
             >
               <img
                 src={`http://127.0.0.1:5000/uploads/${show2.image}`}
-                className="w-full h-full"
+                className="w-full h-full hover:bg-slate-700"
               />
               <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">
                 {show2.title}

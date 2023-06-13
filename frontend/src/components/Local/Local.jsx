@@ -14,7 +14,7 @@ function Local() {
       "http://127.0.0.1:5000/post/bytag/6474a42c5203d3b8df88f18a"
     );
     const resData = await response.json();
-    setHotNews(resData.results.splice(0, 5));
+    setHotNews(resData.results);
     setMianCard(resData.results[0]);
     console.log("main card is ", main);
   };
@@ -62,6 +62,7 @@ function Local() {
               className=" rounded-lg shadow-md  h-64 w-4/5"
             />
           </div>
+
           <div className="w-1/2">
             <span className="text-slate-500 font-sans my-1 ">
               {new Date(main.create).toLocaleDateString()}
@@ -75,9 +76,10 @@ function Local() {
             </div>
           </div>
         </div>
+        <div className="h-0.5 bg-slate-300  my-4 w-full"></div>
         <div className=" font-serif text-[#343a40] my-6">
           <h3 className="text-3xl mb-3">Latest News</h3>
-          <div className=" flex flex-wrap justify-between ">
+          <div className=" flex flex-wrap justify-evenly ">
             {hotnews.length > 0 &&
               hotnews.map((hot) => (
                 <HotNews

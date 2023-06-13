@@ -78,7 +78,10 @@ function Internation() {
       <div className="w-11/12  mx-auto">
         <div className="flex ">
           <div className="w-1/4 p-3 relative flex flex-wrap justify-between">
-            <Link to={`/postdetail/${card1._id}`} className="relative my-2">
+            <Link
+              to={`/postdetail/${card1._id}`}
+              className="relative my-2  hover:opacity-75  "
+            >
               <img
                 src={`http://127.0.0.1:5000/uploads/${card1.image}`}
                 className="w-full h-auto"
@@ -90,7 +93,10 @@ function Internation() {
                 {/* <p className="text-slate-100">{card1.text.substring(0, 0)}</p> */}
               </div>
             </Link>
-            <Link to={`/postdetail/${card2._id}`} className="relative">
+            <Link
+              to={`/postdetail/${card2._id}`}
+              className="relative  hover:opacity-75  "
+            >
               <img
                 src={`http://127.0.0.1:5000/uploads/${card2.image}`}
                 className="w-full"
@@ -103,8 +109,8 @@ function Internation() {
               </div>
             </Link>
           </div>
-          <div className="w-2/4  p-3 flex justify-center">
-            <Link to={`/postdetail/${card3._id}`} className="relative my-2">
+          <div className="w-2/4  p-3 flex justify-center  hover:opacity-75  ">
+            <Link to={`/postdetail/${card3._id}`} className="relative my-2 ">
               <img
                 src={`http://127.0.0.1:5000/uploads/${card3.image}`}
                 className="w-full h-full"
@@ -123,7 +129,7 @@ function Internation() {
           <div className="w-1/4 p-3 flex flex-wrap justify-between">
             <Link
               to={`/postdetail/${card4._id}`}
-              className="relative my-2 h-1/2"
+              className="relative my-2 h-1/2  hover:opacity-75  "
             >
               <img
                 src={`http://127.0.0.1:5000/uploads/${card4.image}`}
@@ -139,7 +145,10 @@ function Internation() {
                 </p> */}
               </div>
             </Link>
-            <Link to={`/postdetail/${card5._id}`} className="relative h-1/2">
+            <Link
+              to={`/postdetail/${card5._id}`}
+              className="relative h-1/2  hover:opacity-75  "
+            >
               <img
                 src={`http://127.0.0.1:5000/uploads/${card5.image}`}
                 className="w-full h-auto"

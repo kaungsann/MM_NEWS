@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 function RightSide({ card }) {
   return (
-    <div className="mx-6 flex bg-white p-4">
+    <Link
+      to={`/postdetail/${card._id}`}
+      className="mx-6 flex bg-white p-4 hover:bg-slate-200"
+    >
       <img
         src={`http://127.0.0.1:5000/uploads/${card.image}`}
         className="lg:h-32 lg:w-36"
@@ -15,11 +18,8 @@ function RightSide({ card }) {
         <p className="text-sm font-sans font-bold text-slate-600">
           {card.title}
         </p>
-        <Link to={`/postdetail/${card._id}`} className="text-slate-500 text-sm">
-          See MORE
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 }
 

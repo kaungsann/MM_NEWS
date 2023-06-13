@@ -19,7 +19,18 @@ const sendPost = async (req, res, next) => {
 };
 
 const getOnePost = async (req, res, next) => {
-  let post = await postDb.findById(req.params.id).populate("user comment");
+  let post = await postDb
+    .findById(req.params.id)
+    .populate("user comment")
+    .populate({
+      path: "comment",
+      populate: {
+        path: "user",
+        model: "user",
+      },
+    })
+    .populate("category", "name");
+
   // let comment = await commentDb.findById({ postId: post._id });
   // post = post.toObject();
   // post.comment = comment;

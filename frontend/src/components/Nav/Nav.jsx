@@ -22,6 +22,7 @@ function Nav() {
   const logout = () => {
     localStorage.removeItem(localDb);
     dispatch(removeUser(null));
+    settoggle(!toggle);
     navigator("/login");
   };
   const warmingAlert = () => {

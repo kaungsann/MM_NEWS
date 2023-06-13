@@ -47,11 +47,12 @@ function Search() {
                 <Link
                   to={`/postdetail/${product._id}`}
                   key={product.id}
-                  className="p-3 border-b-2"
+                  className="w-full py-3 px-3 hover:bg-slate-200  border-solid border-2 "
                 >
-                  <div className=" lg:text-sm text-slate-600 ">
+                  <div className="pb-2 lg:text-sm text-slate-600 w-full">
                     {product.title}
                   </div>
+                  {/* <div className=" w-full h-0.5 bg-slate-400"></div> */}
                 </Link>
               );
             })}

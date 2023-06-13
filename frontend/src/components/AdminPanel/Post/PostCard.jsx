@@ -32,7 +32,12 @@ function PostCard(props) {
           {postCard.text.substring(0, 30)}
         </p>
         <div>
-          <button className=" text-slate-400 mb-2">See more </button>
+          <Link
+            className=" text-slate-400 mb-2"
+            to={`/postdetail/${postCard._id}`}
+          >
+            See more{" "}
+          </Link>
         </div>
         <span className="text-sm">
           {" "}
