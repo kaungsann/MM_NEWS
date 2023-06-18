@@ -1,0 +1,4 @@
+{
+  "roles": [{ "name": "OWNER" }, { "name": "MANAGER" }],
+  "permits": [{ "name": "CREATE" }, { "name": "DELETE" }, { "name": "EDIT" }]
+}

@@ -10,7 +10,7 @@ permitRoute.post("/", validBody(permitSchema), permitController.postPermit);
 permitRoute
   .route("/:id")
   .get(permitController.getOnePermit)
-  .patch(validBody(permitSchema), permitController.editPermit)
+  .patch(permitController.editPermit)
   .delete(permitController.deletePermit);
 
 module.exports = permitRoute;

@@ -3,6 +3,16 @@ import { combineReducers } from "redux";
 const initialData = {
   title: "This is a M NEWS WEBSUTE",
 };
+const localDb = "MMNews";
+
+const getUser = () => {
+  let haveUser = localStorage.getItem(localDb);
+  return haveUser ? JSON.parse(haveUser) : [];
+};
+
+const saveUser = (user) => {
+  localStorage.setItem("localDb ", JSON.stringify(user));
+};
 
 const textDataReducers = (state = initialData, { type, payload }) => {
   switch (type) {
@@ -18,11 +28,16 @@ const textDataReducers = (state = initialData, { type, payload }) => {
 const userReducers = (state = null, { type, payload }) => {
   switch (type) {
     case "userAdd":
-      return (state = payload);
+      //return (state = payload);
+      saveUser(payload);
+      state = getUser();
+      return state;
     case "userRemove":
       return (state = payload);
     default:
+      state = getUser();
       return state;
+    //return state;
   }
 };
 

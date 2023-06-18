@@ -43,4 +43,44 @@ module.exports = {
       next(new Error("Tokenization Error"));
     }
   },
+
+  validRole: (roles) => {
+    return async (req, res, next) => {
+      let valid = false;
+      for (let i = 0; i < roles.length; i++) {
+        let hasRole = req.user.role.find((rol) => rol.name === roles[i]);
+        console.log("has role is ", hasRole);
+        if (hasRole) {
+          valid = true;
+          break;
+        } else {
+          next(new Error("you don't have role "));
+        }
+      }
+      if (bol) {
+        next();
+      } else {
+        new Error("you don't have role exist ");
+      }
+    };
+  },
+  validPermit: (permits) => {
+    return async (req, res, next) => {
+      let validPermit = false;
+      for (let i = 0; i < permits.length; i++) {
+        let hasPermit = req.user.permit.find((per) => per.name === permits[i]);
+        if (hasPermit) {
+          validPermit = true;
+          break;
+        } else {
+          next(new Error("you don't have permit "));
+        }
+      }
+      if (bol) {
+        next();
+      } else {
+        next(new Error("you don't have vip permit exist "));
+      }
+    };
+  },
 };

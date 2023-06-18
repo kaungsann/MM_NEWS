@@ -29,6 +29,13 @@ app.use("/tag", tagRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 
+const defaultUser = async () => {
+  let migrate = require("./Migration/migrate");
+  // migrate.roleAndPermitMigrate();
+  // migrate.addOwerRole();
+};
+//defaultUser();
+
 app.get("*", (req, res, next) => {
   res.send({
     message: "No Route Found",

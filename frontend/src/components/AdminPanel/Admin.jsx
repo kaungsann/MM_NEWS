@@ -12,7 +12,7 @@ function Admin() {
       <div className="cursor-pointer mt-6     relative">
         <div className="row-span-3 lg:w-72 bg-white  p-3 rounded-md mt-3 shadow-l fixed top-14 left-0 bottom-0">
           <span className="items-center text-center flex justify-center  text-slate-600 text-2xl font-serif font-bold mb-8">
-            Dashboard
+            Admin Dashboard
           </span>
           <div className="mt-4">
             <span className="lg:text-lg font-serif">User </span>

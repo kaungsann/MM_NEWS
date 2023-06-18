@@ -34,9 +34,10 @@ const editPermit = async (req, res, next) => {
   }
 };
 const deletePermit = async (req, res, next) => {
+  console.log("hello guys");
   let findId = await permitDb.findById(req.params.id);
   if (findId) {
-    await permitDb.findByIdAndDelete(findId._id, req.body);
+    await permitDb.findByIdAndDelete(findId._id);
     helper(res, "deleted permit");
   } else {
     next(new Error("you don't have with that id "));
