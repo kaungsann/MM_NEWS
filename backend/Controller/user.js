@@ -1,7 +1,7 @@
 const userDB = require("../Model/user");
 const { helper, encode, token, comparePassword } = require("../Library/helper");
 const getAll = async (req, res, next) => {
-  let results = await userDB.find();
+  let results = await userDB.find().populate("role permit");
   helper(res, "all user data ", results);
 };
 
@@ -42,7 +42,7 @@ const LoginUser = async (req, res, next) => {
 };
 
 const getOne = async (req, res, next) => {
-  const findId = await userDB.findById(req.params.id);
+  const findId = await userDB.findById(req.params.id).populate("role");
   helper(res, "get user", findId);
 };
 

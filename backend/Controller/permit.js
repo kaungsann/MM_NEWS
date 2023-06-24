@@ -44,6 +44,7 @@ const deletePermit = async (req, res, next) => {
   }
 };
 
+
 module.exports = {
   allPermit,
   postPermit,

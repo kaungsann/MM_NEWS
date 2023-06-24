@@ -8,8 +8,12 @@ const { validBody } = require("../Library/valid");
 roleRouter.get("/", roleController.allRole);
 roleRouter.post("/", validBody(permitSchema), roleController.postRole);
 
-roleRouter.post("/", validBody(AddRoleSchema), roleController.addRole);
-roleRouter.post("/", validBody(AddRoleSchema), roleController.RemoveRole);
+roleRouter.post("/addrole", validBody(AddRoleSchema), roleController.addRole);
+roleRouter.post(
+  "/removerole",
+
+  roleController.RemoveRole
+);
 
 roleRouter
   .route("/:id")

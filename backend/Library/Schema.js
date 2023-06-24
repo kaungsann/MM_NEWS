@@ -32,7 +32,7 @@ module.exports = {
       .required(),
     roleId: joi
       .string()
-      .regex(/^{a-fA-F0-9}[24]$/)
+      .regex(/^[a-fA-F0-9]{24}$/)
       .required(),
   }),
 

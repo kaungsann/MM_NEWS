@@ -58,12 +58,13 @@ const addRole = async (req, res, next) => {
   }
 };
 const RemoveRole = async (req, res, next) => {
-  let userId = await userDb.findById(req.body.userId);
+  console.log("remove role is working");
+  let user = await userDb.findById(req.body.userId);
   let roleId = await roleDb.findById(req.body.roleId);
-  if (userId) {
-    await userDb.findByIdAndUpdate(userId._id, { $pull: { role: roleId._id } });
-    let userId = await userDb.findById(userId._id);
-    helper(res, "add role user", userId);
+  if (user) {
+    await userDb.findByIdAndUpdate(user._id, { $pull: { role: roleId._id } });
+    let userId = await userDb.findById(user._id);
+    helper(res, "add role user", user);
   } else {
     next(new Error("You don't have with that id"));
   }

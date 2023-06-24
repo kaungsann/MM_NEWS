@@ -19,13 +19,38 @@ const roleAndPermitMigrate = () => {
 const addOwerRole = async () => {
   let owerEmail = await userDb.findOne({ email: "kaungsanh53@gmail.com" });
   let owerRole = await roleDb.findOne({ name: "OWNER" });
+
   await userDb.findByIdAndUpdate(owerEmail._id, {
     $push: { role: owerRole._id },
   });
-  await DB.findById(owerEmail._id);
+  await userDb.findById(owerEmail._id);
+};
+
+const addPermitRole = async (req, res, next) => {
+  let user = await userDb.findOne({ email: "kaungsanh53@gmail.com" });
+  let permit = await permitDb.find();
+  permit.map(async (per) => {
+    return await userDb.findByIdAndUpdate(user._id, {
+      $push: { permit: per },
+    });
+  });
+  await userDb.findById(user._id);
+};
+const removePermit = async (req, res, next) => {
+  let user = await userDb.findOne({ id: req.body.userId });
+  let permit = await permitDb.find();
+  permit.map(async (per) => {
+    return await userDb.findByIdAndUpdate(user._id, {
+      $pull: { role: per },
+    });
+  });
+  await userDb.findById(user._id);
 };
 
 module.exports = {
   roleAndPermitMigrate,
   addOwerRole,
+
+  addPermitRole,
+  removePermit,
 };

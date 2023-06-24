@@ -31,12 +31,12 @@ function MainPage() {
       navigate("/home");
     }
 
-    // return () => {
-    //   if (videoElement) {
-    //     videoElement.loop = false;
-    //     videoElement.pause();
-    //   }
-    // };
+    return () => {
+      if (videoElement) {
+        videoElement.loop = false;
+        videoElement.pause();
+      }
+    };
   }, []);
   return (
     <div>
