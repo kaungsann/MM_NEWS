@@ -11,7 +11,6 @@ function Search() {
       const response = await fetch("http://127.0.0.1:5000/post");
       const postData = await response.json();
       setPosts(postData.results);
-      console.log("search all data ", posts);
     };
     postAll();
   }, []);

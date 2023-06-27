@@ -32,7 +32,7 @@ app.use("/comment", commentRouter);
 const defaultUser = async () => {
   let migrate = require("./Migration/migrate");
   // migrate.roleAndPermitMigrate();
-  //migrate.addOwerRole();
+  // migrate.addOwerRole();
   //migrate.addPermitRole();
 };
 //defaultUser();

@@ -1,20 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { removeUser } from "../../../redux/actions";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-function UserUi({ users, deleteUser }) {
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function UserUi({ users, deleteUser, userApi }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.userData);
+  const { id } = useParams();
+
   const banUser = () => {
     dispatch(removeUser(null));
     navigate("/register");
   };
+
   const { role, permit } = users;
   console.log("all permit is ", permit);
   let findUser = role.find((rol) => rol.name === "OWNER");
 
+  const addOwnerApi = async (usrId) => {
+    const response = await fetch(
+      `http://127.0.0.1:5000/role/addroles/${usrId}`,
+      {
+        method: "POST",
+
+        headers: {
+          authorization: `Bearer ${userData.token}`,
+        },
+      }
+    );
+
+    let resData = response.json();
+    console.log("user data is ", resData.results);
+    toast(resData.message);
+    userApi();
+  };
+
+  const removeOwerRole = async (usrId) => {
+    const response = await fetch(
+      `http://127.0.0.1:5000/role/removeroles/${usrId}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${userData.token}`,
+        },
+      }
+    );
+
+    let resData = response.json();
+    console.log("user data is ", resData.results);
+    toast(resData.message);
+    userApi();
+  };
+
+  useEffect(() => {
+    userApi();
+  }, []);
+
   return (
     <>
+      <ToastContainer />
       <div className=" flex flex-wrap">
         <div className="flex mx-2 flex-col font-serif  flex-wrap p-4 rounded-lg shadow-lg bg-slate-100 my-3">
           <span className="lg:text-2xl my-1 text-slate-600 font-bold">
@@ -48,24 +94,44 @@ function UserUi({ users, deleteUser }) {
           <div className=" mt-2  flex justify-around">
             {users.role.length === 0 ? (
               <>
-                <button className="lg:text-sm bg-[#1f30c9] p-2 text-white rounded-sm shadow-sm   hover:bg-[#4a57c9]">
+                <button
+                  onClick={() => addOwnerApi(users._id)}
+                  className="lg:text-sm bg-[#1f30c9] p-2 text-white rounded-sm shadow-sm   hover:bg-[#4a57c9]"
+                >
                   Add Ower Role
                 </button>
-                <button className="lg:text-sm mx-3 bg-cyan-700 p-2 text-white rounded-sm shadow-sm  hover:bg-cyan-600">
+                {/* <button className="lg:text-sm mx-3 bg-cyan-700 p-2 text-white rounded-sm shadow-sm  hover:bg-cyan-600">
                   Add Manager Role
+                </button> */}
+                <button
+                  className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
+                  onClick={() => {
+                    deleteUser(users._id);
+                  }}
+                >
+                  Ban User
                 </button>
               </>
             ) : null}
-            {findUser ? null : (
-              <button
-                className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
-                onClick={() => {
-                  deleteUser(users._id);
-                }}
-              >
-                Ban User
-              </button>
-            )}
+            {findUser ? (
+              <>
+                <button
+                  onClick={() => removeOwerRole(users._id)}
+                  className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
+                >
+                  Remove Owner Role
+                </button>
+
+                <button
+                  className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
+                  onClick={() => {
+                    deleteUser(users._id);
+                  }}
+                >
+                  Ban User
+                </button>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

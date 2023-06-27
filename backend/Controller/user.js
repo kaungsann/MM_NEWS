@@ -1,5 +1,6 @@
 const userDB = require("../Model/user");
 const { helper, encode, token, comparePassword } = require("../Library/helper");
+
 const getAll = async (req, res, next) => {
   let results = await userDB.find().populate("role permit");
   helper(res, "all user data ", results);
@@ -25,7 +26,9 @@ const registerUser = async (req, res, next) => {
 };
 
 const LoginUser = async (req, res, next) => {
-  const findEmail = await userDB.findOne({ email: req.body.email });
+  const findEmail = await userDB
+    .findOne({ email: req.body.email })
+    .populate("role permit");
   if (findEmail) {
     let results = comparePassword(req.body.password, findEmail.password);
     if (results) {

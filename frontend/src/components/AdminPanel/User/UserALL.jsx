@@ -7,6 +7,7 @@ function UserALL() {
   const [user, setUser] = useState([]);
   const [loading, setloading] = useState(false);
   const userData = useSelector((state) => state.userData);
+
   const userDeleteApi = async (id) => {
     const response = await fetch(`http://127.0.0.1:5000/user/${id}`, {
       method: "DELETE",
@@ -23,7 +24,7 @@ function UserALL() {
     }
   };
   const userApi = async () => {
-    const response = await fetch("http://127.0.0.1:5000/user/");
+    const response = await fetch("http://127.0.0.1:5000/user");
     const resData = await response.json();
     setUser(resData.results);
   };
@@ -46,7 +47,12 @@ function UserALL() {
       <div className="flex flex-wrap">
         {user.length > 0 &&
           user.map((user) => (
-            <UserUi key={user._id} users={user} deleteUser={userDeleteApi} />
+            <UserUi
+              key={user._id}
+              users={user}
+              deleteUser={userDeleteApi}
+              userApi={userApi}
+            />
           ))}
       </div>
     </>

@@ -57,7 +57,6 @@ function Login() {
 
     if (localData) {
       setIsCheck(true);
-      console.log("local data is ", localData);
       dispatch(addUser(localData));
       if (usersData) {
         navigate("/home");

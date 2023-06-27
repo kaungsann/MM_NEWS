@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import icons from "../img/icons.png";
 
@@ -9,16 +9,20 @@ import { removeUser } from "../../redux/actions";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ownerDocument } from "@mui/material";
 
 function Nav() {
   const localDb = "MMNews";
   const userData = useSelector((state) => state.userData);
   const [toggle, settoggle] = useState(false);
+  const [valid, setValid] = useState(false);
   const dispatch = useDispatch();
   const navigator = useNavigate();
+
   const Toggle = () => {
     settoggle(!toggle);
   };
+
   const logout = () => {
     localStorage.removeItem(localDb);
     dispatch(removeUser(null));
@@ -28,6 +32,12 @@ function Nav() {
   const warmingAlert = () => {
     !userData && toast("You need to first register and login");
   };
+
+  const isAdmin =
+    userData &&
+    userData.role &&
+    userData.role.length > 0 &&
+    userData.role[0]?.name === "OWNER";
 
   return (
     <>
@@ -108,7 +118,6 @@ function Nav() {
                   >
                     Home
                   </Link>
-
                   <Link
                     to={userData && "/local"}
                     onClick={warmingAlert}
@@ -116,7 +125,6 @@ function Nav() {
                   >
                     Local
                   </Link>
-
                   <Link
                     to={userData && "/international"}
                     onClick={warmingAlert}
@@ -131,7 +139,16 @@ function Nav() {
                   >
                     About
                   </Link>
-                  {userData && (
+                  {/* {userData.role.name === "OWNER" && (
+                    <Link
+                      to="/admin"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Admin
+                    </Link>
+                  )} */}
+
+                  {isAdmin && (
                     <Link
                       to="/admin"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"

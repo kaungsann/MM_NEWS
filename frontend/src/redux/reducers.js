@@ -11,7 +11,7 @@ const getUser = () => {
 };
 
 const saveUser = (user) => {
-  localStorage.setItem("localDb ", JSON.stringify(user));
+  localStorage.setItem(localDb, JSON.stringify(user));
 };
 
 const textDataReducers = (state = initialData, { type, payload }) => {
