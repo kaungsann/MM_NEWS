@@ -13,6 +13,7 @@ function Internation() {
   const [card3, setCard3] = useState([]);
   const [card4, setCard4] = useState([]);
   const [card5, setCard5] = useState([]);
+
   const userData = useSelector((state) => state.userData);
   const { id } = useParams();
   const latestNewsApi = async () => {

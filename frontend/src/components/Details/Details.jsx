@@ -131,22 +131,30 @@ function Details() {
                     <div className="mt-4 flex mr-2 ">
                       <HiOutlineUserCircle className="text-2xl text-slate-500" />
                     </div>
-                    <div className="my-3 text-slate-600 flex flex-col mx-2">
-                      <span className="text-slate-800 text-lg mt-1 mb-2 font-serif ">
+                    <div className="my-2 text-slate-600 flex flex-col mx-2">
+                      <span className="text-black text-lg mt-1 mb-1 font-serif ">
                         {/* {detail.user ? detail.user.name : "None"} */}
                         {/* {detail.comment ? detail.comment.user.name : "none"} */}
                         {cmt.user.name}
                       </span>
-                      <p className="text-slate-600 text-lg">{cmt.text}</p>
+                      <p className="text-slate-600 text-md ml-5">{cmt.text}</p>
                     </div>
                   </div>
                   <div className="flex justify-center items-center">
-                    <MdOutlineDelete
+                    {userData.role.length ? (
+                      <MdOutlineDelete
+                        onClick={(event) =>
+                          deleteCommentApi(detail._id, cmt._id, event)
+                        }
+                        className="text-2xl text-red-600 hover:text-red-500 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+                      />
+                    ) : null}
+                    {/* <MdOutlineDelete
                       onClick={(event) =>
                         deleteCommentApi(detail._id, cmt._id, event)
                       }
                       className="text-2xl text-red-600 hover:text-red-500 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
-                    />
+                    /> */}
                   </div>
                 </div>
               ))
