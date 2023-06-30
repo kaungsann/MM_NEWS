@@ -10,16 +10,23 @@ function Details() {
   const [showment, setShowMent] = useState(false);
   const [text, setText] = useState("");
   const [detail, setDetail] = useState({});
+  const [check, setCheck] = useState([]);
+  const [valid, setValid] = useState(false);
   const { comment } = detail;
 
   const userData = useSelector((state) => state.userData);
+
+  const takeUserApi = async () => {
+    const response = await fetch("http://127.0.0.1:5000/user");
+    let resData = await response.json();
+    setCheck(resData.results);
+    console.log("all users", check);
+  };
 
   const singlePost = async () => {
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
     setDetail(resData.results);
-
-    console.log("post detailsis user name ", detail.comment);
   };
 
   const deleteCommentApi = async (postId, cmtId, event) => {
@@ -70,6 +77,7 @@ function Details() {
 
   useEffect(() => {
     singlePost();
+    takeUserApi();
   }, [id]);
   return (
     <>
@@ -86,17 +94,17 @@ function Details() {
           <div className="py-3pl-3">
             <div className="flex  cursor-pointer  items-center ">
               <span
-                onClick={() => {
-                  toggleLikeApi(detail._id, 1);
-                }}
+                // onClick={() => {
+                //   toggleLikeApi(detail._id, 1);
+                // }}
                 className="text-blue-600 rounde:md shadow-md flex   p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150"
               >
                 Like : {detail.like}
               </span>
               <span
-                onClick={() => {
-                  toggleLikeApi(detail._id, 0);
-                }}
+                // onClick={() => {
+                //   toggleLikeApi(detail._id, 0);
+                // }}
                 className="rounde:md shadow-md mx-6  p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150 text-red-600  flex flex-col px-4 border-l-2 "
               >
                 UnLike {detail.unLike}
@@ -133,8 +141,6 @@ function Details() {
                     </div>
                     <div className="my-2 text-slate-600 flex flex-col mx-2">
                       <span className="text-black text-lg mt-1 mb-1 font-serif ">
-                        {/* {detail.user ? detail.user.name : "None"} */}
-                        {/* {detail.comment ? detail.comment.user.name : "none"} */}
                         {cmt.user.name}
                       </span>
                       <p className="text-slate-600 text-md ml-5">{cmt.text}</p>
@@ -149,12 +155,14 @@ function Details() {
                         className="text-2xl text-red-600 hover:text-red-500 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
                       />
                     ) : null}
-                    {/* <MdOutlineDelete
-                      onClick={(event) =>
-                        deleteCommentApi(detail._id, cmt._id, event)
-                      }
-                      className="text-2xl text-red-600 hover:text-red-500 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
-                    /> */}
+                    {!userData.role.length && cmt.user._id === userData._id && (
+                      <MdOutlineDelete
+                        onClick={(event) =>
+                          deleteCommentApi(detail._id, cmt._id, event)
+                        }
+                        className="text-2xl text-red-600 hover:text-red-500 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+                      />
+                    )}
                   </div>
                 </div>
               ))
