@@ -17,13 +17,6 @@ export default function LatestCard({ card, addLike, comments }) {
   const [dismark, setDismark] = useState(false);
   const userData = useSelector((state) => state.userData);
 
-  // const disablelike = {
-  //   pointerEvents: isDisable && "none",
-  // };
-  // const disLikes = {
-  //   pointerEvents: disLike && "none",
-  // };
-
   return (
     <div className="w-64  h-96 p-3 my-8 cursor-pointer ">
       <img
@@ -49,12 +42,12 @@ export default function LatestCard({ card, addLike, comments }) {
             <div className="flex items-center">
               <button
                 onClick={() => {
-                  userData.role.length && addLike(card._id, 1);
-                  !userData.role.length && setLiked(false);
+                  userData.role.length > 0 && addLike(card._id, 1);
+                  !userData.role.length > 0 && setLiked(false);
                   mark ? null : addLike(card._id, 1);
 
                   setMark(true);
-                  userData.role.length ? setLiked(true) : setLiked(!liked);
+                  userData.role.length > 0 ? setLiked(true) : setLiked(!liked);
                 }}
                 className="fill-blue-600 text-2xl  text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
               >

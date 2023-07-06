@@ -40,12 +40,6 @@ function Admin() {
               >
                 Category Create
               </Link>
-              {/* <Link
-                to={`/admin/category/edit/:id`}
-                className=" p-2 hover:bg-slate-100 hover:rounded-md"
-              >
-                Category Edit
-              </Link> */}
             </div>
           </div>
           <div>
@@ -63,12 +57,6 @@ function Admin() {
               >
                 Tag Create
               </Link>
-              {/* <Link
-                to="/admin/tag/edit/:id"
-                className=" p-2 hover:bg-slate-100 hover:rounded-md"
-              >
-                Tag Edit
-              </Link> */}
             </div>
           </div>
           <div>

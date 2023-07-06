@@ -68,8 +68,7 @@ function PostEdit() {
   const getOnePost = async () => {
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
-    //const catPost = resData.results;
-    console.log("post one is ", resData.results);
+
     settag(resData.results.tag);
     setcat(resData.results.category);
     setTitle(resData.results.title);
@@ -85,8 +84,6 @@ function PostEdit() {
   const postSubmit = (e) => {
     e.preventDefault();
     EditPostAPi();
-    // console.log("all post data is ", title, text, cat, tag, file);
-    // EditPostAPi();
   };
   return (
     <>

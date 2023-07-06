@@ -34,10 +34,8 @@ function PostCreate() {
     });
     const resData = await response.json();
     if (resData.con) {
-      console.log(resData);
       navigate("/admin/posts/all");
     } else {
-      console.log(resData);
     }
   };
 

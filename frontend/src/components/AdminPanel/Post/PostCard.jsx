@@ -1,17 +1,13 @@
 import React from "react";
-import img from "../../img/biden.jpg";
+
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 function PostCard(props) {
   const { postCard, deletePost } = props;
-  // const category = postCard.category || {};
-  // const user = postCard.user || {};
-  //
+
   const { user, category } = postCard;
   console.log("post card is ", postCard);
-  // console.log("user name is ", user);
-  // console.log(category);
 
   return (
     <>

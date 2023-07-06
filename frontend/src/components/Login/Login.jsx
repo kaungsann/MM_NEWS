@@ -113,7 +113,7 @@ function Login() {
                   Password
                 </label>
                 <div class="text-sm">
-                  <Link to="/register">
+                  <Link to="/forget-password">
                     <a
                       href="#"
                       class="font-semibold   text-cyan-600 hover:text-indigo-500"

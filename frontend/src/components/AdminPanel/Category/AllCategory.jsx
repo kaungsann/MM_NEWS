@@ -14,7 +14,6 @@ function AllCategory() {
   const catApi = async () => {
     const response = await fetch("http://127.0.0.1:5000/category/");
     let resData = await response.json();
-    console.log(resData);
     setCategory(resData.results);
   };
 
@@ -30,7 +29,6 @@ function AllCategory() {
     catApi();
     if (resData.con) {
       setloading(false);
-      //  toast(resData);
     }
   };
 
@@ -41,11 +39,6 @@ function AllCategory() {
     <div className="relative">
       <h1 className="mx-3 text-xl font-serif ">ALL CATEGORY</h1>
       <ToastContainer />
-      {/* <Link to="/admin/category/create">
-        <button className="p-1  bg-cyan-700 w-28 text-slate-200 mt-4 mb-3 rounded-md hover:bg-cyan-600">
-          Add +
-        </button>
-      </Link> */}
 
       {loading && (
         <BeatLoader

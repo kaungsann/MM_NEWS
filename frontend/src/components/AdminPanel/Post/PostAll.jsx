@@ -12,7 +12,6 @@ function PostAll() {
     );
     let resData = await response.json();
     setPost(resData.results);
-    //  console.log("post data is ", resData.results);
   };
 
   const deletePost = async (id) => {
@@ -26,7 +25,6 @@ function PostAll() {
     const resData = await response.json();
     postApi();
     if (resData.con) {
-      console.log("successful");
       //setloading(false);
       //  toast(resData);
     }

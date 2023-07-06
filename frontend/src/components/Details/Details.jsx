@@ -11,7 +11,7 @@ function Details() {
   const [text, setText] = useState("");
   const [detail, setDetail] = useState({});
   const [check, setCheck] = useState([]);
-  const [valid, setValid] = useState(false);
+  const [show, setShow] = useState(false);
   const { comment } = detail;
 
   const userData = useSelector((state) => state.userData);
@@ -20,7 +20,6 @@ function Details() {
     const response = await fetch("http://127.0.0.1:5000/user");
     let resData = await response.json();
     setCheck(resData.results);
-    console.log("all users", check);
   };
 
   const singlePost = async () => {
@@ -43,7 +42,6 @@ function Details() {
       }
     );
     const resData = deleComment.json();
-    console.log("delete comment", resData);
     singlePost();
   };
 
@@ -55,7 +53,7 @@ function Details() {
         `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
       );
       let resData = await postLike.json();
-      console.log("add like is working", resData.results);
+
       singlePost();
     }
   };
@@ -70,8 +68,6 @@ function Details() {
       },
     });
     const resData = response.json();
-    console.log("comments ", resData.results);
-
     singlePost();
   };
 
@@ -107,7 +103,7 @@ function Details() {
                 // }}
                 className="rounde:md shadow-md mx-6  p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150 text-red-600  flex flex-col px-4 border-l-2 "
               >
-                UnLike {detail.unLike}
+                UnLike : {detail.unLike}
               </span>
               <div>
                 <div className="rounde:md shadow-md text-cyan-700 flex   p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150">
@@ -128,8 +124,13 @@ function Details() {
           </div>
 
           <div className="mt-4">
-            <span className="text-xl text-slate-600 my-6">Comments</span>
-            {comment && comment.length > 0 ? (
+            <button
+              className="mt-8 rounde:md shadow-md text-cyan-700 flex   p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150"
+              onClick={() => setShow(!show)}
+            >
+              View Comments
+            </button>
+            {show && comment && comment.length > 0 ? (
               comment.map((cmt) => (
                 <div
                   className="bg-slate-100 p-4 shadow-md rounded-lg flex justify-between  my-4 relative"

@@ -32,7 +32,7 @@ function UserUi({ users, deleteUser, userApi }) {
     );
 
     let resData = response.json();
-    console.log("user data is ", resData.results);
+
     toast(resData.message);
     userApi();
   };
@@ -49,7 +49,7 @@ function UserUi({ users, deleteUser, userApi }) {
     );
 
     let resData = response.json();
-    console.log("user data is ", resData.results);
+
     toast(resData.message);
     userApi();
   };

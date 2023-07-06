@@ -35,6 +35,9 @@ module.exports = {
       .regex(/^[a-fA-F0-9]{24}$/)
       .required(),
   }),
+  PasswordSchema: joi.object({
+    password: joi.string().min(8).max(24).required(),
+  }),
 
   PostSchema: joi.object({
     image: joi.string().required(),

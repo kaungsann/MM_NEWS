@@ -8,7 +8,9 @@ const userSchema = new Schema({
   phone: { type: String, required: true, unquie: true },
   role: [{ type: Schema.Types.ObjectId, ref: "role" }],
   permit: [{ type: Schema.Types.ObjectId, ref: "permit" }],
-  password: { type: String, required: true },
+  password: { type: String },
+  resetToken: { type: String },
+  resetTokenExpiration: { type: Date },
   create: { type: Date, default: Date.now },
 });
 

@@ -22,7 +22,7 @@ function Internation() {
       "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
     );
     let resData = await response.json();
-    console.log(resData.results);
+
     setLatest(resData.results);
     setCard1(resData.results[0]);
     setCard2(resData.results[1]);
@@ -35,7 +35,7 @@ function Internation() {
       "http://127.0.0.1:5000/post/bytag/6477740ac8b3627821bcba50"
     );
     let resData = await sports.json();
-    console.log("sports ", resData.results);
+
     setSports(resData.results);
   };
   const toggleLikeApi = async (id, page) => {
@@ -46,7 +46,6 @@ function Internation() {
         `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
       );
       let resData = await postLike.json();
-      console.log("add like is working", resData.results);
       latestNewsApi();
     }
   };
@@ -62,7 +61,6 @@ function Internation() {
       },
     });
     const resData = await comment.json();
-    console.log(resData.results);
 
     latestNewsApi();
   };

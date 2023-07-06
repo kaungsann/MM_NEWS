@@ -108,55 +108,57 @@ function Nav() {
                 />
               </div>
 
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  {/*  Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-                  <Link
-                    to={userData && "/home"}
-                    onClick={warmingAlert}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    to={userData && "/local"}
-                    onClick={warmingAlert}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Local
-                  </Link>
-                  <Link
-                    to={userData && "/international"}
-                    onClick={warmingAlert}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    International
-                  </Link>
-                  <Link
-                    to={userData && "/about"}
-                    onClick={warmingAlert}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    About
-                  </Link>
-                  {/* {userData.role.name === "OWNER" && (
+              <div className="hidden sm:ml-6 sm:block ">
+                {userData && (
+                  <div className="flex space-x-4 transition ease-in-out delay-150 opacity-100 ">
+                    {/*  Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                     <Link
-                      to="/admin"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      to={userData && "/home"}
+                      onClick={warmingAlert}
+                      className="transition ease-in-out delay-150 opacity-100 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                     >
-                      Admin
+                      Home
                     </Link>
-                  )} */}
+                    <Link
+                      to={userData && "/local"}
+                      onClick={warmingAlert}
+                      className="transition ease-in-out delay-150 opacity-100 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Local
+                    </Link>
+                    <Link
+                      to={userData && "/international"}
+                      onClick={warmingAlert}
+                      className="transition ease-in-out delay-150 opacity-100 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      International
+                    </Link>
+                    <Link
+                      to={userData && "/about"}
+                      onClick={warmingAlert}
+                      className=" transition ease-in-out delay-150 opacity-100 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      About
+                    </Link>
+                    {/* {userData.role.name === "OWNER" && (
+        <Link
+          to="/admin"
+          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+        >
+          Admin
+        </Link>
+      )} */}
 
-                  {isAdmin && (
-                    <Link
-                      to="/admin"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                    >
-                      Admin
-                    </Link>
-                  )}
-                </div>
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        className="transition ease-in-out delay-150 opacity-100 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                      >
+                        Admin
+                      </Link>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

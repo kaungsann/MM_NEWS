@@ -26,7 +26,6 @@ function MainPage() {
 
     if (localData) {
       setIsCheck(true);
-      console.log("local data is ", localData);
       dispatch(addUser(localData));
       navigate("/home");
     }

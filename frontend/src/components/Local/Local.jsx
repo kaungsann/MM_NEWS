@@ -16,7 +16,6 @@ function Local() {
     const resData = await response.json();
     setHotNews(resData.results);
     setMianCard(resData.results[0]);
-    console.log("main card is ", main);
   };
   const toggleLikeApi = async (id, page) => {
     if (page < 0) {
@@ -26,7 +25,7 @@ function Local() {
         `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
       );
       let resData = await postLike.json();
-      console.log("add like is working", resData.results);
+
       HotNewsApi();
     }
   };
@@ -42,7 +41,6 @@ function Local() {
       },
     });
     const resData = await comment.json();
-    console.log(resData.results);
 
     HotNewsApi();
   };

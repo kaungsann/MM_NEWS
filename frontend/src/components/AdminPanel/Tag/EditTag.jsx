@@ -18,7 +18,6 @@ function TagEdit() {
       },
     });
     const resData = await response.json();
-    console.log(resData.results);
 
     if (resData.con) {
       navigate("/admin/tags/all");

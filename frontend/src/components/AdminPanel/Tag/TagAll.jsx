@@ -10,10 +10,8 @@ function TagAll() {
     const response = await fetch("http://127.0.0.1:5000/tag/");
     let resData = await response.json();
     if (resData.con) {
-      console.log(resData);
       setTag(resData.results);
     } else {
-      console.log(resData);
     }
   };
   const deleteTag = async (id) => {
@@ -26,7 +24,6 @@ function TagAll() {
     });
     let resData = await deleteCard.json();
     tagApI();
-    console.log(resData);
   };
   useEffect(() => {
     tagApI();

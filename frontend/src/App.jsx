@@ -27,6 +27,8 @@ import About from "./components/about/About";
 
 import Details from "./components/Details/Details";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
+import AddNewPassword from "./components/ForgetPassword/AddNewPassword";
 
 function App() {
   return (
@@ -38,15 +40,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/postdetail/:id" element={<Details />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/reset-password/:id" element={<AddNewPassword />} />
 
-          {/* <Route
-            path="/detail"
-            element={
-              <GuardRouter>
-                <Details />
-              </GuardRouter>
-            }
-          /> */}
           <Route
             path="/home"
             element={
