@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+
 import { BiCommentDetail } from "react-icons/bi";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import { BsFillSendFill } from "react-icons/bs";
+import { AiTwotoneLike, AiTwotoneDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 export default function HotNews({ hotCard, addLike, comments }) {
   const [showment, setShowMent] = useState(false);
   const [text, setText] = useState("");
+  const [liked, setLiked] = useState(false);
+  const [disLike, setDisLike] = useState(false);
+  const [mark, setMark] = useState(false);
+  const [dismark, setDismark] = useState(false);
+  const userData = useSelector((state) => state.userData);
   return (
     <>
       <div className="w-60 h-96 p-2 my-4">
@@ -38,21 +45,48 @@ export default function HotNews({ hotCard, addLike, comments }) {
           <div className=" flex  bg-slate-100 flex-col justify-center mt-3">
             <div className="flex">
               <div className="flex items-center">
-                <AiOutlineLike
+                <button
                   onClick={() => {
-                    addLike(hotCard._id, 1);
+                    userData.role.length > 0 && addLike(hotCard._id, 1);
+                    !userData.role.length > 0 && setLiked(false);
+                    mark ? null : addLike(hotCard._id, 1);
+
+                    setMark(true);
+                    userData.role.length > 0
+                      ? setLiked(true)
+                      : setLiked(!liked);
                   }}
-                  className="text-2xl  text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
-                />
+                  className="fill-blue-600 text-2xl  text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+                >
+                  {liked ? (
+                    <AiTwotoneLike color="#2563eb" />
+                  ) : (
+                    <AiOutlineLike />
+                  )}
+                </button>
+
                 <span className="mx-1 text-slate-600">{hotCard.like}</span>
               </div>
               <div className="flex items-center mx-6">
-                <AiOutlineDislike
+                <button
                   onClick={() => {
-                    addLike(hotCard._id, 0);
+                    userData.role.length && addLike(hotCard._id, 0);
+                    !userData.role.length && setDisLike(false);
+                    dismark ? null : addLike(hotCard._id, 0);
+                    setDismark(true);
+                    userData.role.length
+                      ? setDisLike(true)
+                      : setDisLike(!disLike);
                   }}
                   className="text-2xl  text-blue-600 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
-                />
+                >
+                  {disLike ? (
+                    <AiTwotoneDislike color="#ef4444" />
+                  ) : (
+                    <AiOutlineDislike />
+                  )}
+                </button>
+
                 <span className="mx-1 text-slate-600">{hotCard.unLike}</span>
               </div>
               <div

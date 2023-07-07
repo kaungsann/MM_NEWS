@@ -20,7 +20,7 @@ function PostEdit() {
   };
 
   const EditPostAPi = async () => {
-    console.log("IMAGE IS ", file);
+    console.log("user id is ", id);
     const catData = { file, cat, tag, title, text };
     const formData = new FormData();
     formData.append("title", title);
@@ -30,10 +30,10 @@ function PostEdit() {
     formData.append("tag", tag);
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`, {
       method: "PATCH",
-      body: formData,
-      // body: JSON.stringify(catData),
+      //  body: formData,
+      body: JSON.stringify(catData),
       headers: {
-        //  "content-type": "application/json",
+        "content-type": "application/json",
         authorization: `Bearer ${userData.token}`,
       },
     });
@@ -68,11 +68,12 @@ function PostEdit() {
   const getOnePost = async () => {
     const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
-
-    settag(resData.results.tag);
-    setcat(resData.results.category);
-    setTitle(resData.results.title);
-    setText(resData.results.text);
+    const catPost = resData.results;
+    console.log(catPost);
+    setcat(catPost.category);
+    settag(catPost.tag);
+    setTitle(catPost.title);
+    setText(catPost.text);
   };
 
   useEffect(() => {
@@ -84,10 +85,12 @@ function PostEdit() {
   const postSubmit = (e) => {
     e.preventDefault();
     EditPostAPi();
+    // console.log("all post data is ", title, text, cat, tag, file);
+    // EditPostAPi();
   };
   return (
     <>
-      <div className="mx-3 text-xl font-serif">PostEdit</div>
+      <div>PostEdit</div>
       <div className="w-3/5 mx-auto p-4">
         <form onSubmit={postSubmit}>
           <div className="mt-2">
@@ -130,9 +133,6 @@ function PostEdit() {
                 onChange={(e) => setcat(e.target.value)}
                 className="p-2.5 bg-white   w-full block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option disabled selected value>
-                  Select an option
-                </option>
                 {categorys.length > 0 &&
                   categorys.map((cats) => (
                     <option
@@ -155,11 +155,9 @@ function PostEdit() {
               <select
                 id="tagId"
                 onChange={(e) => settag(e.target.value)}
+                s
                 className="w-full p-2.5 order-solid bg-white  block  rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option disabled selected value>
-                  Select an option
-                </option>
                 {tags.length > 0 &&
                   tags.map((tags) => (
                     <option

@@ -66,10 +66,13 @@ function Local() {
               {new Date(main.create).toLocaleDateString()}
             </span>
             <div className="w-8/12">
-              <h3 className="text-3xl my-3 font-serif ">{main.title}</h3>
-              <p className="text-slate-600 my-2">{main.text}</p>
-              <Link to={`/postdetail/${main._id}`} className="text-slate-400">
-                See More
+              <h3 className="text-3xl  font-serif  mb-8">{main.title}</h3>
+              {/* <p className="text-slate-600 my-2">{main.text}</p> */}
+              <Link
+                to={`/postdetail/${main._id}`}
+                className="text-slate-200 p-3 bg-blue-600 m hover:bg-blue-500"
+              >
+                Read More
               </Link>
             </div>
           </div>

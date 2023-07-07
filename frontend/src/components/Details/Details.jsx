@@ -90,17 +90,17 @@ function Details() {
           <div className="py-3pl-3">
             <div className="flex  cursor-pointer  items-center ">
               <span
-                // onClick={() => {
-                //   toggleLikeApi(detail._id, 1);
-                // }}
+                onClick={() => {
+                  toggleLikeApi(detail._id, 1);
+                }}
                 className="text-blue-600 rounde:md shadow-md flex   p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150"
               >
                 Like : {detail.like}
               </span>
               <span
-                // onClick={() => {
-                //   toggleLikeApi(detail._id, 0);
-                // }}
+                onClick={() => {
+                  toggleLikeApi(detail._id, 0);
+                }}
                 className="rounde:md shadow-md mx-6  p-2 hover:scale-110 hover:font-bold transition ease-in-out delay-150 text-red-600  flex flex-col px-4 border-l-2 "
               >
                 UnLike : {detail.unLike}
