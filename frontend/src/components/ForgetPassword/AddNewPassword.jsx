@@ -6,17 +6,17 @@ import { AiTwotoneEye } from "react-icons/ai";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addUser, removeUser } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 export default function AddNewPassword() {
-  const localDb = "MMNews";
   const [eye, setEye] = useState(true);
   const [pw, setPw] = useState("");
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const usersData = useSelector((state) => state.userData);
-  const dispatch = useDispatch();
+  console.log("user data in reset password", usersData);
+
   const NewPwApi = async () => {
     console.log("user new ps", pw);
     const response = await fetch(
@@ -43,22 +43,11 @@ export default function AddNewPassword() {
     setLoaded(true);
     NewPwApi();
   };
-  useEffect(() => {
-    let localData = JSON.parse(localStorage.getItem(localDb));
 
-    if (localData) {
-      dispatch(addUser(localData));
-      if (usersData) {
-        navigate("/home");
-      } else {
-        navigate("/");
-      }
-    }
-  }, []);
   return (
     <>
       <ToastContainer />
-      <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8">
+      <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8 ">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img class="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
           <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

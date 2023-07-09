@@ -21,9 +21,9 @@ const userForgetPassword = async (req, res, next) => {
     findEmail.resetTokenExpiration = Date.now() + 3600000; // Token expires in 1 hour
     await findEmail.save();
     helper(res, "Email sent successfully", findEmail);
+
     //  Send email with the reset link
-    //   http://localhost:5173/
-    //http://localhost:5000/user/reset-password/${resetToken}
+
     const mailOptions = {
       from: process.env.EMAIL,
       to: findEmail.email,
@@ -65,7 +65,10 @@ const userResetPassword = async (req, res, next) => {
   user.resetTokenExpiration = undefined;
   await user.save();
 
-  helper(res, "Password reset successful , Pls login again");
+  helper(
+    res,
+    "Password reset successful , Pls login again with your new password"
+  );
 };
 
 module.exports = {

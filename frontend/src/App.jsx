@@ -32,82 +32,92 @@ import AddNewPassword from "./components/ForgetPassword/AddNewPassword";
 
 function App() {
   return (
-    <ErrorBoundary>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/postdetail/:id" element={<Details />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/reset-password/:id" element={<AddNewPassword />} />
+    <>
+      <ErrorBoundary>
+        <Router>
+          <Nav />
 
-          <Route
-            path="/home"
-            element={
-              <GuardRouter>
-                <Home />
-              </GuardRouter>
-            }
-          />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/reset-password/:id" element={<AddNewPassword />} />
+            <Route
+              path="/postdetail/:id"
+              element={
+                <GuardRouter>
+                  <Details />
+                </GuardRouter>
+              }
+            />
 
-          <Route
-            path="/local"
-            element={
-              <GuardRouter>
-                <Local />
-              </GuardRouter>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <GuardRouter>
-                <About />
-              </GuardRouter>
-            }
-          />
-          <Route
-            path="/international"
-            element={
-              <GuardRouter>
-                <Internation />
-              </GuardRouter>
-            }
-          />
+            <Route
+              path="/home"
+              element={
+                <GuardRouter>
+                  <Home />
+                </GuardRouter>
+              }
+            />
 
-          <Route
-            path="/admin"
-            element={
-              <GuardRouter>
-                <Admin />
-              </GuardRouter>
-            }
-          >
-            <Route path="posts">
-              <Route path="all" element={<PostAll />} />
-              <Route path="create" element={<PostCreate />} />
-              <Route path="edit/:id" element={<PostEdit />} />
+            <Route
+              path="/local"
+              element={
+                <GuardRouter>
+                  <Local />
+                </GuardRouter>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <GuardRouter>
+                  <About />
+                </GuardRouter>
+              }
+            />
+            <Route
+              path="/international"
+              element={
+                <GuardRouter>
+                  <Internation />
+                </GuardRouter>
+              }
+            />
+
+            <Route
+              path="/admin"
+              element={
+                <GuardRouter>
+                  <Admin />
+                </GuardRouter>
+              }
+            >
+              <Route path="posts">
+                <Route path="all" element={<PostAll />} />
+                <Route path="create" element={<PostCreate />} />
+                <Route path="edit/:id" element={<PostEdit />} />
+              </Route>
+              <Route path="users">
+                <Route path="all" element={<UserALL />} />
+              </Route>
+              <Route path="categorys">
+                <Route path="all" element={<AllCategory />} />
+                <Route path="create" element={<CreateCategory />} />
+                <Route path="edit/:id" element={<EditCategory />} />
+              </Route>
+              <Route path="tags">
+                <Route path="all" element={<TagAll />} />
+                <Route path="create" element={<TagCreate />} />
+                <Route path="edit/:id" element={<TagEdit />} />
+              </Route>
             </Route>
-            <Route path="users">
-              <Route path="all" element={<UserALL />} />
-            </Route>
-            <Route path="categorys">
-              <Route path="all" element={<AllCategory />} />
-              <Route path="create" element={<CreateCategory />} />
-              <Route path="edit/:id" element={<EditCategory />} />
-            </Route>
-            <Route path="tags">
-              <Route path="all" element={<TagAll />} />
-              <Route path="create" element={<TagCreate />} />
-              <Route path="edit/:id" element={<TagEdit />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<FallBack />} />
-        </Routes>
-      </Router>
-    </ErrorBoundary>
+            <Route path="*" element={<FallBack />} />
+          </Routes>
+        </Router>
+      </ErrorBoundary>
+    </>
   );
 }
 

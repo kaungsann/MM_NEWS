@@ -6,6 +6,7 @@ import RightSide from "../reusedCard/RightSide";
 import { Link, useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
 import { getApi } from "../Api";
+import { useSelector } from "react-redux";
 
 function Home() {
   const [technology, setTechnology] = useState([]);

@@ -13,7 +13,7 @@ export default function ForgetPassword() {
   const [load, setload] = useState(false);
   const navigate = useNavigate();
   console.log("user email is ", fgMail);
-  const forgetApi = async (userEmail) => {
+  const forgetApi = async () => {
     const response = await fetch("http://127.0.0.1:5000/user/forget-password", {
       method: "POST",
       body: JSON.stringify({ email: fgMail }),
@@ -26,7 +26,6 @@ export default function ForgetPassword() {
     if (resData.con) {
       toast("Pls Check Your Email  ");
       fgMail(null);
-      // navigate(`/reset-password/${resData.results.resetToken}`);
     } else {
       toast(resData.message);
     }
