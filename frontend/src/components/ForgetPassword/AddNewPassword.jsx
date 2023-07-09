@@ -6,16 +6,19 @@ import { AiTwotoneEye } from "react-icons/ai";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { useSelector } from "react-redux";
+import { addUser, removeUser } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 export default function AddNewPassword() {
   const [eye, setEye] = useState(true);
   const [pw, setPw] = useState("");
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const usersData = useSelector((state) => state.userData);
   console.log("user data in reset password", usersData);
+
+  usersData && dispatch(removeUser(null));
 
   const NewPwApi = async () => {
     console.log("user new ps", pw);
@@ -47,6 +50,7 @@ export default function AddNewPassword() {
   return (
     <>
       <ToastContainer />
+
       <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8 ">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img class="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
