@@ -14,7 +14,7 @@ function Nav() {
   const localDb = "MMNews";
   const userData = useSelector((state) => state.userData);
   const [toggle, settoggle] = useState(false);
-  const [valid, setValid] = useState(false);
+  const [name, setName] = useState(null);
   const dispatch = useDispatch();
   const navigator = useNavigate();
 
@@ -37,6 +37,13 @@ function Nav() {
     userData.role &&
     userData.role.length > 0 &&
     userData.role[0]?.name === "OWNER";
+
+  useEffect(() => {
+    // let haveUser = localStorage.getItem(localDb);
+    // let user = JSON.parse(haveUser);
+    // console.log("name of user", user.name);
+    // //setName(user.name);
+  }, []);
 
   return (
     <>

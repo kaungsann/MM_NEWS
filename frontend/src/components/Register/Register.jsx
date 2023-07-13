@@ -41,6 +41,7 @@ export default function () {
       },
     });
     const resData = await response.json();
+    console.log("user register is ", resData.results);
     if (resData.con) {
       setloading(false);
       navigate("/login");
@@ -172,7 +173,7 @@ export default function () {
                     size={20}
                     aria-label="Loading Spinner"
                     data-testid="loader"
-                    className="mx-4"
+                    className="absolut top-40 left-30 "
                   />
                 )}
                 Sign Up

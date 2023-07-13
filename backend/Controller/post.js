@@ -123,14 +123,20 @@ const commentDelete = async (req, res, next) => {
 
 const toggleLike = async (req, res, next) => {
   let findId = await postDb.findById(req.params.id);
+
   if (findId) {
     if (req.params.page == 1) {
+      // const userId = req.body.user._id;
+      // console.log("user id  is ", userId);
+      // const alreadyLiked = findId.likeUser.includes(userId);
+      // if (alreadyLiked) {
+      //   next(new Error("You have already liked this post"));
+      // }
+
+      // findId.likeUser.push(userId);
       findId.like = findId.like + 1;
     } else {
       findId.unLike = findId.unLike + 1;
-    }
-    if (findId.unLike < 0) {
-      findId.unLike = findId.unLike = 0;
     }
 
     await postDb.findByIdAndUpdate(findId._id, findId);

@@ -52,20 +52,6 @@ function Login() {
     loginApi(user);
   };
 
-  useEffect(() => {
-    let localData = JSON.parse(localStorage.getItem(localDb));
-
-    if (localData) {
-      setIsCheck(true);
-      dispatch(addUser(localData));
-      if (usersData) {
-        navigate("/home");
-      } else {
-        navigate("/");
-      }
-    }
-  }, []);
-
   return (
     <div>
       <ToastContainer />

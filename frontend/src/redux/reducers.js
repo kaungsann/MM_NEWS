@@ -37,7 +37,6 @@ const userReducers = (state = null, { type, payload }) => {
     default:
       state = getUser();
       return state;
-    //return state;
   }
 };
 

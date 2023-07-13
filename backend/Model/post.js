@@ -10,6 +10,7 @@ const postSchema = new Schema({
   image: { type: String, required: true },
   title: { type: String, required: true },
   text: { type: String, required: true },
+  likeUser: [{ type: Schema.Types.ObjectId, ref: "user" }],
   like: { type: Number, default: 0 },
   unLike: { type: Number, default: 0 },
   create: { type: Date, default: Date.now },

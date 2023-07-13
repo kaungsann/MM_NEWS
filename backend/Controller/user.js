@@ -33,8 +33,11 @@ const LoginUser = async (req, res, next) => {
     let results = comparePassword(req.body.password, findEmail.password);
     if (results) {
       let user = findEmail.toObject();
+
       delete user.password;
+
       user.token = token(user);
+
       helper(res, "login successfully ", user);
     } else {
       next(new Error("your password is something wrong , pls try again "));

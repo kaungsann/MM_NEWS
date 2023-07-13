@@ -4,8 +4,9 @@ import LatestCard from "../reusedCard/LatestCard";
 import SportsCard from "../reusedCard/SportsCard";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import HashLoader from "react-spinners/HashLoader";
 function Internation() {
+  const localDb = "MMNews";
   const [latest, setLatest] = useState([]);
   const [sports, setSports] = useState([]);
   const [card1, setCard1] = useState([]);
@@ -13,7 +14,7 @@ function Internation() {
   const [card3, setCard3] = useState([]);
   const [card4, setCard4] = useState([]);
   const [card5, setCard5] = useState([]);
-
+  const [loading, setloading] = useState(true);
   const userData = useSelector((state) => state.userData);
   const { id } = useParams();
   const latestNewsApi = async () => {
@@ -22,7 +23,7 @@ function Internation() {
       "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
     );
     let resData = await response.json();
-
+    setloading(false);
     setLatest(resData.results);
     setCard1(resData.results[0]);
     setCard2(resData.results[1]);
@@ -43,7 +44,13 @@ function Internation() {
       return;
     } else {
       const postLike = await fetch(
-        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`,
+        {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${userData.token}`,
+          },
+        }
       );
       let resData = await postLike.json();
       latestNewsApi();
@@ -66,6 +73,7 @@ function Internation() {
   };
 
   useEffect(() => {
+    setloading(true);
     latestNewsApi();
     sportsApi();
   }, []);
@@ -74,112 +82,125 @@ function Internation() {
       <h1 className="text-2xl font-serif  my-2 text-center">
         Internation News
       </h1>
-      <div className="w-11/12  mx-auto">
-        <div className="flex ">
-          <div className="w-1/4 p-3 relative flex flex-wrap justify-between">
-            <Link
-              to={`/postdetail/${card1._id}`}
-              className="relative my-2  hover:opacity-75  "
-            >
-              <img
-                src={`http://127.0.0.1:5000/uploads/${card1.image}`}
-                className="w-full h-auto"
-              />
-              <div className="absolute  left-0 bottom-0  font-serif p-3">
-                <span className="text-white font-serif font-bold">
-                  {card1.title}
-                </span>
-                {/* <p className="text-slate-100">{card1.text.substring(0, 0)}</p> */}
-              </div>
-            </Link>
-            <Link
-              to={`/postdetail/${card2._id}`}
-              className="relative  hover:opacity-75  "
-            >
-              <img
-                src={`http://127.0.0.1:5000/uploads/${card2.image}`}
-                className="w-full"
-              />
-              <div className="absolute  left-0 bottom-0  font-serif p-3">
-                <span className="text-white ont-serif font-bold">
-                  {card2.title}
-                </span>
-                {/* <p className="text-slate-100">{card2.text.}</p> */}
-              </div>
-            </Link>
-          </div>
-          <div className="w-2/4  p-3 flex justify-center  hover:opacity-75  ">
-            <Link to={`/postdetail/${card3._id}`} className="relative my-2 ">
-              <img
-                src={`http://127.0.0.1:5000/uploads/${card3.image}`}
-                className="w-full h-full"
-              />
-              <div className="absolute  left-0 bottom-3 mb-4 font-serif p-3">
-                <span className="text-white font-serif font-bold ">
-                  {card3.title}
-                </span>
-                {/* <p className="text-slate-100">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Inventore, earum?
-                </p> */}
-              </div>
-            </Link>
-          </div>
-          <div className="w-1/4 p-3 flex flex-wrap justify-between">
-            <Link
-              to={`/postdetail/${card4._id}`}
-              className="relative my-2 h-1/2  hover:opacity-75  "
-            >
-              <img
-                src={`http://127.0.0.1:5000/uploads/${card4.image}`}
-                className="w-full h-full"
-              />
-              <div className="absolute  left-0 bottom-0  font-serif p-3">
-                <span className="text-white font-serif font-bold ">
-                  {card4.title}
-                </span>
-                {/* <p className="text-slate-100">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Inventore, earum?
-                </p> */}
-              </div>
-            </Link>
-            <Link
-              to={`/postdetail/${card5._id}`}
-              className="relative h-1/2  hover:opacity-75  "
-            >
-              <img
-                src={`http://127.0.0.1:5000/uploads/${card5.image}`}
-                className="w-full h-auto"
-              />
-              <div className="absolute  left-0 bottom-3  font-serif p-3">
-                <span className="text-white font-serif font-bold">
-                  {card5.title}
-                </span>
-              </div>
-            </Link>
-          </div>
-        </div>
-        <h3 className="text-2xl mb-3">Sports News</h3>
-        <div className="flex justify-between mb-14">
-          {sports.length > 0 &&
-            sports.map((sp) => <SportsCard key={sp._id} sport={sp} />)}
-        </div>
-        <div className=" font-serif text-[#343a40] my-6">
-          <h3 className="text-3xl mb-3">Latest News</h3>
-          <div className=" flex flex-wrap justify-between my-4">
-            {latest.length > 0 &&
-              latest.map((lat) => (
-                <LatestCard
-                  key={lat._id}
-                  card={lat}
-                  addLike={toggleLikeApi}
-                  comments={commentApi}
+      {!loading && (
+        <div className="w-11/12  mx-auto">
+          <div className="flex ">
+            <div className="w-1/4 p-3 relative flex flex-wrap justify-between">
+              <Link
+                to={`/postdetail/${card1._id}`}
+                className="relative my-2  hover:opacity-75  "
+              >
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${card1.image}`}
+                  className="w-full h-auto"
                 />
-              ))}
+                <div className="absolute  left-0 bottom-0  font-serif p-3">
+                  <span className="text-white font-serif font-bold">
+                    {card1.title}
+                  </span>
+                  {/* <p className="text-slate-100">{card1.text.substring(0, 0)}</p> */}
+                </div>
+              </Link>
+              <Link
+                to={`/postdetail/${card2._id}`}
+                className="relative  hover:opacity-75  "
+              >
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${card2.image}`}
+                  className="w-full"
+                />
+                <div className="absolute  left-0 bottom-0  font-serif p-3">
+                  <span className="text-white ont-serif font-bold">
+                    {card2.title}
+                  </span>
+                  {/* <p className="text-slate-100">{card2.text.}</p> */}
+                </div>
+              </Link>
+            </div>
+            <div className="w-2/4  p-3 flex justify-center  hover:opacity-75  ">
+              <Link to={`/postdetail/${card3._id}`} className="relative my-2 ">
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${card3.image}`}
+                  className="w-full h-full"
+                />
+                <div className="absolute  left-0 bottom-3 mb-4 font-serif p-3">
+                  <span className="text-white font-serif font-bold ">
+                    {card3.title}
+                  </span>
+                  {/* <p className="text-slate-100">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Inventore, earum?
+                  </p> */}
+                </div>
+              </Link>
+            </div>
+            <div className="w-1/4 p-3 flex flex-wrap justify-between">
+              <Link
+                to={`/postdetail/${card4._id}`}
+                className="relative my-2 h-1/2  hover:opacity-75  "
+              >
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${card4.image}`}
+                  className="w-full h-full"
+                />
+                <div className="absolute  left-0 bottom-0  font-serif p-3">
+                  <span className="text-white font-serif font-bold ">
+                    {card4.title}
+                  </span>
+                  {/* <p className="text-slate-100">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Inventore, earum?
+                  </p> */}
+                </div>
+              </Link>
+              <Link
+                to={`/postdetail/${card5._id}`}
+                className="relative h-1/2  hover:opacity-75  "
+              >
+                <img
+                  src={`http://127.0.0.1:5000/uploads/${card5.image}`}
+                  className="w-full h-auto"
+                />
+                <div className="absolute  left-0 bottom-3  font-serif p-3">
+                  <span className="text-white font-serif font-bold">
+                    {card5.title}
+                  </span>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <h3 className="text-2xl mb-3">Sports News</h3>
+          <div className="flex justify-between mb-14">
+            {sports.length > 0 &&
+              sports.map((sp) => <SportsCard key={sp._id} sport={sp} />)}
+          </div>
+          <div className=" font-serif text-[#343a40] my-6">
+            <h3 className="text-3xl mb-3">Latest News</h3>
+            <div className=" flex flex-wrap justify-between my-4">
+              {latest.length > 0 &&
+                latest.map((lat) => (
+                  <LatestCard
+                    key={lat._id}
+                    card={lat}
+                    addLike={toggleLikeApi}
+                    comments={commentApi}
+                  />
+                ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {loading && (
+        <div className=" fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20">
+          <HashLoader
+            color="#4679e6"
+            cssOverride={{}}
+            loading
+            size={50}
+            speedMultiplier={1}
+          />
+        </div>
+      )}
     </>
   );
 }
