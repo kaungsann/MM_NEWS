@@ -5,6 +5,8 @@ import SportsCard from "../reusedCard/SportsCard";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HashLoader from "react-spinners/HashLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Internation() {
   const localDb = "MMNews";
   const [latest, setLatest] = useState([]);
@@ -14,6 +16,7 @@ function Internation() {
   const [card3, setCard3] = useState([]);
   const [card4, setCard4] = useState([]);
   const [card5, setCard5] = useState([]);
+  const [error, setError] = useState([]);
   const [loading, setloading] = useState(true);
   const userData = useSelector((state) => state.userData);
   const { id } = useParams();
@@ -53,6 +56,8 @@ function Internation() {
         }
       );
       let resData = await postLike.json();
+      setError(resData.message);
+      toast(resData.message);
       latestNewsApi();
     }
   };
@@ -79,6 +84,7 @@ function Internation() {
   }, []);
   return (
     <>
+      <ToastContainer />
       <h1 className="text-2xl font-serif  my-2 text-center">
         Internation News
       </h1>
@@ -182,6 +188,7 @@ function Internation() {
                   <LatestCard
                     key={lat._id}
                     card={lat}
+                    err={error}
                     addLike={toggleLikeApi}
                     comments={commentApi}
                   />

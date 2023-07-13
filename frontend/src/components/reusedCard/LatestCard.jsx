@@ -7,8 +7,6 @@ import { TfiCommentAlt } from "react-icons/tfi";
 import { BsFillSendFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import "../../App.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function LatestCard({ card, addLike, comments }) {
   const [showment, setShowMent] = useState(false);
@@ -21,7 +19,6 @@ export default function LatestCard({ card, addLike, comments }) {
 
   return (
     <>
-      <ToastContainer />
       <div className="w-64  h-96 p-3 my-8 cursor-pointer ">
         <img
           src={`http://127.0.0.1:5000/uploads/${card.image}`}

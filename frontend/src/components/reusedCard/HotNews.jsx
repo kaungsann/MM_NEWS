@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { BsFillSendFill } from "react-icons/bs";
 import { AiTwotoneLike, AiTwotoneDislike } from "react-icons/ai";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+
 export default function HotNews({ hotCard, addLike, comments }) {
   const [showment, setShowMent] = useState(false);
   const [text, setText] = useState("");

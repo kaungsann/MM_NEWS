@@ -5,6 +5,8 @@ import HotNews from "../reusedCard/HotNews";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HashLoader from "react-spinners/HashLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Local() {
   const [hotnews, setHotNews] = useState([]);
   const [main, setMianCard] = useState([]);
@@ -19,15 +21,22 @@ function Local() {
     setHotNews(resData.results);
     setMianCard(resData.results[0]);
   };
+
   const toggleLikeApi = async (id, page) => {
     if (page < 0) {
       return;
     } else {
       const postLike = await fetch(
-        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`,
+        {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${userData.token}`,
+          },
+        }
       );
       let resData = await postLike.json();
-
+      toast(resData.message);
       HotNewsApi();
     }
   };
@@ -54,7 +63,9 @@ function Local() {
 
   return (
     <>
+      <ToastContainer />
       <div className="text-2xl font-serif my-4 text-center">Local News</div>
+
       {!loading && (
         <div className="w-10/12  p-3 mx-auto flex flex-wrap">
           <div className="w-full  flex">

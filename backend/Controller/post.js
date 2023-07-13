@@ -1,6 +1,7 @@
 const postDb = require("../Model/post");
 const commentDb = require("../Model/comment");
-
+const userDb = require("../Model/user");
+const jwt = require("jsonwebtoken");
 const { helper } = require("../Library/helper");
 
 const Allpost = async (req, res, next) => {
@@ -126,22 +127,39 @@ const toggleLike = async (req, res, next) => {
 
   if (findId) {
     if (req.params.page == 1) {
+      let token = req.headers.authorization;
+      if (token) {
+        let tokens = token.split(" ")[1];
+        let decodeUser = jwt.decode(tokens, process.env.SECRET_KEY);
+        let user = await userDb.findById(decodeUser._id).select("-password");
+        let userId = user._id;
+        if (user.role.length > 0) {
+          findId.like = findId.like + 1;
+          await postDb.findByIdAndUpdate(findId._id, findId);
+          let results = await postDb.findById(findId._id);
+          return helper(res, "Your liked this post", results);
+        }
+
+        const alreadyLiked = findId.likeUser.includes(userId);
+        if (alreadyLiked) {
+          return next(new Error("You have already liked this post"));
+        } else {
+          findId.likeUser.push(userId);
+          findId.like = findId.like + 1;
+          await postDb.findByIdAndUpdate(findId._id, findId);
+          let results = await postDb.findById(findId._id);
+          return helper(res, "Your liked this post", results);
+        }
+      } else {
+        next(new Error("Credentials error"));
+      }
+
       // const userId = req.body.user._id;
-      // console.log("user id  is ", userId);
-      // const alreadyLiked = findId.likeUser.includes(userId);
-      // if (alreadyLiked) {
-      //   next(new Error("You have already liked this post"));
-      // }
-
-      // findId.likeUser.push(userId);
-      findId.like = findId.like + 1;
-    } else {
-      findId.unLike = findId.unLike + 1;
     }
-
+    findId.unLike = findId.unLike + 1;
     await postDb.findByIdAndUpdate(findId._id, findId);
     let results = await postDb.findById(findId._id);
-    helper(res, "toggle like", results);
+    helper(res, "You unLiked this Post", results);
   } else {
     next(new Error("you don't have with that id"));
   }

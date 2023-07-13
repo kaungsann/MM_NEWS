@@ -35,8 +35,10 @@ const userReducers = (state = null, { type, payload }) => {
     case "userRemove":
       return (state = payload);
     default:
-      state = getUser();
-      return state;
+      let haveUser = localStorage.getItem(localDb);
+      return haveUser ? (state = getUser()) : state;
+    // state = getUser();
+    // return state;
   }
 };
 
