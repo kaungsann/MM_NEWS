@@ -7,7 +7,15 @@ const cors = require("cors");
 const fileupload = require("express-fileupload");
 
 const mongoose = require("mongoose");
-mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
+//mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
+mongoose
+  .connect(process.env.DATADASE)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
 const userRouter = require("./Router/userRouer");
 const categoryRouter = require("./Router/category");
