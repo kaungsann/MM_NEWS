@@ -7,7 +7,9 @@ const cors = require("cors");
 const fileupload = require("express-fileupload");
 
 const mongoose = require("mongoose");
+
 //mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
+
 mongoose
   .connect(process.env.DATADASE)
   .then(() => {
