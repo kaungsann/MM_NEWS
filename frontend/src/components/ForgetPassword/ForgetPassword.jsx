@@ -14,13 +14,16 @@ export default function ForgetPassword() {
   const navigate = useNavigate();
   console.log("user email is ", fgMail);
   const forgetApi = async () => {
-    const response = await fetch("http://127.0.0.1:5000/user/forget-password", {
-      method: "POST",
-      body: JSON.stringify({ email: fgMail }),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://mnews-api.onrender.com/user/forget-password",
+      {
+        method: "POST",
+        body: JSON.stringify({ email: fgMail }),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
     setload(false);
     let resData = await response.json();
     if (resData.con) {

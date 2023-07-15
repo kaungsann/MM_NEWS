@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
+import ClipLoader from "react-spinners/ClipLoader";
 function PostEdit() {
   const [categorys, setCategorys] = useState([]);
   const [tags, setTags] = useState([]);
@@ -14,7 +14,7 @@ function PostEdit() {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const [loading, setLoading] = useState(false);
   const fileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -28,7 +28,8 @@ function PostEdit() {
     formData.append("file", file);
     formData.append("category", cat);
     formData.append("tag", tag);
-    const response = await fetch(`http://127.0.0.1:5000/post/${id}`, {
+
+    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`, {
       method: "PATCH",
       //  body: formData,
       body: JSON.stringify(catData),
@@ -66,9 +67,12 @@ function PostEdit() {
     }
   };
   const getOnePost = async () => {
-    const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
+    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`);
     const resData = await response.json();
     const catPost = resData.results;
+    if (catPost.con) {
+      setLoading(false);
+    }
     console.log(catPost);
     setcat(catPost.category);
     settag(catPost.tag);
@@ -83,6 +87,7 @@ function PostEdit() {
   }, []);
 
   const postSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     EditPostAPi();
     // console.log("all post data is ", title, text, cat, tag, file);
@@ -90,7 +95,7 @@ function PostEdit() {
   };
   return (
     <>
-      <div>PostEdit</div>
+      <div className="mx-3 text-xl font-serif">PostEdit</div>
       <div className="w-3/5 mx-auto p-4">
         <form onSubmit={postSubmit}>
           <div className="mt-2">
@@ -218,6 +223,16 @@ function PostEdit() {
                 type="submit"
                 className="bg-cyan-700 text-slate-200  rounded-md  px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-cyan-600"
               >
+                {loading && (
+                  <ClipLoader
+                    color={"#9ca3af"}
+                    loading={loading}
+                    size={12}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    className="mx-1"
+                  />
+                )}
                 Edit Post
               </button>
             </div>

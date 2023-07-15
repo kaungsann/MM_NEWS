@@ -17,10 +17,11 @@ function Home() {
   const [show1, setShow1] = useState([]);
   const [show2, setShow2] = useState([]);
 
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
 
   const techApi = async () => {
-    let response = await getApi("/post/bytag/6479d7cce8a3b6f7db7fbf62");
+    //old id     let response = await getApi("/post/bytag/6479d7cce8a3b6f7db7fbf62");
+    let response = await getApi("/post/bytag/64b2b7f5513ee4f869055f68");
 
     if (response) {
       setloading(false);
@@ -49,7 +50,9 @@ function Home() {
                 to={`/postdetail/${main._id}`}
                 className="w-3/5  relative  hover:opacity-75  border-solid border-2 "
               >
-                <img src={`http://127.0.0.1:5000/uploads/${main.image}`} />
+                <img
+                  src={`https://mnews-api.onrender.com/uploads/${main.image}`}
+                />
                 <div className=" lg:w-72 p-4 absolute top-0 bg-[#F5F5F5]">
                   <div className="text-slate-500 font-sans">
                     {new Date(main.create).toLocaleDateString()}
@@ -89,7 +92,7 @@ function Home() {
                     className="w-3/5 relative hover:opacity-75  "
                   >
                     <img
-                      src={`http://127.0.0.1:5000/uploads/${show.image}`}
+                      src={`https://mnews-api.onrender.com/uploads/${show.image}`}
                       className="w-full h-full"
                     />
                     <span className="absolute bottom-0 text-slate-300 font-serif font-bold px-3 w-42 ">

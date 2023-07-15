@@ -13,8 +13,9 @@ function Local() {
   const [loading, setloading] = useState(false);
   const userData = useSelector((state) => state.userData);
   const HotNewsApi = async () => {
+    //old id   "https://mnews-api.onrender.com/post/bytag/6474a42c5203d3b8df88f18a"
     const response = await fetch(
-      "http://127.0.0.1:5000/post/bytag/6474a42c5203d3b8df88f18a"
+      "https://mnews-api.onrender.com/post/bytag/64b2761698ffc76bf3e7e5d9"
     );
     setloading(false);
     const resData = await response.json();
@@ -27,7 +28,7 @@ function Local() {
       return;
     } else {
       const postLike = await fetch(
-        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`,
+        `https://mnews-api.onrender.com/post/like/toggle/${id}/${page}`,
         {
           method: "POST",
           headers: {
@@ -42,15 +43,18 @@ function Local() {
   };
 
   const commentApi = async (id, text) => {
-    let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
-      method: "POST",
+    let comment = await fetch(
+      `https://mnews-api.onrender.com/post/comment/${id}`,
+      {
+        method: "POST",
 
-      body: JSON.stringify({ text: text }),
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${userData.token}`,
-      },
-    });
+        body: JSON.stringify({ text: text }),
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${userData.token}`,
+        },
+      }
+    );
     const resData = await comment.json();
 
     HotNewsApi();
@@ -71,7 +75,7 @@ function Local() {
           <div className="w-full  flex">
             <div className="w-1/2 ">
               <img
-                src={`http://127.0.0.1:5000/uploads/${main.image}`}
+                src={`https://mnews-api.onrender.com/uploads/${main.image}`}
                 className=" rounded-lg shadow-md  h-64 w-4/5"
               />
             </div>

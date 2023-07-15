@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ClipLoader from "react-spinners/ClipLoader";
 function UserUi({ users, deleteUser, userApi }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
 
   const banUser = () => {
     dispatch(removeUser(null));
@@ -19,9 +22,12 @@ function UserUi({ users, deleteUser, userApi }) {
   console.log("all permit is ", permit);
   let findUser = role.find((rol) => rol.name === "OWNER");
 
+  let havePermit = permit.find((per) => (per.name = "CREATE"));
+
   const addOwnerApi = async (usrId) => {
+    setLoading(true);
     const response = await fetch(
-      `http://127.0.0.1:5000/role/addroles/${usrId}`,
+      `https://mnews-api.onrender.com/role/addroles/${usrId}`,
       {
         method: "POST",
 
@@ -32,14 +38,18 @@ function UserUi({ users, deleteUser, userApi }) {
     );
 
     let resData = response.json();
+    if (resData.con) {
+      setLoading(false);
+    }
 
     toast(resData.message);
     userApi();
   };
 
   const removeOwerRole = async (usrId) => {
+    setLoading(true);
     const response = await fetch(
-      `http://127.0.0.1:5000/role/removeroles/${usrId}`,
+      `https://mnews-api.onrender.com/role/removeroles/${usrId}`,
       {
         method: "POST",
         headers: {
@@ -49,6 +59,9 @@ function UserUi({ users, deleteUser, userApi }) {
     );
 
     let resData = response.json();
+    if (resData.con) {
+      setLoading(false);
+    }
 
     toast(resData.message);
     userApi();
@@ -98,6 +111,16 @@ function UserUi({ users, deleteUser, userApi }) {
                   onClick={() => addOwnerApi(users._id)}
                   className="lg:text-sm bg-[#1f30c9] p-2 text-white rounded-sm shadow-sm   hover:bg-[#4a57c9]"
                 >
+                  {loading && (
+                    <ClipLoader
+                      color={"#fdfdff"}
+                      loading={loading}
+                      size={15}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                      className="mx-1"
+                    />
+                  )}
                   Add Ower Role
                 </button>
                 {/* <button className="lg:text-sm mx-3 bg-cyan-700 p-2 text-white rounded-sm shadow-sm  hover:bg-cyan-600">
@@ -119,17 +142,28 @@ function UserUi({ users, deleteUser, userApi }) {
                   onClick={() => removeOwerRole(users._id)}
                   className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
                 >
+                  {loading1 && (
+                    <ClipLoader
+                      color={"#a71616"}
+                      loading={loading1}
+                      size={15}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                      className="mx-1"
+                    />
+                  )}
                   Remove Owner Role
                 </button>
-
-                <button
-                  className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
-                  onClick={() => {
-                    deleteUser(users._id);
-                  }}
-                >
-                  Ban User
-                </button>
+                {havePermit ? null : (
+                  <button
+                    className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
+                    onClick={() => {
+                      deleteUser(users._id);
+                    }}
+                  >
+                    Ban User
+                  </button>
+                )}
               </>
             ) : null}
           </div>

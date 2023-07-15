@@ -21,7 +21,7 @@ export default function LatestCard({ card, addLike, comments }) {
     <>
       <div className="w-64  h-96 p-3 my-8 cursor-pointer ">
         <img
-          src={`http://127.0.0.1:5000/uploads/${card.image}`}
+          src={`https://mnews-api.onrender.com/uploads/${card.image}`}
           className="w-full h-44  rounded-md shadow-md "
         />
         <div className="my-2">

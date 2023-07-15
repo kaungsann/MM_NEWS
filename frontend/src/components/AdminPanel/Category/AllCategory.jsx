@@ -12,19 +12,22 @@ function AllCategory() {
   const userData = useSelector((state) => state.userData);
 
   const catApi = async () => {
-    const response = await fetch("http://127.0.0.1:5000/category/");
+    const response = await fetch("https://mnews-api.onrender.com/category/");
     let resData = await response.json();
     setCategory(resData.results);
   };
 
   const deleteCategoryApi = async (id) => {
-    const deleteCard = await fetch(`http://127.0.0.1:5000/category/${id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${userData.token}`,
-      },
-    });
+    const deleteCard = await fetch(
+      `https://mnews-api.onrender.com/category/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${userData.token}`,
+        },
+      }
+    );
     const resData = await deleteCard.json();
     catApi();
     if (resData.con) {

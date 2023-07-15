@@ -22,8 +22,9 @@ function Internation() {
   const { id } = useParams();
   const latestNewsApi = async () => {
     // latest News & international category
+    //old id    "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
     let response = await fetch(
-      "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
+      "https://mnews-api.onrender.com/post/bytag/64b2746698ffc76bf3e7e55c"
     );
     let resData = await response.json();
     setloading(false);
@@ -35,8 +36,9 @@ function Internation() {
     setCard5(resData.results[5]);
   };
   const sportsApi = async () => {
+    //old id  "https://mnews-api.onrender.com/post/bytag/6477740ac8b3627821bcba50"
     const sports = await fetch(
-      "http://127.0.0.1:5000/post/bytag/6477740ac8b3627821bcba50"
+      "https://mnews-api.onrender.com/post/bytag/64b2bdbf513ee4f86905614c"
     );
     let resData = await sports.json();
 
@@ -47,7 +49,7 @@ function Internation() {
       return;
     } else {
       const postLike = await fetch(
-        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`,
+        `https://mnews-api.onrender.com/post/like/toggle/${id}/${page}`,
         {
           method: "POST",
           headers: {
@@ -63,15 +65,18 @@ function Internation() {
   };
 
   const commentApi = async (id, text) => {
-    let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
-      method: "POST",
+    let comment = await fetch(
+      `https://mnews-api.onrender.com/post/comment/${id}`,
+      {
+        method: "POST",
 
-      body: JSON.stringify({ text: text }),
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${userData.token}`,
-      },
-    });
+        body: JSON.stringify({ text: text }),
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${userData.token}`,
+        },
+      }
+    );
     const resData = await comment.json();
 
     latestNewsApi();
@@ -97,7 +102,7 @@ function Internation() {
                 className="relative my-2  hover:opacity-75  "
               >
                 <img
-                  src={`http://127.0.0.1:5000/uploads/${card1.image}`}
+                  src={`https://mnews-api.onrender.com/uploads/${card1.image}`}
                   className="w-full h-auto"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -112,7 +117,7 @@ function Internation() {
                 className="relative  hover:opacity-75  "
               >
                 <img
-                  src={`http://127.0.0.1:5000/uploads/${card2.image}`}
+                  src={`https://mnews-api.onrender.com/uploads/${card2.image}`}
                   className="w-full"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -126,7 +131,7 @@ function Internation() {
             <div className="w-2/4  p-3 flex justify-center  hover:opacity-75  ">
               <Link to={`/postdetail/${card3._id}`} className="relative my-2 ">
                 <img
-                  src={`http://127.0.0.1:5000/uploads/${card3.image}`}
+                  src={`https://mnews-api.onrender.com/uploads/${card3.image}`}
                   className="w-full h-full"
                 />
                 <div className="absolute  left-0 bottom-3 mb-4 font-serif p-3">
@@ -146,7 +151,7 @@ function Internation() {
                 className="relative my-2 h-1/2  hover:opacity-75  "
               >
                 <img
-                  src={`http://127.0.0.1:5000/uploads/${card4.image}`}
+                  src={`https://mnews-api.onrender.com/uploads/${card4.image}`}
                   className="w-full h-full"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -164,7 +169,7 @@ function Internation() {
                 className="relative h-1/2  hover:opacity-75  "
               >
                 <img
-                  src={`http://127.0.0.1:5000/uploads/${card5.image}`}
+                  src={`https://mnews-api.onrender.com/uploads/${card5.image}`}
                   className="w-full h-auto"
                 />
                 <div className="absolute  left-0 bottom-3  font-serif p-3">

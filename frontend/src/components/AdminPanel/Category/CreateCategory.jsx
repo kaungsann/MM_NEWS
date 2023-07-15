@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ClipLoader from "react-spinners/ClipLoader";
 function CreateCategory() {
   const [name, setName] = useState("");
   const [file, setFile] = useState("");
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
   console.log(userData);
@@ -19,7 +20,7 @@ function CreateCategory() {
     formData.append("name", name);
     formData.append("file", file);
     formData.append("text", text);
-    const response = await fetch("http://127.0.0.1:5000/category/", {
+    const response = await fetch("https://mnews-api.onrender.com/category/", {
       method: "POST",
       body: formData,
       headers: {
@@ -29,12 +30,14 @@ function CreateCategory() {
     const resData = await response.json();
 
     if (resData.con) {
+      setLoading(false);
       navigate("/admin/categorys/all");
     } else {
       toast(resData.message);
     }
   };
   const submitCategory = (e) => {
+    setLoading(true);
     e.preventDefault();
     addApiCategory();
   };
@@ -122,6 +125,16 @@ function CreateCategory() {
                 type="submit"
                 className="bg-cyan-700 text-slate-200  rounded-md  px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-cyan-600"
               >
+                {loading && (
+                  <ClipLoader
+                    color={"#9ca3af"}
+                    loading={loading}
+                    size={12}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    className="mx-1"
+                  />
+                )}
                 Add Category
               </button>
             </div>

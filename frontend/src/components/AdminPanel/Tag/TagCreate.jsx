@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 function TagCreate() {
   let [name, setName] = useState("");
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
-
+  const [loading, setLoading] = useState(false);
   const addApiTag = async () => {
-    const response = await fetch("http://127.0.0.1:5000/tag/", {
+    const response = await fetch("https://mnews-api.onrender.com/tag/", {
       method: "POST",
       body: JSON.stringify({ name: name }),
       headers: {
@@ -24,6 +25,7 @@ function TagCreate() {
     }
   };
   const submitTag = (e) => {
+    setLoading(true);
     e.preventDefault();
     addApiTag();
   };
@@ -64,6 +66,16 @@ function TagCreate() {
                 type="submit"
                 className="bg-cyan-700 text-slate-200  rounded-md  px-2.5 py-1.5 text-sm font-semibold  shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-cyan-600"
               >
+                {loading && (
+                  <ClipLoader
+                    color={"#9ca3af"}
+                    loading={loading}
+                    size={12}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    className="mx-1"
+                  />
+                )}
                 Create Tag
               </button>
             </div>

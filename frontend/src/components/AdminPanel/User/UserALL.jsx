@@ -5,11 +5,11 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 function UserALL() {
   const [user, setUser] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [userLoading, setUserLoading] = useState(false);
   const userData = useSelector((state) => state.userData);
 
   const userDeleteApi = async (id) => {
-    const response = await fetch(`http://127.0.0.1:5000/user/${id}`, {
+    const response = await fetch(`https://mnews-api.onrender.com/user/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -19,14 +19,14 @@ function UserALL() {
     const resData = await response.json();
     userApi();
     if (resData.con) {
-      setloading(false);
-      //  toast(resData);
+      toast(resData);
     }
   };
   const userApi = async () => {
-    const response = await fetch("http://127.0.0.1:5000/user");
+    const response = await fetch("https://mnews-api.onrender.com/user");
     const resData = await response.json();
     setUser(resData.results);
+    setUserLoading(false);
   };
   useEffect(() => {
     userApi();
@@ -34,27 +34,29 @@ function UserALL() {
   return (
     <>
       <h3 className="mx-3 text-xl font-serif">User ALL</h3>
-      {loading && (
-        <BeatLoader
-          color={"#14b8a6"}
-          loading={loading}
-          aria-label="Loading Spinner"
-          size={20}
-          data-testid="loader"
-          className="absolute top-0 mx-96 my-60 bottom-0 left-0 "
-        />
+      {userLoading && (
+        <div className=" fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-20">
+          <ClipLoader
+            color="#4679e6"
+            loading={userLoading}
+            size={50}
+            speedMultiplier={1}
+          />
+        </div>
       )}
-      <div className="flex flex-wrap">
-        {user.length > 0 &&
-          user.map((user) => (
-            <UserUi
-              key={user._id}
-              users={user}
-              deleteUser={userDeleteApi}
-              userApi={userApi}
-            />
-          ))}
-      </div>
+      {!userLoading && (
+        <div className="flex flex-wrap">
+          {user.length > 0 &&
+            user.map((user) => (
+              <UserUi
+                key={user._id}
+                users={user}
+                deleteUser={userDeleteApi}
+                userApi={userApi}
+              />
+            ))}
+        </div>
+      )}
     </>
   );
 }

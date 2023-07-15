@@ -31,9 +31,9 @@ export default function () {
     }
     gapi.load("client:auth2", start);
   });
-
+  //http://127.0.0.1:5000
   const registterApi = async (userData) => {
-    let response = await fetch("http://127.0.0.1:5000/user/register", {
+    let response = await fetch("https://mnews-api.onrender.com/user/register", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {

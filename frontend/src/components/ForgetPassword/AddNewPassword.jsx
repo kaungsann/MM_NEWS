@@ -23,7 +23,7 @@ export default function AddNewPassword() {
   const NewPwApi = async () => {
     console.log("user new ps", pw);
     const response = await fetch(
-      `http://127.0.0.1:5000/user/reset-password/${id}`,
+      `https://mnews-api.onrender.com/user/reset-password/${id}`,
       {
         method: "POST",
         body: JSON.stringify({ password: pw }),
@@ -51,17 +51,17 @@ export default function AddNewPassword() {
     <>
       <ToastContainer />
 
-      <div class="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8 ">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img class="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
-          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <div className="flex min-h-full flex-col justify-center px-6 py-8 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img className="mx-auto h-10 w-auto" src={Icons} alt="Your Company" />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create Your New Password.
           </h2>
         </div>
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
-            class="space-y-6"
+            className="space-y-6"
             action="#"
             method="POST"
             onSubmit={changePassword}
@@ -69,12 +69,12 @@ export default function AddNewPassword() {
             <div>
               <label
                 htmlFor="email"
-                class="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Password
               </label>
-              <div class="mt-2">
-                <div className="relative ">
+              <div className="mt-2">
+                <div classNameName="relative ">
                   <input
                     id="password"
                     name="password"
@@ -82,16 +82,16 @@ export default function AddNewPassword() {
                     autocomplete="current-password"
                     onChange={(e) => setPw(e.target.value)}
                     required
-                    className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    classNameName="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   {eye ? (
                     <AiFillEyeInvisible
-                      className="absolute top-2 right-0 bottom-0 text-xl mx-3"
+                      classNameName="absolute top-2 right-0 bottom-0 text-xl mx-3"
                       onClick={() => setEye(false)}
                     />
                   ) : (
                     <AiTwotoneEye
-                      className="absolute top-2 right-0 bottom-0 text-xl mx-3"
+                      classNameName="absolute top-2 right-0 bottom-0 text-xl mx-3"
                       onClick={() => setEye(true)}
                     />
                   )}
@@ -99,14 +99,14 @@ export default function AddNewPassword() {
               </div>
               <label
                 htmlFor="email"
-                class="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-gray-900"
               ></label>
             </div>
 
             <div>
               <button
                 type="submit"
-                class="flex w-full justify-center rounded-md bg-cyan-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                className="flex w-full justify-center rounded-md bg-cyan-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
               >
                 {loaded && (
                   <ClipLoader
@@ -115,7 +115,7 @@ export default function AddNewPassword() {
                     size={20}
                     aria-label="Loading Spinner"
                     data-testid="loader"
-                    className="mx-4"
+                    classNameName="mx-4"
                   />
                 )}
                 Submit
@@ -123,12 +123,12 @@ export default function AddNewPassword() {
             </div>
           </form>
 
-          <p class="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-sm text-gray-500">
             {/* Not a member? */}
 
             <Link
               to="/"
-              class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go to main page
             </Link>
