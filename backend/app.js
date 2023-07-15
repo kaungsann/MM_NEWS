@@ -30,8 +30,8 @@ const commentRouter = require("./Router/comment");
 app.use(express.json());
 app.use(cors());
 app.use(fileupload());
-//app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/uploads", express.static(path.join(__dirname, "backend", "uploads")));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/user", userRouter);
 app.use("/category", categoryRouter);
@@ -42,11 +42,10 @@ app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 
 //Define a route to handle requests for the image URL
-app.get("/uploads/:filename", (req, res) => {
-  const filename = req.params.filename;
-  res.sendFile(path.join(__dirname, "backend", "uploads", filename));
-});
-
+// app.get("/uploads/:filename", (req, res) => {
+//   const filename = req.params.filename;
+//   res.sendFile(path.join(__dirname, "uploads", filename));
+// });
 
 // const defaultUser = async () => {
 //   let migrate = require("./Migration/migrate");
