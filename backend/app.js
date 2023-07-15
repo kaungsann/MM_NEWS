@@ -39,13 +39,13 @@ app.use("/tag", tagRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 
-// const defaultUser = async () => {
-//   let migrate = require("./Migration/migrate");
-//   migrate.roleAndPermitMigrate();
-//   migrate.addOwerRole();
-//   migrate.addPermitRole();
-// };
-// defaultUser();
+const defaultUser = async () => {
+  let migrate = require("./Migration/migrate");
+  migrate.roleAndPermitMigrate();
+  migrate.addOwerRole();
+  migrate.addPermitRole();
+};
+defaultUser();
 
 app.get("*", (req, res, next) => {
   res.send({
