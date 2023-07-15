@@ -8,16 +8,16 @@ const fileupload = require("express-fileupload");
 
 const mongoose = require("mongoose");
 
-//mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
+mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
 
-mongoose
-  .connect(process.env.DATADASE)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
-  });
+// mongoose
+//   .connect(process.env.DATADASE)
+//   .then(() => {
+//     console.log("Connected to MongoDB");
+//   })
+//   .catch((error) => {
+//     console.error("Error connecting to MongoDB:", error);
+//   });
 
 const userRouter = require("./Router/userRouer");
 const categoryRouter = require("./Router/category");
@@ -38,11 +38,6 @@ app.use("/role", roleRouter);
 app.use("/tag", tagRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
-
-app.get("/uploads/:filename", (req, res) => {
-  const filename = req.params.filename;
-  res.sendFile(path.join(__dirname, "uploads", filename));
-});
 
 // const defaultUser = async () => {
 //   let migrate = require("./Migration/migrate");
