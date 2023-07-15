@@ -44,13 +44,13 @@ app.get("/uploads/:filename", (req, res) => {
   res.sendFile(path.join(__dirname, "uploads", filename));
 });
 
-const defaultUser = async () => {
-  let migrate = require("./Migration/migrate");
-  migrate.roleAndPermitMigrate();
-  migrate.addOwerRole();
-  migrate.addPermitRole();
-};
-defaultUser();
+// const defaultUser = async () => {
+//   let migrate = require("./Migration/migrate");
+//   migrate.roleAndPermitMigrate();
+//   migrate.addOwerRole();
+//   migrate.addPermitRole();
+// };
+// defaultUser();
 
 app.get("*", (req, res, next) => {
   res.send({
