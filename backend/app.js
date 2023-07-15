@@ -8,13 +8,10 @@ const fileupload = require("express-fileupload");
 
 const mongoose = require("mongoose");
 
-//mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
+// mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`);
 
 mongoose
-  .connect(process.env.DATADASE, {
-    useNewParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.SECDATABASE)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -42,13 +39,13 @@ app.use("/tag", tagRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
 
-const defaultUser = async () => {
-  let migrate = require("./Migration/migrate");
-  migrate.roleAndPermitMigrate();
-  migrate.addOwerRole();
-  migrate.addPermitRole();
-};
-defaultUser();
+// const defaultUser = async () => {
+//   let migrate = require("./Migration/migrate");
+//   migrate.roleAndPermitMigrate();
+//   migrate.addOwerRole();
+//   migrate.addPermitRole();
+// };
+// defaultUser();
 
 app.get("*", (req, res, next) => {
   res.send({
