@@ -24,7 +24,7 @@ function Internation() {
     // latest News & international category
     //old id    "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
     let response = await fetch(
-      "https://mnews-api.onrender.com/post/bytag/64b2746698ffc76bf3e7e55c"
+      "http://127.0.0.1:5000/post/bytag/646b9bf7c64b9ec668e9a6ad"
     );
     let resData = await response.json();
     setloading(false);
@@ -38,7 +38,7 @@ function Internation() {
   const sportsApi = async () => {
     //old id  "https://mnews-api.onrender.com/post/bytag/6477740ac8b3627821bcba50"
     const sports = await fetch(
-      "https://mnews-api.onrender.com/post/bytag/64b2bdbf513ee4f86905614c"
+      "http://127.0.0.1:5000/post/bytag/6477740ac8b3627821bcba50"
     );
     let resData = await sports.json();
 
@@ -49,7 +49,7 @@ function Internation() {
       return;
     } else {
       const postLike = await fetch(
-        `https://mnews-api.onrender.com/post/like/toggle/${id}/${page}`,
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`,
         {
           method: "POST",
           headers: {
@@ -65,18 +65,15 @@ function Internation() {
   };
 
   const commentApi = async (id, text) => {
-    let comment = await fetch(
-      `https://mnews-api.onrender.com/post/comment/${id}`,
-      {
-        method: "POST",
+    let comment = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
+      method: "POST",
 
-        body: JSON.stringify({ text: text }),
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${userData.token}`,
-        },
-      }
-    );
+      body: JSON.stringify({ text: text }),
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
     const resData = await comment.json();
 
     latestNewsApi();
@@ -102,7 +99,7 @@ function Internation() {
                 className="relative my-2  hover:opacity-75  "
               >
                 <img
-                  src={`https://mnews-api.onrender.com/uploads/${card1.image}`}
+                  src={`http://127.0.0.1:5000/uploads/${card1.image}`}
                   className="w-full h-auto"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -117,7 +114,7 @@ function Internation() {
                 className="relative  hover:opacity-75  "
               >
                 <img
-                  src={`https://mnews-api.onrender.com/uploads/${card2.image}`}
+                  src={`http://127.0.0.1:5000/uploads/${card2.image}`}
                   className="w-full"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -131,7 +128,7 @@ function Internation() {
             <div className="w-2/4  p-3 flex justify-center  hover:opacity-75  ">
               <Link to={`/postdetail/${card3._id}`} className="relative my-2 ">
                 <img
-                  src={`https://mnews-api.onrender.com/uploads/${card3.image}`}
+                  src={`http://127.0.0.1:5000/uploads/${card3.image}`}
                   className="w-full h-full"
                 />
                 <div className="absolute  left-0 bottom-3 mb-4 font-serif p-3">
@@ -151,7 +148,7 @@ function Internation() {
                 className="relative my-2 h-1/2  hover:opacity-75  "
               >
                 <img
-                  src={`https://mnews-api.onrender.com/uploads/${card4.image}`}
+                  src={`http://127.0.0.1:5000/uploads/${card4.image}`}
                   className="w-full h-full"
                 />
                 <div className="absolute  left-0 bottom-0  font-serif p-3">
@@ -169,7 +166,7 @@ function Internation() {
                 className="relative h-1/2  hover:opacity-75  "
               >
                 <img
-                  src={`https://mnews-api.onrender.com/uploads/${card5.image}`}
+                  src={`http://127.0.0.1:5000/uploads/${card5.image}`}
                   className="w-full h-auto"
                 />
                 <div className="absolute  left-0 bottom-3  font-serif p-3">

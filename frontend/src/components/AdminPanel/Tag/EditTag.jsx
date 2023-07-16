@@ -9,7 +9,7 @@ function TagEdit() {
   const { id } = useParams();
 
   const addApiTag = async () => {
-    const response = await fetch(`https://mnews-api.onrender.com/tag/${id}`, {
+    const response = await fetch(`http://127.0.0.1:5000/tag/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ name: name }),
       headers: {
@@ -27,7 +27,7 @@ function TagEdit() {
   };
 
   const getOneTag = async () => {
-    const response = await fetch(`https://mnews-api.onrender.com/tag/${id}`);
+    const response = await fetch(`http://127.0.0.1:5000/tag/${id}`);
     const resData = await response.json();
     setName(resData.results.name);
   };

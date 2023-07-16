@@ -7,7 +7,7 @@ function TagAll() {
   let userData = useSelector((state) => state.userData);
 
   const tagApI = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/tag/");
+    const response = await fetch("http://127.0.0.1:5000/tag/");
     let resData = await response.json();
     if (resData.con) {
       setTag(resData.results);
@@ -15,7 +15,7 @@ function TagAll() {
     }
   };
   const deleteTag = async (id) => {
-    const deleteCard = await fetch(`https://mnews-api.onrender.com/tag/${id}`, {
+    const deleteCard = await fetch(`http://127.0.0.1:5000/tag/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

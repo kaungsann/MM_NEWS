@@ -25,18 +25,15 @@ function EditCategory() {
     formData.append("text", text);
     formData.append("file", file);
 
-    const response = await fetch(
-      `https://mnews-api.onrender.com/category/${id}`,
-      {
-        method: "PATCH",
-        body: formData,
-        // body: JSON.stringify(editCat),
-        headers: {
-          //"content-type": "application/json",
-          authorization: `Bearer ${userData.token}`,
-        },
-      }
-    );
+    const response = await fetch(`http://127.0.0.1:5000/category/${id}`, {
+      method: "PATCH",
+      body: formData,
+      // body: JSON.stringify(editCat),
+      headers: {
+        //"content-type": "application/json",
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
     const resData = await response.json();
 
     if (resData.con) {
@@ -47,7 +44,7 @@ function EditCategory() {
     }
   };
   const singleCategory = async () => {
-    let response = await fetch(`https://mnews-api.onrender.com/category/${id}`);
+    let response = await fetch(`http://127.0.0.1:5000/category/${id}`);
     let resData = await response.json();
     setName(resData.results.name);
     setText(resData.results.text);

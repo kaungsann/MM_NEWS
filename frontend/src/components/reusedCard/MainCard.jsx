@@ -6,7 +6,7 @@ function MainCard({ hotCard }) {
       <div className="w-full  flex">
         <div className="w-1/2 ">
           <img
-            src={`https://mnews-api.onrender.com/uploads/${hotCard.image}`}
+            src={`http://127.0.0.1:5000/uploads/${hotCard.image}`}
             className=" rounded-lg shadow-md  h-64 w-4/5"
           />
         </div>

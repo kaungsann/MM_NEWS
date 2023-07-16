@@ -19,7 +19,7 @@ function PostCard(props) {
           </span>
         </div>
         <img
-          src={`https://mnews-api.onrender.com/uploads/${postCard.image}`}
+          src={`http://127.0.0.1:5000/uploads/${postCard.image}`}
           className=" h-32 w-full mb-2 rounded-sm shadow-sm"
         />
 

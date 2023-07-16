@@ -29,7 +29,7 @@ function PostEdit() {
     formData.append("category", cat);
     formData.append("tag", tag);
 
-    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`, {
+    const response = await fetch(`http://127.0.0.1:5000/post/${id}`, {
       method: "PATCH",
       //  body: formData,
       body: JSON.stringify(catData),
@@ -67,7 +67,7 @@ function PostEdit() {
     }
   };
   const getOnePost = async () => {
-    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`);
+    const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
     const catPost = resData.results;
     if (catPost.con) {

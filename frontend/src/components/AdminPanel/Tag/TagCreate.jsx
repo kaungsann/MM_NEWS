@@ -8,7 +8,7 @@ function TagCreate() {
   const userData = useSelector((state) => state.userData);
   const [loading, setLoading] = useState(false);
   const addApiTag = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/tag/", {
+    const response = await fetch("http://127.0.0.1:5000/tag/", {
       method: "POST",
       body: JSON.stringify({ name: name }),
       headers: {

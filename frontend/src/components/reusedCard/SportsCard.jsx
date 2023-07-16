@@ -8,7 +8,7 @@ function SportsCard({ sport }) {
       className="flex w-80 h-40 bg-slate-100 p-4 hover:bg-slate-200"
     >
       <img
-        src={`https://mnews-api.onrender.com/uploads/${sport.image}`}
+        src={`http://127.0.0.1:5000/uploads/${sport.image}`}
         className="w-32 h-full"
       />
       <div className="mx-4 ">

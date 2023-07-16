@@ -20,7 +20,7 @@ function CreateCategory() {
     formData.append("name", name);
     formData.append("file", file);
     formData.append("text", text);
-    const response = await fetch("https://mnews-api.onrender.com/category/", {
+    const response = await fetch("http://127.0.0.1:5000/category/", {
       method: "POST",
       body: formData,
       headers: {

@@ -23,7 +23,7 @@ export default function AddNewPassword() {
   const NewPwApi = async () => {
     console.log("user new ps", pw);
     const response = await fetch(
-      `https://mnews-api.onrender.com/user/reset-password/${id}`,
+      `http://127.0.0.1:5000/user/reset-password/${id}`,
       {
         method: "POST",
         body: JSON.stringify({ password: pw }),
@@ -74,7 +74,7 @@ export default function AddNewPassword() {
                 Password
               </label>
               <div className="mt-2">
-                <div classNameName="relative ">
+                <div className="relative ">
                   <input
                     id="password"
                     name="password"
@@ -82,16 +82,16 @@ export default function AddNewPassword() {
                     autocomplete="current-password"
                     onChange={(e) => setPw(e.target.value)}
                     required
-                    classNameName="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                   {eye ? (
                     <AiFillEyeInvisible
-                      classNameName="absolute top-2 right-0 bottom-0 text-xl mx-3"
+                      className="absolute top-2 right-0 bottom-0 text-xl mx-3"
                       onClick={() => setEye(false)}
                     />
                   ) : (
                     <AiTwotoneEye
-                      classNameName="absolute top-2 right-0 bottom-0 text-xl mx-3"
+                      className="absolute top-2 right-0 bottom-0 text-xl mx-3"
                       onClick={() => setEye(true)}
                     />
                   )}

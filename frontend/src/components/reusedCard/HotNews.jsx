@@ -27,7 +27,7 @@ export default function HotNews({ hotCard, addLike, comments }) {
         </span>
 
         <img
-          src={`https://mnews-api.onrender.com/uploads/${hotCard.image}`}
+          src={`http://127.0.0.1:5000/uploads/${hotCard.image}`}
           className="my-2 w-full h-44"
         />
         <div>

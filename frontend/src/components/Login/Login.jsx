@@ -18,7 +18,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const loginApi = async (userData) => {
-    let response = await fetch("https://mnews-api.onrender.com/user/login", {
+    let response = await fetch("http://127.0.0.1:5000/user/login", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {

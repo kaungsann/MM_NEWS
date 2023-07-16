@@ -19,14 +19,14 @@ function Details() {
   const userData = useSelector((state) => state.userData);
 
   const takeUserApi = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/user");
+    const response = await fetch("http://127.0.0.1:5000/user");
     setloading(false);
     let resData = await response.json();
     setCheck(resData.results);
   };
 
   const singlePost = async () => {
-    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`);
+    const response = await fetch(`http://127.0.0.1:5000/post/${id}`);
     const resData = await response.json();
     if (resData) {
       setloading(false);
@@ -37,7 +37,7 @@ function Details() {
   const deleteCommentApi = async (postId, cmtId, event) => {
     event.stopPropagation();
     const deleComment = await fetch(
-      `https://mnews-api.onrender.com/post/comment/delete/${postId}`,
+      `http://127.0.0.1:5000/post/comment/delete/${postId}`,
       {
         method: "POST",
         body: JSON.stringify({ commentId: cmtId }),
@@ -56,7 +56,7 @@ function Details() {
       return;
     } else {
       const postLike = await fetch(
-        `https://mnews-api.onrender.com/post/like/toggle/${id}/${page}`
+        `http://127.0.0.1:5000/post/like/toggle/${id}/${page}`
       );
       let resData = await postLike.json();
 
@@ -65,17 +65,14 @@ function Details() {
   };
 
   const commentApi = async (id) => {
-    let response = await fetch(
-      `https://mnews-api.onrender.com/post/comment/${id}`,
-      {
-        method: "POST",
-        body: JSON.stringify({ text: text }),
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${userData.token}`,
-        },
-      }
-    );
+    let response = await fetch(`http://127.0.0.1:5000/post/comment/${id}`, {
+      method: "POST",
+      body: JSON.stringify({ text: text }),
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${userData.token}`,
+      },
+    });
     const resData = response.json();
     singlePost();
   };
@@ -90,7 +87,7 @@ function Details() {
       {!loading && (
         <div className="flex flex-col justify-center w-7/12 mx-auto my-8 p-10">
           <img
-            src={`https://mnews-api.onrender.com/uploads/${detail.image}`}
+            src={`http://127.0.0.1:5000/uploads/${detail.image}`}
             className="w-full h-96 mx-auto my-2 rounded-md shadow-md"
           />
           <span className="text-slate-800 text-3xl font-serif my-4 text-center">

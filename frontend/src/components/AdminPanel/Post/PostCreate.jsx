@@ -25,7 +25,7 @@ function PostCreate() {
     formData.append("title", title);
     formData.append("text", text);
 
-    const response = await fetch("https://mnews-api.onrender.com/post/", {
+    const response = await fetch("http://127.0.0.1:5000/post/", {
       method: "POST",
       body: formData,
       headers: {
@@ -41,12 +41,12 @@ function PostCreate() {
   };
 
   const catApi = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/category/");
+    const response = await fetch("http://127.0.0.1:5000/category/");
     let resData = await response.json();
     setCategorys(resData.results);
   };
   const tagApI = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/tag/");
+    const response = await fetch("http://127.0.0.1:5000/tag/");
     let resData = await response.json();
     setTags(resData.results);
   };

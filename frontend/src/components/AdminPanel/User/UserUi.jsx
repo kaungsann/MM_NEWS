@@ -27,7 +27,7 @@ function UserUi({ users, deleteUser, userApi }) {
   const addOwnerApi = async (usrId) => {
     setLoading(true);
     const response = await fetch(
-      `https://mnews-api.onrender.com/role/addroles/${usrId}`,
+      `http://127.0.0.1:5000/role/addroles/${usrId}`,
       {
         method: "POST",
 
@@ -49,7 +49,7 @@ function UserUi({ users, deleteUser, userApi }) {
   const removeOwerRole = async (usrId) => {
     setLoading(true);
     const response = await fetch(
-      `https://mnews-api.onrender.com/role/removeroles/${usrId}`,
+      `http://127.0.0.1:5000/role/removeroles/${usrId}`,
       {
         method: "POST",
         headers: {
@@ -138,22 +138,25 @@ function UserUi({ users, deleteUser, userApi }) {
             ) : null}
             {findUser ? (
               <>
-                <button
-                  onClick={() => removeOwerRole(users._id)}
-                  className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
-                >
-                  {loading1 && (
-                    <ClipLoader
-                      color={"#a71616"}
-                      loading={loading1}
-                      size={15}
-                      aria-label="Loading Spinner"
-                      data-testid="loader"
-                      className="mx-1"
-                    />
-                  )}
-                  Remove Owner Role
-                </button>
+                {havePermit ? null : (
+                  <button
+                    onClick={() => removeOwerRole(users._id)}
+                    className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"
+                  >
+                    {loading1 && (
+                      <ClipLoader
+                        color={"#a71616"}
+                        loading={loading1}
+                        size={15}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                        className="mx-1"
+                      />
+                    )}
+                    Remove Owner Role
+                  </button>
+                )}
+
                 {havePermit ? null : (
                   <button
                     className="lg:text-sm  bg-[#a71616] mx-3 p-2 text-white rounded-sm shadow-sm   hover:bg-[#f14b4b]"

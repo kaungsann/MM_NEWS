@@ -8,14 +8,14 @@ function PostAll() {
   const userData = useSelector((state) => state.userData);
   const postApi = async () => {
     const response = await fetch(
-      `https://mnews-api.onrender.com/post/paginate/${pages}`
+      `http://127.0.0.1:5000/post/paginate/${pages}`
     );
     let resData = await response.json();
     setPost(resData.results);
   };
 
   const deletePost = async (id) => {
-    const response = await fetch(`https://mnews-api.onrender.com/post/${id}`, {
+    const response = await fetch(`http://127.0.0.1:5000/post/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

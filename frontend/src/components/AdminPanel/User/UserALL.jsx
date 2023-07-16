@@ -9,7 +9,7 @@ function UserALL() {
   const userData = useSelector((state) => state.userData);
 
   const userDeleteApi = async (id) => {
-    const response = await fetch(`https://mnews-api.onrender.com/user/${id}`, {
+    const response = await fetch(`http://127.0.0.1:5000/user/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -23,7 +23,7 @@ function UserALL() {
     }
   };
   const userApi = async () => {
-    const response = await fetch("https://mnews-api.onrender.com/user");
+    const response = await fetch("http://127.0.0.1:5000/user");
     const resData = await response.json();
     setUser(resData.results);
     setUserLoading(false);

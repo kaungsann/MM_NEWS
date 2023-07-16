@@ -1,5 +1,5 @@
-//const Base_Url = "http://127.0.0.1:5000";
-const Base_Url = "https://mnews-api.onrender.com";
+const Base_Url = "http://127.0.0.1:5000";
+//const Base_Url = "https://mnews-api.onrender.com";
 
 export const getApi = async (route) => {
   const response = await fetch(`${Base_Url}${route}`);

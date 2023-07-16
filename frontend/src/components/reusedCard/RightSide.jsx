@@ -8,7 +8,7 @@ function RightSide({ card }) {
       className="mx-6 flex bg-white p-4 hover:bg-slate-200"
     >
       <img
-        src={`https://mnews-api.onrender.com/uploads/${card.image}`}
+        src={`http://127.0.0.1:5000/uploads/${card.image}`}
         className="lg:h-32 lg:w-36"
       />
       <div className="mx-6">
